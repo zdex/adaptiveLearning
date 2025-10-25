@@ -1,21 +1,52 @@
 spring:
-    application:
+  application:
         name: api
-    datasource:
-    # The TNS alias name from your tnsnames.ora (like "adb_high" or "adb_tp")
-      url: jdbc:oracle:thin:@adplearn_high?TNS_ADMIN=D:\\Main_everything\\AIProjects\\Adaptive_learning\\support_notes\\Wallet_adplearn
-      username: ADMIN
-      password: Oracleadm@11    
-      driver-class-name: oracle.jdbc.OracleDriver
 
-    jpa:
-      hibernate:
-        ddl-auto: update
-      show-sql: true
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.OracleDialect
+  config:
+      activate:
+        on-profile: dev
+
+  datasource:
+    url: jdbc:h2:mem:aiqdb;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 openai:
   api:
-    key: ${OPENAI_API_KEY}
+    key: ${OPENAI_API_KEY:}
+
+  config:
+      activate:
+        on-profile: prod
+
+  datasource:
+  # The TNS alias name from your tnsnames.ora (like "adb_high" or "adb_tp")
+    url: jdbc:oracle:thin:@adplearn_high?TNS_ADMIN=D:\\Main_everything\\AIProjects\\Adaptive_learning\\support_notes\\Wallet_adplearn
+    username: ADMIN
+    password: Oracleadm@11    
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+
+
+  mail:
+    host: smtp.yourprovider.com
+    port: 587
+    username: <smtp_user>
+    password: <smtp_pass>
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true

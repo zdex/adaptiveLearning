@@ -1,5 +1,7 @@
 package com.adap.learn.dto.questionnaire;
-
-public class NextAdaptiveQuestionnaireRequest {
-    
-}
+import jakarta.validation.constraints.NotBlank;
+public record NextAdaptiveQuestionnaireRequest(
+        @NotBlank String studentId,
+        @NotBlank String subject,
+        String targetDifficulty // e.g., EASY/MEDIUM/HARD
+) {}
