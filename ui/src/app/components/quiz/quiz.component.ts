@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css']
+  templateUrl: './quiz.component.html'
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent {
+  @Input() questionnaireId?: string;
+  studentId='student-1';
+  answers:any[]=[];
+  result:any; message='';
 
-  constructor() { }
+  // in real app, fetch questions by id; here we keep it simple
+  constructor(private api: ApiService) {}
 
-  ngOnInit() {
+  submit() {
+    const payload = { questionnaireId: this.questionnaireId, studentId: this.studentId, answers: this.answers };
+    this.api.submitAnswers(payload).subscribe({
+      next: res => this.result = res,
+      error: err => this.message = 'Submit failed'
+    });
   }
-
 }

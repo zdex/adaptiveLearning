@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Generate Questionnaire</h2>
+
+  <form (ngSubmit)="generate()">
+    <label>Subject:</label>
+    <input type="text" [(ngModel)]="subject" name="subject" required />
+
+    <label>Grade:</label>
+    <input type="text" [(ngModel)]="grade" name="grade" required />
+
+    <label>Question Type:</label>
+    <select [(ngModel)]="style" name="style">
+      <option value="MCQ">MCQ</option>
+      <option value="SHORT_ANSWER">Short Answer</option>
+    </select>
+
+    <button type="submit" [disabled]="loading">Generate</button>
+  </form>
+
+  <p>{{ message }}</p>
+
+  <div *ngIf="generated">
+    <h3>Generated Questionnaire</h3>
+    <pre>{{ generated | json }}</pre>
+  </div>
+</div>

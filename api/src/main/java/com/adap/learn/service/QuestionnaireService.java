@@ -3,12 +3,11 @@ package com.adap.learn.service;
 import com.adap.learn.dto.questionnaire.*;
 import com.adap.learn.model.*;
 import com.adap.learn.repository.*;
-import com.adap.learn.util.JsonUtils;
+import com.adap.learn.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.*;
 
 @Service @RequiredArgsConstructor
 public class QuestionnaireService {
@@ -47,7 +46,7 @@ public class QuestionnaireService {
             questionRepo.save(ent);
         }
         return new GenerateQuestionnaireResponse(questionnaire.getId(), questionnaire.getSubject(),
-                questionnaire.getGrade(), questionnaire.getDifficulty());
+                questionnaire.getGrade(), questionnaire.getDifficulty(), null);
     }
 
     public SubmitAnswersResponse submit(SubmitAnswersRequest req) {
@@ -69,7 +68,7 @@ public class QuestionnaireService {
                     .build();
             answerRepo.save(ans);
         }
-        return new SubmitAnswersResponse(req.questionnaireId(), req.studentId(), correct, req.answers().size());
+        return new SubmitAnswersResponse(req.questionnaireId(), req.studentId(), correct, req.answers().size(), 0, null, null);
     }
 
     public GenerateQuestionnaireResponse nextAdaptive(NextAdaptiveQuestionnaireRequest req) {
@@ -103,6 +102,6 @@ public class QuestionnaireService {
         }
 
         return new GenerateQuestionnaireResponse(
-                questionnaire.getId(), questionnaire.getSubject(), questionnaire.getGrade(), questionnaire.getDifficulty());
+                questionnaire.getId(), questionnaire.getSubject(), questionnaire.getGrade(), questionnaire.getDifficulty(), null);
     }
 }

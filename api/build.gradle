@@ -8,10 +8,8 @@ group = 'com.apap.learn'
 version = '1.0.0'
 
 java { toolchain { languageVersion = JavaLanguageVersion.of(17) } }
-
-repositories { 
-    mavenCentral() 
-   // maven { url 'https://repo.maven.apache.org/maven2/' }
+repositories{
+mavenCentral() 
      maven {
         url "https://maven.oracle.com"
         credentials {
@@ -19,14 +17,15 @@ repositories {
             password = findProperty("maven.oracle.com.password")
         }
     }
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.4.2'
     implementation 'org.springframework.boot:spring-boot-starter-security:3.4.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.4.2'
     implementation 'org.springframework.boot:spring-boot-starter-mail:3.4.2'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.4.2'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.4.2'
 
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly  'io.jsonwebtoken:jjwt-impl:0.11.5'
@@ -47,6 +46,7 @@ dependencies {
      implementation 'com.oracle.database.security:oraclepki:23.4.0.24.05'
    // implementation 'com.oracle.database.security:osdt_core:23.4.0.24.05'
     // implementation 'com.oracle.database.security:osdt_cert:23.4.0.24.05'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 }
 
 tasks.named('test') {
@@ -57,7 +57,7 @@ tasks.named('test') {
 // 👇 Copy Angular build output into Spring Boot static resources
 tasks.register('copyFrontend', Copy) {
     dependsOn ':ui:build'  // or ':ui:buildFrontend' if your task name differs
-    from("../ui/dist/")    // adjust path if needed
+    from("../ui/dist/ui")    // adjust path if needed
     into("src/main/resources/static/")
 }
 
@@ -70,6 +70,7 @@ bootJar {
     dependsOn 'copyFrontend'
 }
 bootWar {
+    archiveFileName = 'api.war'
+    launchScript()
     dependsOn 'copyFrontend'
-}
 }

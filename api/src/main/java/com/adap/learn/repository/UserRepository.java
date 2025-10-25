@@ -1,14 +1,34 @@
 package com.adap.learn.repository;
-import com.adap.learn.model.*;
+
+import com.adap.learn.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+/**
+ * ✅ UserRepository
+ *
+ * Handles database operations for User entities — registration,
+ * authentication, OTP verification, and lookups by email.
+ */
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    java.util.Optional<User> findByEmail(String email);
-}
 
-public interface QuestionnaireRepository extends JpaRepository<Questionnaire, String> {}
-public interface QuestionRepository extends JpaRepository<Question, String> {}
-public interface QuestionOptionRepository extends JpaRepository<QuestionOption, String> {}
-public interface StudentAnswerRepository extends JpaRepository<StudentAnswer, Long> {
-    java.util.List<StudentAnswer> findByStudentIdAndQuestionnaireId(String studentId, String questionnaireId);
+    /**
+     * Find a user by email (unique field).
+     */
+    Optional<User> findByEmail(String email);
+
+    /**
+     * Check if a user with this email already exists.
+     */
+    boolean existsByEmail(String email);
+
+    /**
+     * Fetch only enabled (verified) users.
+     */
+    @Query("SELECT u FROM User u WHERE u.enabled = true")
+    java.util.List<User> findAllVerifiedUsers();
 }

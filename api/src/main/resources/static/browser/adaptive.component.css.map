@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/questionnaire/adaptive/adaptive.component.css"],
+  "sourcesContent": [".container {\r\n  max-width: 600px;\r\n  margin: auto;\r\n}\r\ninput, select, button {\r\n  margin-bottom: 10px;\r\n  padding: 6px;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC;AACC,aAAW;AACX,UAAQ;AACV;AACA;AAAO;AAAQ;AACb,iBAAe;AACf,WAAS;AACX;",
+  "names": []
+}

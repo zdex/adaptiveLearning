@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/questionnaire/generate/generate.component.css"],
+  "sourcesContent": [".container {\r\n  max-width: 600px;\r\n  margin: auto;\r\n}\r\nform {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\ninput, select, button {\r\n  margin-bottom: 12px;\r\n  padding: 6px;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC;AACC,aAAW;AACX,UAAQ;AACV;AACA;AACE,WAAS;AACT,kBAAgB;AAClB;AACA;AAAO;AAAQ;AACb,iBAAe;AACf,WAAS;AACX;",
+  "names": []
+}

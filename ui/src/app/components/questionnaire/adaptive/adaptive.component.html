@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Adaptive Questionnaire</h2>
+
+  <label>Student ID:</label>
+  <input [(ngModel)]="studentId" name="sid" />
+
+  <label>Subject:</label>
+  <input [(ngModel)]="subject" name="subject" />
+
+  <label>Difficulty:</label>
+  <select [(ngModel)]="difficulty" name="difficulty">
+    <option value="EASY">EASY</option>
+    <option value="MEDIUM">MEDIUM</option>
+    <option value="HARD">HARD</option>
+  </select>
+
+  <button (click)="getNextAdaptive()">Get Adaptive Questionnaire</button>
+
+  <p>{{ message }}</p>
+
+  <div *ngIf="adaptiveResponse">
+    <h3>Adaptive Questionnaire</h3>
+    <pre>{{ adaptiveResponse | json }}</pre>
+  </div>
+</div>

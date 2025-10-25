@@ -1,0 +1,12 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+input, select, button {
+  margin-bottom: 12px;
+  padding: 6px;
+}

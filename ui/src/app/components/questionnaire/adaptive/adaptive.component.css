@@ -1,0 +1,8 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+input, select, button {
+  margin-bottom: 10px;
+  padding: 6px;
+}

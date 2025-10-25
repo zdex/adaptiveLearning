@@ -5,6 +5,8 @@ import com.adap.learn.dto.auth.RegisterRequest;
 import com.adap.learn.model.User;
 import com.adap.learn.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

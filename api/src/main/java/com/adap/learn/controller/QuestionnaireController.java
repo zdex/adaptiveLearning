@@ -1,35 +1,41 @@
 package com.adap.learn.controller;
 
-import com.adap.learn.dto.auth.LoginRequest;
-import com.adap.learn.dto.auth.OtpRequest;
-import com.adap.learn.dto.auth.RegisterRequest;
-import com.adap.learn.service.AuthService;
-import com.adap.learn.service.JwtService;
+import com.adap.learn.dto.questionnaire.*;
+import com.adap.learn.service.QuestionnaireService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/api/auth") @RequiredArgsConstructor
-public class AuthController {
-    private final AuthService auth;
-    private final JwtService jwt;
+@RestController
+@RequestMapping("/api/questionnaire")
+@RequiredArgsConstructor
+public class QuestionnaireController {
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
-        auth.register(req);
-        return ResponseEntity.ok().body("Registered. Check email for OTP.");
+    private final QuestionnaireService service;
+
+    // 🔹 1. Generate questionnaire
+    @PostMapping("/generate")
+    public ResponseEntity<GenerateQuestionnaireResponse> generate(
+            @RequestBody GenerateQuestionnaireRequest req,
+            @RequestHeader(value = "X-Owner", required = false) String owner) {
+
+        GenerateQuestionnaireResponse response = service.generate(req, owner);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/verify-otp")
-    public ResponseEntity<?> verify(@RequestBody OtpRequest req) {
-        return auth.verifyOtp(req.email(), req.otp())
-                ? ResponseEntity.ok("Verified.")
-                : ResponseEntity.badRequest().body("Invalid OTP.");
+    // 🔹 2. Submit answers
+    @PostMapping("/submit")
+    public ResponseEntity<SubmitAnswersResponse> submit(@RequestBody SubmitAnswersRequest req) {
+        SubmitAnswersResponse response = service.submit(req);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
-        String token = auth.login(req, jwt);
-        return ResponseEntity.ok().body(java.util.Map.of("token", token));
+    // 🔹 3. Next adaptive questionnaire
+    @PostMapping("/next-adaptive")
+    public ResponseEntity<GenerateQuestionnaireResponse> nextAdaptive(
+            @RequestBody NextAdaptiveQuestionnaireRequest req) {
+
+        GenerateQuestionnaireResponse response = service.nextAdaptive(req);
+        return ResponseEntity.ok(response);
     }
 }

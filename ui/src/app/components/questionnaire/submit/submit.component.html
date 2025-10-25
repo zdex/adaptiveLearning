@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Submit Questionnaire</h2>
+
+  <label>Questionnaire ID:</label>
+  <input [(ngModel)]="questionnaireId" name="qid" />
+
+  <button (click)="loadMockQuestions()">Load Questions (Demo)</button>
+
+  <form (ngSubmit)="submit()" *ngIf="questions.length">
+    <div *ngFor="let q of questions" class="question">
+      <p><b>{{ q.text }}</b></p>
+      <div *ngFor="let opt of q.options">
+        <label>
+          <input
+            type="radio"
+            name="{{ q.questionId }}"
+            [value]="opt"
+            [(ngModel)]="answers[q.questionId]"
+          />
+          {{ opt }}
+        </label>
+      </div>
+    </div>
+    <button type="submit">Submit Answers</button>
+  </form>
+
+  <p>{{ message }}</p>
+
+  <div *ngIf="result">
+    <h3>Results</h3>
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>
