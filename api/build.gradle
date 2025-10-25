@@ -1,0 +1,75 @@
+plugins {
+    id 'org.springframework.boot' version '3.4.2'
+    id 'java'
+    id 'war'
+}
+
+group = 'com.apap.learn'
+version = '1.0.0'
+
+java { toolchain { languageVersion = JavaLanguageVersion.of(17) } }
+
+repositories { 
+    mavenCentral() 
+   // maven { url 'https://repo.maven.apache.org/maven2/' }
+     maven {
+        url "https://maven.oracle.com"
+        credentials {
+            username = findProperty("maven.oracle.com.username")
+            password = findProperty("maven.oracle.com.password")
+        }
+    }
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-mail:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.4.2'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly  'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly  'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    //runtimeOnly 'com.mysql:mysql-connector-j:8.4.0'
+
+    // Lombok needs explicit version on Gradle 9
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.4.2'
+
+    
+
+     implementation 'com.oracle.database.jdbc:ojdbc11:23.4.0.24.05'
+     // files('lib/ojdbc11-23.4.0.24.05.jar')
+     implementation 'com.oracle.database.security:oraclepki:23.4.0.24.05'
+   // implementation 'com.oracle.database.security:osdt_core:23.4.0.24.05'
+    // implementation 'com.oracle.database.security:osdt_cert:23.4.0.24.05'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    failOnNoDiscoveredTests = false      // ✅ Gradle 9+
+}
+
+// 👇 Copy Angular build output into Spring Boot static resources
+tasks.register('copyFrontend', Copy) {
+    dependsOn ':ui:build'  // or ':ui:buildFrontend' if your task name differs
+    from("../ui/dist/")    // adjust path if needed
+    into("src/main/resources/static/")
+}
+
+tasks.named('processResources') {
+    dependsOn 'copyFrontend'
+}
+
+// ensure it's done before packaging
+bootJar {
+    dependsOn 'copyFrontend'
+}
+bootWar {
+    dependsOn 'copyFrontend'
+}
+}

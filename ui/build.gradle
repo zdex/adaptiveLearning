@@ -1,0 +1,20 @@
+plugins {
+    id 'base'
+    id "com.github.node-gradle.node" version "7.1.0"
+}
+node {
+    version = '22.21.0'
+    npmVersion = '10.9.4'
+    download = true
+    workDir = file("${project.buildDir}/nodejs")
+    npmWorkDir = file("${project.buildDir}/npm")
+}
+tasks.register('buildFrontend', com.github.gradle.node.npm.task.NpmTask) {
+    dependsOn 'npmInstall'
+    args = ['run', 'build']
+}
+tasks.register('startFrontend', com.github.gradle.node.npm.task.NpmTask) {
+    dependsOn 'npmInstall'
+    args = ['start']
+}
+tasks.named('build') { dependsOn 'buildFrontend' } // gives :ui:build
