@@ -1,0 +1,10 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.formatOnSave": true,
+  "gradle.javaDebug": {
+    "tasks": [
+      "bootRun"
+    ],
+    "clean": true
+  }
+}

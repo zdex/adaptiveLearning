@@ -46764,5 +46764,5 @@ var AppModule = class _AppModule {
 })();
 
 // src/main.ts
-platformBrowser().bootstrapModule(AppModule);
+platformBrowser().bootstrapModule(AppModule).catch((err) => console.error(err));
 //# sourceMappingURL=main.js.map
