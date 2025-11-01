@@ -7,7 +7,7 @@ plugins {
 group = 'com.apap.learn'
 version = '1.0.0'
 
-java { toolchain { languageVersion = JavaLanguageVersion.of(17) } }
+java { toolchain { languageVersion = JavaLanguageVersion.of(19) } }
 repositories{
 mavenCentral() 
      maven {
@@ -57,7 +57,7 @@ tasks.named('test') {
 // 👇 Copy Angular build output into Spring Boot static resources
 tasks.register('copyFrontend', Copy) {
     dependsOn ':ui:build'  // or ':ui:buildFrontend' if your task name differs
-    from("../ui/dist/ui")    // adjust path if needed
+    from("../ui/dist/ui/browser")    // copy from browser subdirectory
     into("src/main/resources/static/")
 }
 
