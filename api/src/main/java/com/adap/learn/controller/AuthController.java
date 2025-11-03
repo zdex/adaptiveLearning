@@ -1,35 +1,47 @@
 package com.adap.learn.controller;
 
-import com.adap.learn.dto.auth.LoginRequest;
-import com.adap.learn.dto.auth.OtpRequest;
-import com.adap.learn.dto.auth.RegisterRequest;
+import com.adap.learn.dto.AuthRequest;
+import com.adap.learn.dto.AuthResponse;
+import com.adap.learn.dto.RegisterRequest;
+import com.adap.learn.model.User;
 import com.adap.learn.service.AuthService;
-import com.adap.learn.service.JwtService;
-import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/api/auth") @RequiredArgsConstructor 
-
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
+@Tag(name = "Authentication", description = "Endpoints for user authentication and registration")
 public class AuthController {
-    private final AuthService auth;
-    private final JwtService jwt;
 
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @Operation(summary = "Register a new user")
+    @ApiResponse(responseCode = "200", description = "User registered successfully")
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
-        auth.register(req);
-        return ResponseEntity.ok().body("Registered. Check email for OTP.");
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
     }
 
-    @PostMapping("/verify-otp")
-    public ResponseEntity<?> verify(@RequestBody OtpRequest req) {
-        return auth.verifyOtp(req.email(), req.otp())
-                ? ResponseEntity.ok("Verified.")
-                : ResponseEntity.badRequest().body("Invalid OTP.");
-    }
+    @Operation(summary = "Login user and get JWT token")
+    @ApiResponse(responseCode = "200", description = "Login successful")
+    @ApiResponse(responseCode = "401", description = "Invalid credentials")
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
-        String token = auth.login(req, jwt);
-        return ResponseEntity.ok().body(java.util.Map.of("token", token));
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+
+    @Operation(summary = "Test secured endpoint")
+    @ApiResponse(responseCode = "200", description = "Access granted")
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUser(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(authService.getCurrentUser(token));
     }
 }

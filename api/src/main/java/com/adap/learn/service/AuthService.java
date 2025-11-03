@@ -1,63 +1,87 @@
 package com.adap.learn.service;
 
-import com.adap.learn.dto.auth.LoginRequest;
-import com.adap.learn.dto.auth.RegisterRequest;
+import com.adap.learn.dto.AuthRequest;
+import com.adap.learn.dto.AuthResponse;
+import com.adap.learn.dto.RegisterRequest;
 import com.adap.learn.model.User;
 import com.adap.learn.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service @RequiredArgsConstructor
-public class AuthService implements UserDetailsService {
-    private final UserRepository users;
-    private final MailService mail;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+@Service
+public class AuthService {
 
-    public void register(RegisterRequest req) {
-        var user = User.builder()
-                .email(req.email())
-                .firstName(req.firstName())
-                .lastName(req.lastName())
-                .passwordHash(encoder.encode(req.password()))
-                .enabled(false)
-                .roles("ROLE_STUDENT")
-                .otp(String.format("%06d", (int)(Math.random()*1_000_000)))
-                .build();
-        users.save(user);
-        mail.sendOtp(user.getEmail(), user.getOtp());
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService userDetailsService;
+
+    public AuthService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtService jwtService,
+                       AuthenticationManager authenticationManager,
+                       CustomUserDetailsService userDetailsService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
     }
 
-    public String login(LoginRequest req, JwtService jwt) {
-        var user = users.findByEmail(req.email())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        if (!user.isEnabled()) throw new RuntimeException("User not verified");
-        if (!encoder.matches(req.password(), user.getPasswordHash()))
-            throw new BadCredentialsException("Bad credentials");
-        return jwt.generateToken(user.getEmail());
-    }
-
-    public boolean verifyOtp(String email, String otp) {
-        var user = users.findByEmail(email).orElseThrow();
-        if (user.getOtp()!=null && user.getOtp().equals(otp)) {
-            user.setEnabled(true);
-            user.setOtp(null);
-            users.save(user);
-            return true;
+    /**
+     * Register a new user and return a JWT token
+     */
+    public AuthResponse register(RegisterRequest request) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already registered.");
         }
-        return false;
+
+        User user = User.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role("USER")
+                .active(true)
+                .build();
+
+        userRepository.save(user);
+
+        String token = jwtService.generateToken(user.getEmail());
+        return new AuthResponse("User registered successfully", token);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        var u = users.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return org.springframework.security.core.userdetails.User.withUsername(u.getEmail())
-                .password(u.getPasswordHash())
-                .roles(u.getRoles().split(","))
-                .disabled(!u.isEnabled())
-                .build();
+    /**
+     * Authenticate user and return JWT token
+     */
+    public AuthResponse login(AuthRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(), request.getPassword()
+                )
+        );
+
+        UserDetails user = userDetailsService.loadUserByUsername(request.getEmail());
+        String token = jwtService.generateToken(user.getUsername());
+
+        return new AuthResponse("Login successful", token);
+    }
+
+    /**
+     * Get current logged-in user info from token
+     */
+    public User getCurrentUser(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new RuntimeException("Invalid Authorization header");
+        }
+
+        String token = authHeader.substring(7);
+        String email = jwtService.extractUsername(token);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

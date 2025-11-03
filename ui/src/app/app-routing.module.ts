@@ -6,6 +6,7 @@ import { VerifyOtpComponent } from './components/auth/verify-otp/verify-otp.comp
 import { GenerateComponent } from './components/questionnaire/generate/generate.component';
 import { SubmitComponent } from './components/questionnaire/submit/submit.component';
 import { AdaptiveComponent } from './components/questionnaire/adaptive/adaptive.component';
+import {QuizComponent} from './components/quiz/quiz.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'questionnaire/generate', component: GenerateComponent },
   { path: 'questionnaire/submit', component: SubmitComponent },
   { path: 'questionnaire/adaptive', component: AdaptiveComponent },
+  { path: 'questionnaire/quiz', component: QuizComponent },
   { path: '**', redirectTo: 'login' }
 ];
 

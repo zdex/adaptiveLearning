@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["src/app/components/questionnaire/submit/submit.component.css"],
-  "sourcesContent": [".container {\n  max-width: 600px;\n  margin: auto;\n}\n.question {\n  border: 1px solid #ccc;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n"],
+  "sourcesContent": [".container {\r\n  max-width: 600px;\r\n  margin: auto;\r\n}\r\n.question {\r\n  border: 1px solid #ccc;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\r\n}\r\n"],
   "mappings": ";AAAA,CAAC;AACC,aAAW;AACX,UAAQ;AACV;AACA,CAAC;AACC,UAAQ,IAAI,MAAM;AAClB,iBAAe;AACf,WAAS;AACX;",
   "names": []
 }

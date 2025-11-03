@@ -29,6 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Fetch only enabled (verified) users.
      */
-    @Query("SELECT u FROM User u WHERE u.enabled = true")
+    @Query("SELECT u FROM User u WHERE u.active = true")
     java.util.List<User> findAllVerifiedUsers();
 }

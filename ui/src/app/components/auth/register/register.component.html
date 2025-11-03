@@ -1,3 +1,50 @@
-<p>
-  register works!
-</p>
+<div class="register-container">
+  <h2>Create Account</h2>
+
+  <form (ngSubmit)="onRegister()" #registerForm="ngForm" novalidate>
+    <input
+      type="text"
+      placeholder="First Name"
+      [(ngModel)]="firstName"
+      name="firstName"
+      required
+    />
+    <input
+      type="text"
+      placeholder="Last Name"
+      [(ngModel)]="lastName"
+      name="lastName"
+      required
+    />
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email"
+      name="email"
+      required
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      minlength="6"
+    />
+    <input
+      type="password"
+      placeholder="Confirm Password"
+      [(ngModel)]="confirmPassword"
+      name="confirmPassword"
+      required
+    />
+
+    <button type="submit" [disabled]="loading || !registerForm.valid">
+      {{ loading ? 'Registering...' : 'Register' }}
+    </button>
+
+    <p class="message">{{ message }}</p>
+
+    <p>Already have an account? <a routerLink="/login">Login here</a></p>
+  </form>
+</div>

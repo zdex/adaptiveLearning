@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/auth/login/login.component.css"],
+  "sourcesContent": [".login-container {\r\n  max-width: 400px;\r\n  margin: 80px auto;\r\n  padding: 25px;\r\n  background: #fff;\r\n  border-radius: 12px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\r\n  text-align: center;\r\n}\r\n\r\n.login-container input {\r\n  display: block;\r\n  width: 100%;\r\n  padding: 10px;\r\n  margin: 10px 0;\r\n  border: 1px solid #ccc;\r\n  border-radius: 6px;\r\n}\r\n\r\n.login-container button {\r\n  width: 100%;\r\n  padding: 10px;\r\n  background-color: #0078d4;\r\n  color: white;\r\n  border: none;\r\n  border-radius: 6px;\r\n  cursor: pointer;\r\n}\r\n\r\n.login-container button:disabled {\r\n  background-color: #aaa;\r\n}\r\n\r\n.message {\r\n  color: red;\r\n  margin-top: 10px;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC;AACC,aAAW;AACX,UAAQ,KAAK;AACb,WAAS;AACT,cAAY;AACZ,iBAAe;AACf,cAAY,EAAE,IAAI,IAAI,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AACpC,cAAY;AACd;AAEA,CAVC,gBAUgB;AACf,WAAS;AACT,SAAO;AACP,WAAS;AACT,UAAQ,KAAK;AACb,UAAQ,IAAI,MAAM;AAClB,iBAAe;AACjB;AAEA,CAnBC,gBAmBgB;AACf,SAAO;AACP,WAAS;AACT,oBAAkB;AAClB,SAAO;AACP,UAAQ;AACR,iBAAe;AACf,UAAQ;AACV;AAEA,CA7BC,gBA6BgB,MAAM;AACrB,oBAAkB;AACpB;AAEA,CAAC;AACC,SAAO;AACP,cAAY;AACd;",
+  "names": []
+}

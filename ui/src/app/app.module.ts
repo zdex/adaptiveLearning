@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 
+
 // Components
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
@@ -23,8 +24,6 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     VerifyOtpComponent,
     GenerateComponent,
     SubmitComponent,
@@ -34,7 +33,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RegisterComponent,
+    LoginComponent
   ],
   providers: [ApiService, AuthService, QuestionnaireService],
   bootstrap: [AppComponent]

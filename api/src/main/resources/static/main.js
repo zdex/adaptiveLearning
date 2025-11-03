@@ -46006,18 +46006,21 @@ var VERSION5 = new Version("20.3.9");
 // src/app/services/auth.service.ts
 var AuthService = class _AuthService {
   http;
-  baseUrl = "http://localhost:8080/api/auth";
+  apiUrl = "http://localhost:8080/api/auth";
   constructor(http) {
     this.http = http;
   }
-  login(email, password) {
-    return this.http.post(`${this.baseUrl}/login`, { email, password });
+  login(credentials) {
+    return this.http.post(`${this.apiUrl}/login`, credentials, { withCredentials: true });
   }
-  register(email, password) {
-    return this.http.post(`${this.baseUrl}/register`, { email, password });
+  register(user) {
+    return this.http.post(`${this.apiUrl}/register`, user, { withCredentials: true });
+  }
+  logout() {
+    localStorage.removeItem("token");
   }
   verifyOtp(email, otp) {
-    return this.http.post(`${this.baseUrl}/verify-otp`, { email, otp });
+    return this.http.post(`${this.apiUrl}/verify-otp`, { email, otp });
   }
   static \u0275fac = function AuthService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AuthService)(\u0275\u0275inject(HttpClient));
@@ -46033,105 +46036,259 @@ var AuthService = class _AuthService {
 
 // src/app/components/auth/login/login.component.ts
 var LoginComponent = class _LoginComponent {
-  auth;
+  authService;
   router;
   email = "";
   password = "";
-  constructor(auth, router) {
-    this.auth = auth;
+  message = "";
+  loading = false;
+  constructor(authService, router) {
+    this.authService = authService;
     this.router = router;
   }
-  login() {
-    this.auth.login(this.email, this.password).subscribe({
+  onLogin() {
+    if (!this.email || !this.password) {
+      this.message = "Please enter both email and password.";
+      return;
+    }
+    this.loading = true;
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (res) => {
-        localStorage.setItem("token", res.token);
-        this.router.navigate(["/questionnaire/generate"]);
+        console.log("Login success:", res);
+        this.message = "Login successful! Redirecting...";
+        if (res?.token) {
+          localStorage.setItem("token", res.token);
+        }
+        setTimeout(() => this.router.navigate(["/questionnaire/generate"]), 1500);
       },
-      error: () => alert("Invalid credentials")
+      error: (err) => {
+        console.error("Login failed:", err);
+        this.message = err.error?.message || "Invalid credentials, please try again.";
+        this.loading = false;
+      },
+      complete: () => this.loading = false
     });
+  }
+  goToRegister() {
+    this.router.navigate(["/register"]);
   }
   static \u0275fac = function LoginComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _LoginComponent)(\u0275\u0275directiveInject(AuthService), \u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], standalone: false, decls: 15, vars: 2, consts: [[3, "ngSubmit"], ["type", "email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "name", "password", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit"], ["routerLink", "/register"]], template: function LoginComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 15, vars: 5, consts: [["loginForm", "ngForm"], [1, "login-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], [3, "click"]], template: function LoginComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "h2");
-      \u0275\u0275text(1, "Login");
+      const _r1 = \u0275\u0275getCurrentView();
+      \u0275\u0275elementStart(0, "div", 1)(1, "h2");
+      \u0275\u0275text(2, "Login");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(2, "form", 0);
-      \u0275\u0275listener("ngSubmit", function LoginComponent_Template_form_ngSubmit_2_listener() {
-        return ctx.login();
+      \u0275\u0275elementStart(3, "form", 2, 0);
+      \u0275\u0275listener("ngSubmit", function LoginComponent_Template_form_ngSubmit_3_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onLogin());
       });
-      \u0275\u0275elementStart(3, "label");
-      \u0275\u0275text(4, "Email:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "input", 1);
+      \u0275\u0275elementStart(5, "input", 3);
       \u0275\u0275twoWayListener("ngModelChange", function LoginComponent_Template_input_ngModelChange_5_listener($event) {
+        \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.email, $event) || (ctx.email = $event);
-        return $event;
+        return \u0275\u0275resetView($event);
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "label");
-      \u0275\u0275text(7, "Password:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "input", 2);
-      \u0275\u0275twoWayListener("ngModelChange", function LoginComponent_Template_input_ngModelChange_8_listener($event) {
+      \u0275\u0275elementStart(6, "input", 4);
+      \u0275\u0275twoWayListener("ngModelChange", function LoginComponent_Template_input_ngModelChange_6_listener($event) {
+        \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.password, $event) || (ctx.password = $event);
-        return $event;
+        return \u0275\u0275resetView($event);
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "button", 3);
-      \u0275\u0275text(10, "Login");
-      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(7, "button", 5);
+      \u0275\u0275text(8);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "p", 6);
+      \u0275\u0275text(10);
+      \u0275\u0275elementEnd();
       \u0275\u0275elementStart(11, "p");
-      \u0275\u0275text(12, " Don\u2019t have an account? ");
-      \u0275\u0275elementStart(13, "a", 4);
-      \u0275\u0275text(14, "Register");
-      \u0275\u0275elementEnd()();
+      \u0275\u0275text(12, "Don't have an account? ");
+      \u0275\u0275elementStart(13, "a", 7);
+      \u0275\u0275listener("click", function LoginComponent_Template_a_click_13_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.goToRegister());
+      });
+      \u0275\u0275text(14, "Register here");
+      \u0275\u0275elementEnd()()()();
     }
     if (rf & 2) {
+      const loginForm_r2 = \u0275\u0275reference(4);
       \u0275\u0275advance(5);
       \u0275\u0275twoWayProperty("ngModel", ctx.email);
-      \u0275\u0275advance(3);
+      \u0275\u0275advance();
       \u0275\u0275twoWayProperty("ngModel", ctx.password);
+      \u0275\u0275advance();
+      \u0275\u0275property("disabled", ctx.loading || !loginForm_r2.valid);
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate1(" ", ctx.loading ? "Logging in..." : "Login", " ");
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.message);
     }
-  }, dependencies: [RouterLink, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm], encapsulation: 2 });
+  }, dependencies: [CommonModule, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm], styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n  max-width: 400px;\n  margin: 80px auto;\n  padding: 25px;\n  background: #fff;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.login-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:disabled {\n  background-color: #aaa;\n}\n.message[_ngcontent-%COMP%] {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=login.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LoginComponent, [{
     type: Component,
-    args: [{ selector: "app-login", standalone: false, template: '<h2>Login</h2>\n<form (ngSubmit)="login()">\n  <label>Email:</label>\n  <input type="email" [(ngModel)]="email" name="email" required>\n\n  <label>Password:</label>\n  <input type="password" [(ngModel)]="password" name="password" required>\n\n  <button type="submit">Login</button>\n</form>\n\n<p>\n  Don\u2019t have an account? <a routerLink="/register">Register</a>\n</p>\n' }]
+    args: [{ selector: "app-login", standalone: true, imports: [CommonModule, FormsModule], template: `<div class="login-container">
+  <h2>Login</h2>
+
+  <form (ngSubmit)="onLogin()" #loginForm="ngForm" novalidate>
+    <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+    <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+
+    <button type="submit" [disabled]="loading || !loginForm.valid">
+      {{ loading ? 'Logging in...' : 'Login' }}
+    </button>
+
+    <p class="message">{{ message }}</p>
+
+    <p>Don't have an account? <a (click)="goToRegister()">Register here</a></p>
+  </form>
+</div>
+`, styles: ["/* src/app/components/auth/login/login.component.css */\n.login-container {\n  max-width: 400px;\n  margin: 80px auto;\n  padding: 25px;\n  background: #fff;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.login-container input {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.login-container button {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.login-container button:disabled {\n  background-color: #aaa;\n}\n.message {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=login.component.css.map */\n"] }]
   }], () => [{ type: AuthService }, { type: Router }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/components/auth/login/login.component.ts", lineNumber: 10 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/components/auth/login/login.component.ts", lineNumber: 14 });
 })();
 
 // src/app/components/auth/register/register.component.ts
 var RegisterComponent = class _RegisterComponent {
-  constructor() {
+  authService;
+  router;
+  name = "";
+  email = "";
+  password = "";
+  confirmPassword = "";
+  message = "";
+  loading = false;
+  constructor(authService, router) {
+    this.authService = authService;
+    this.router = router;
   }
-  ngOnInit() {
+  onRegister() {
+    if (this.password !== this.confirmPassword) {
+      this.message = "Passwords do not match.";
+      return;
+    }
+    this.loading = true;
+    this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe({
+      next: () => {
+        this.message = "Registration successful! Redirecting to login...";
+        setTimeout(() => this.router.navigate(["/login"]), 1500);
+      },
+      error: (err) => {
+        console.error(err);
+        this.message = "Registration failed. Try again.";
+        this.loading = false;
+      },
+      complete: () => this.loading = false
+    });
   }
   static \u0275fac = function RegisterComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _RegisterComponent)();
+    return new (__ngFactoryType__ || _RegisterComponent)(\u0275\u0275directiveInject(AuthService), \u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RegisterComponent, selectors: [["app-register"]], standalone: false, decls: 2, vars: 0, template: function RegisterComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RegisterComponent, selectors: [["app-register"]], decls: 17, vars: 7, consts: [["registerForm", "ngForm"], [1, "register-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "text", "placeholder", "Name", "name", "name", "required", "", 3, "ngModelChange", "ngModel"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", "minlength", "6", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Confirm Password", "name", "confirmPassword", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], ["routerLink", "/login"]], template: function RegisterComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "p");
-      \u0275\u0275text(1, " register works!\n");
+      const _r1 = \u0275\u0275getCurrentView();
+      \u0275\u0275elementStart(0, "div", 1)(1, "h2");
+      \u0275\u0275text(2, "Create Account");
       \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(3, "form", 2, 0);
+      \u0275\u0275listener("ngSubmit", function RegisterComponent_Template_form_ngSubmit_3_listener() {
+        \u0275\u0275restoreView(_r1);
+        return \u0275\u0275resetView(ctx.onRegister());
+      });
+      \u0275\u0275elementStart(5, "input", 3);
+      \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_5_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.name, $event) || (ctx.name = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(6, "input", 4);
+      \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_6_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.email, $event) || (ctx.email = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "input", 5);
+      \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_7_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.password, $event) || (ctx.password = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(8, "input", 6);
+      \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_8_listener($event) {
+        \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.confirmPassword, $event) || (ctx.confirmPassword = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "button", 7);
+      \u0275\u0275text(10);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(11, "p", 8);
+      \u0275\u0275text(12);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(13, "p");
+      \u0275\u0275text(14, "Already have an account? ");
+      \u0275\u0275elementStart(15, "a", 9);
+      \u0275\u0275text(16, "Login here");
+      \u0275\u0275elementEnd()()()();
     }
-  }, encapsulation: 2 });
+    if (rf & 2) {
+      const registerForm_r2 = \u0275\u0275reference(4);
+      \u0275\u0275advance(5);
+      \u0275\u0275twoWayProperty("ngModel", ctx.name);
+      \u0275\u0275advance();
+      \u0275\u0275twoWayProperty("ngModel", ctx.email);
+      \u0275\u0275advance();
+      \u0275\u0275twoWayProperty("ngModel", ctx.password);
+      \u0275\u0275advance();
+      \u0275\u0275twoWayProperty("ngModel", ctx.confirmPassword);
+      \u0275\u0275advance();
+      \u0275\u0275property("disabled", ctx.loading || !registerForm_r2.valid);
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate1(" ", ctx.loading ? "Registering..." : "Register", " ");
+      \u0275\u0275advance(2);
+      \u0275\u0275textInterpolate(ctx.message);
+    }
+  }, dependencies: [CommonModule, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, NgModel, NgForm], styles: ["\n\n.register-container[_ngcontent-%COMP%] {\n  max-width: 400px;\n  margin: 60px auto;\n  padding: 20px;\n  border-radius: 12px;\n  background: #fff;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.register-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:disabled {\n  background-color: #aaa;\n}\n.message[_ngcontent-%COMP%] {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=register.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RegisterComponent, [{
     type: Component,
-    args: [{ selector: "app-register", standalone: false, template: "<p>\n  register works!\n</p>\n" }]
-  }], () => [], null);
+    args: [{ selector: "app-register", standalone: true, imports: [CommonModule, FormsModule], template: `<div class="register-container">
+  <h2>Create Account</h2>
+
+  <form (ngSubmit)="onRegister()" #registerForm="ngForm" novalidate>
+    <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
+    <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+    <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required minlength="6" />
+    <input type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword" required />
+
+    <button type="submit" [disabled]="loading || !registerForm.valid">
+      {{ loading ? 'Registering...' : 'Register' }}
+    </button>
+
+    <p class="message">{{ message }}</p>
+
+    <p>Already have an account? <a routerLink="/login">Login here</a></p>
+  </form>
+</div>
+`, styles: ["/* src/app/components/auth/register/register.component.css */\n.register-container {\n  max-width: 400px;\n  margin: 60px auto;\n  padding: 20px;\n  border-radius: 12px;\n  background: #fff;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.register-container input {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.register-container button {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.register-container button:disabled {\n  background-color: #aaa;\n}\n.message {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=register.component.css.map */\n"] }]
+  }], () => [{ type: AuthService }, { type: Router }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RegisterComponent, { className: "RegisterComponent", filePath: "src/app/components/auth/register/register.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RegisterComponent, { className: "RegisterComponent", filePath: "src/app/components/auth/register/register.component.ts", lineNumber: 14 });
 })();
 
 // src/app/components/auth/verify-otp/verify-otp.component.ts
@@ -46164,7 +46321,7 @@ var VerifyOtpComponent = class _VerifyOtpComponent {
 // src/app/services/questionnaire.service.ts
 var QuestionnaireService = class _QuestionnaireService {
   http;
-  baseUrl = "http://localhost:8080/api/questionnaire";
+  baseUrl = "http://localhost:8080/api/service/questionnaire";
   constructor(http) {
     this.http = http;
   }
@@ -46612,34 +46769,6 @@ var AdaptiveComponent = class _AdaptiveComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AdaptiveComponent, { className: "AdaptiveComponent", filePath: "src/app/components/questionnaire/adaptive/adaptive.component.ts", lineNumber: 10 });
 })();
 
-// src/app/app-routing.module.ts
-var routes = [
-  { path: "", redirectTo: "login", pathMatch: "full" },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "verify-otp", component: VerifyOtpComponent },
-  { path: "questionnaire/generate", component: GenerateComponent },
-  { path: "questionnaire/submit", component: SubmitComponent },
-  { path: "questionnaire/adaptive", component: AdaptiveComponent },
-  { path: "**", redirectTo: "login" }
-];
-var AppRoutingModule = class _AppRoutingModule {
-  static \u0275fac = function AppRoutingModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AppRoutingModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppRoutingModule });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [RouterModule.forRoot(routes), RouterModule] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppRoutingModule, [{
-    type: NgModule,
-    args: [{
-      imports: [RouterModule.forRoot(routes)],
-      exports: [RouterModule]
-    }]
-  }], null, null);
-})();
-
 // src/environments/environment.ts
 var environment = {
   production: false,
@@ -46684,6 +46813,77 @@ var ApiService = class _ApiService {
     type: Injectable,
     args: [{ providedIn: "root" }]
   }], () => [{ type: HttpClient }], null);
+})();
+
+// src/app/components/quiz/quiz.component.ts
+var QuizComponent = class _QuizComponent {
+  api;
+  questionnaireId;
+  studentId = "student-1";
+  answers = [];
+  result;
+  message = "";
+  // in real app, fetch questions by id; here we keep it simple
+  constructor(api) {
+    this.api = api;
+  }
+  submit() {
+    const payload = { questionnaireId: this.questionnaireId, studentId: this.studentId, answers: this.answers };
+    this.api.submitAnswers(payload).subscribe({
+      next: (res) => this.result = res,
+      error: (err) => this.message = "Submit failed"
+    });
+  }
+  static \u0275fac = function QuizComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _QuizComponent)(\u0275\u0275directiveInject(ApiService));
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _QuizComponent, selectors: [["app-quiz"]], inputs: { questionnaireId: "questionnaireId" }, decls: 2, vars: 0, template: function QuizComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275domElementStart(0, "p");
+      \u0275\u0275text(1, " quiz works!\n");
+      \u0275\u0275domElementEnd();
+    }
+  }, encapsulation: 2 });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(QuizComponent, [{
+    type: Component,
+    args: [{ selector: "app-quiz", template: "<p>\n  quiz works!\n</p>\n" }]
+  }], () => [{ type: ApiService }], { questionnaireId: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(QuizComponent, { className: "QuizComponent", filePath: "src/app/components/quiz/quiz.component.ts", lineNumber: 8 });
+})();
+
+// src/app/app-routing.module.ts
+var routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "verify-otp", component: VerifyOtpComponent },
+  { path: "questionnaire/generate", component: GenerateComponent },
+  { path: "questionnaire/submit", component: SubmitComponent },
+  { path: "questionnaire/adaptive", component: AdaptiveComponent },
+  { path: "questionnaire/quiz", component: QuizComponent },
+  { path: "**", redirectTo: "login" }
+];
+var AppRoutingModule = class _AppRoutingModule {
+  static \u0275fac = function AppRoutingModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AppRoutingModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppRoutingModule });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [RouterModule.forRoot(routes), RouterModule] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppRoutingModule, [{
+    type: NgModule,
+    args: [{
+      imports: [RouterModule.forRoot(routes)],
+      exports: [RouterModule]
+    }]
+  }], null, null);
 })();
 
 // src/app/app.component.ts
@@ -46735,7 +46935,9 @@ var AppModule = class _AppModule {
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RegisterComponent,
+    LoginComponent
   ] });
 };
 (() => {
@@ -46744,8 +46946,6 @@ var AppModule = class _AppModule {
     args: [{
       declarations: [
         AppComponent,
-        LoginComponent,
-        RegisterComponent,
         VerifyOtpComponent,
         GenerateComponent,
         SubmitComponent,
@@ -46755,7 +46955,9 @@ var AppModule = class _AppModule {
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        RegisterComponent,
+        LoginComponent
       ],
       providers: [ApiService, AuthService, QuestionnaireService],
       bootstrap: [AppComponent]
@@ -46764,5 +46966,5 @@ var AppModule = class _AppModule {
 })();
 
 // src/main.ts
-platformBrowser().bootstrapModule(AppModule);
+platformBrowser().bootstrapModule(AppModule).catch((err) => console.error(err));
 //# sourceMappingURL=main.js.map
