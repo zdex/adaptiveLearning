@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpInterceptor} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,13 +21,15 @@ import { AuthService } from './services/auth.service';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { AppComponent } from './app.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     VerifyOtpComponent,
     GenerateComponent,
     SubmitComponent,
-    AdaptiveComponent
+    AdaptiveComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     RegisterComponent,
     LoginComponent
+
   ],
   providers: [ApiService, AuthService, QuestionnaireService],
   bootstrap: [AppComponent]

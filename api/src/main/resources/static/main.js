@@ -46007,20 +46007,60 @@ var VERSION5 = new Version("20.3.9");
 var AuthService = class _AuthService {
   http;
   apiUrl = "http://localhost:8080/api/auth";
+  // backend base URL
   constructor(http) {
     this.http = http;
   }
-  login(credentials) {
-    return this.http.post(`${this.apiUrl}/login`, credentials, { withCredentials: true });
-  }
+  /**
+   * Register a new user
+   */
   register(user) {
-    return this.http.post(`${this.apiUrl}/register`, user, { withCredentials: true });
+    return this.http.post(`${this.apiUrl}/register`, user, {
+      withCredentials: true
+    });
   }
+  /**
+   * Login user and store JWT
+   */
+  login(credentials) {
+    return this.http.post(`${this.apiUrl}/login`, credentials, {
+      withCredentials: true
+    }).pipe(tap((response) => {
+      if (response?.token) {
+        localStorage.setItem("token", response.token);
+      }
+    }));
+  }
+  /**
+   * Logout user
+   */
   logout() {
     localStorage.removeItem("token");
   }
-  verifyOtp(email, otp) {
-    return this.http.post(`${this.apiUrl}/verify-otp`, { email, otp });
+  /**
+   * Get JWT token
+   */
+  getToken() {
+    return localStorage.getItem("token");
+  }
+  /**
+   * Check if user is logged in
+   */
+  isAuthenticated() {
+    return !!this.getToken();
+  }
+  /**
+   * Fetch current logged-in user (optional)
+   */
+  getCurrentUser() {
+    const token = this.getToken();
+    if (!token) {
+      throw new Error("No token found");
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/me`, { headers });
   }
   static \u0275fac = function AuthService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AuthService)(\u0275\u0275inject(HttpClient));
@@ -46030,7 +46070,9 @@ var AuthService = class _AuthService {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AuthService, [{
     type: Injectable,
-    args: [{ providedIn: "root" }]
+    args: [{
+      providedIn: "root"
+    }]
   }], () => [{ type: HttpClient }], null);
 })();
 
@@ -46161,7 +46203,8 @@ var LoginComponent = class _LoginComponent {
 var RegisterComponent = class _RegisterComponent {
   authService;
   router;
-  name = "";
+  firstName = "";
+  lastName = "";
   email = "";
   password = "";
   confirmPassword = "";
@@ -46177,14 +46220,20 @@ var RegisterComponent = class _RegisterComponent {
       return;
     }
     this.loading = true;
-    this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe({
+    const user = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password
+    };
+    this.authService.register(user).subscribe({
       next: () => {
         this.message = "Registration successful! Redirecting to login...";
         setTimeout(() => this.router.navigate(["/login"]), 1500);
       },
       error: (err) => {
         console.error(err);
-        this.message = "Registration failed. Try again.";
+        this.message = err.error?.message || "Registration failed. Try again.";
         this.loading = false;
       },
       complete: () => this.loading = false
@@ -46193,7 +46242,7 @@ var RegisterComponent = class _RegisterComponent {
   static \u0275fac = function RegisterComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _RegisterComponent)(\u0275\u0275directiveInject(AuthService), \u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RegisterComponent, selectors: [["app-register"]], decls: 17, vars: 7, consts: [["registerForm", "ngForm"], [1, "register-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "text", "placeholder", "Name", "name", "name", "required", "", 3, "ngModelChange", "ngModel"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", "minlength", "6", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Confirm Password", "name", "confirmPassword", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], ["routerLink", "/login"]], template: function RegisterComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RegisterComponent, selectors: [["app-register"]], decls: 18, vars: 8, consts: [["registerForm", "ngForm"], [1, "register-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "text", "placeholder", "First Name", "name", "firstName", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "placeholder", "Last Name", "name", "lastName", "required", "", 3, "ngModelChange", "ngModel"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", "minlength", "6", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Confirm Password", "name", "confirmPassword", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], ["routerLink", "/login"]], template: function RegisterComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "div", 1)(1, "h2");
@@ -46207,47 +46256,56 @@ var RegisterComponent = class _RegisterComponent {
       \u0275\u0275elementStart(5, "input", 3);
       \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_5_listener($event) {
         \u0275\u0275restoreView(_r1);
-        \u0275\u0275twoWayBindingSet(ctx.name, $event) || (ctx.name = $event);
+        \u0275\u0275twoWayBindingSet(ctx.firstName, $event) || (ctx.firstName = $event);
         return \u0275\u0275resetView($event);
       });
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(6, "input", 4);
       \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_6_listener($event) {
         \u0275\u0275restoreView(_r1);
-        \u0275\u0275twoWayBindingSet(ctx.email, $event) || (ctx.email = $event);
+        \u0275\u0275twoWayBindingSet(ctx.lastName, $event) || (ctx.lastName = $event);
         return \u0275\u0275resetView($event);
       });
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(7, "input", 5);
       \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_7_listener($event) {
         \u0275\u0275restoreView(_r1);
-        \u0275\u0275twoWayBindingSet(ctx.password, $event) || (ctx.password = $event);
+        \u0275\u0275twoWayBindingSet(ctx.email, $event) || (ctx.email = $event);
         return \u0275\u0275resetView($event);
       });
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(8, "input", 6);
       \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_8_listener($event) {
         \u0275\u0275restoreView(_r1);
+        \u0275\u0275twoWayBindingSet(ctx.password, $event) || (ctx.password = $event);
+        return \u0275\u0275resetView($event);
+      });
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "input", 7);
+      \u0275\u0275twoWayListener("ngModelChange", function RegisterComponent_Template_input_ngModelChange_9_listener($event) {
+        \u0275\u0275restoreView(_r1);
         \u0275\u0275twoWayBindingSet(ctx.confirmPassword, $event) || (ctx.confirmPassword = $event);
         return \u0275\u0275resetView($event);
       });
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "button", 7);
-      \u0275\u0275text(10);
+      \u0275\u0275elementStart(10, "button", 8);
+      \u0275\u0275text(11);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(11, "p", 8);
-      \u0275\u0275text(12);
+      \u0275\u0275elementStart(12, "p", 9);
+      \u0275\u0275text(13);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(13, "p");
-      \u0275\u0275text(14, "Already have an account? ");
-      \u0275\u0275elementStart(15, "a", 9);
-      \u0275\u0275text(16, "Login here");
+      \u0275\u0275elementStart(14, "p");
+      \u0275\u0275text(15, "Already have an account? ");
+      \u0275\u0275elementStart(16, "a", 10);
+      \u0275\u0275text(17, "Login here");
       \u0275\u0275elementEnd()()()();
     }
     if (rf & 2) {
       const registerForm_r2 = \u0275\u0275reference(4);
       \u0275\u0275advance(5);
-      \u0275\u0275twoWayProperty("ngModel", ctx.name);
+      \u0275\u0275twoWayProperty("ngModel", ctx.firstName);
+      \u0275\u0275advance();
+      \u0275\u0275twoWayProperty("ngModel", ctx.lastName);
       \u0275\u0275advance();
       \u0275\u0275twoWayProperty("ngModel", ctx.email);
       \u0275\u0275advance();
@@ -46270,10 +46328,42 @@ var RegisterComponent = class _RegisterComponent {
   <h2>Create Account</h2>
 
   <form (ngSubmit)="onRegister()" #registerForm="ngForm" novalidate>
-    <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
-    <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-    <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required minlength="6" />
-    <input type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword" required />
+    <input
+      type="text"
+      placeholder="First Name"
+      [(ngModel)]="firstName"
+      name="firstName"
+      required
+    />
+    <input
+      type="text"
+      placeholder="Last Name"
+      [(ngModel)]="lastName"
+      name="lastName"
+      required
+    />
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email"
+      name="email"
+      required
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      minlength="6"
+    />
+    <input
+      type="password"
+      placeholder="Confirm Password"
+      [(ngModel)]="confirmPassword"
+      name="confirmPassword"
+      required
+    />
 
     <button type="submit" [disabled]="loading || !registerForm.valid">
       {{ loading ? 'Registering...' : 'Register' }}

@@ -8,7 +8,7 @@ import { SubmitComponent } from './components/questionnaire/submit/submit.compon
 import { AdaptiveComponent } from './components/questionnaire/adaptive/adaptive.component';
 import {QuizComponent} from './components/quiz/quiz.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
