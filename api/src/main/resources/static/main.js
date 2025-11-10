@@ -46419,7 +46419,8 @@ var QuestionnaireService = class _QuestionnaireService {
     const token = localStorage.getItem("token");
     return {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
       })
     };
   }
@@ -46445,54 +46446,351 @@ var QuestionnaireService = class _QuestionnaireService {
 })();
 
 // src/app/components/questionnaire/generate/generate.component.ts
-function GenerateComponent_div_21_Template(rf, ctx) {
+function GenerateComponent_p_22_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "h3");
-    \u0275\u0275text(2, "Generated Questionnaire");
+    \u0275\u0275elementStart(0, "p", 11);
+    \u0275\u0275text(1);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "pre");
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "json");
-    \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(ctx_r0.message);
+  }
+}
+function GenerateComponent_section_23_div_4_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 22)(1, "span");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "span");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("Answered: ", ctx_r0.answeredCount());
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("Correct: ", ctx_r0.correctCount());
+  }
+}
+function GenerateComponent_section_23_div_6_div_7_span_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 35);
+    \u0275\u0275text(1, "Correct");
+    \u0275\u0275elementEnd();
+  }
+}
+function GenerateComponent_section_23_div_6_div_7_span_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 36);
+    \u0275\u0275text(1, "Incorrect");
+    \u0275\u0275elementEnd();
+  }
+}
+function GenerateComponent_section_23_div_6_div_7_span_3_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span", 37);
+    \u0275\u0275text(1, "Unanswered");
+    \u0275\u0275elementEnd();
+  }
+}
+function GenerateComponent_section_23_div_6_div_7_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 31);
+    \u0275\u0275template(1, GenerateComponent_section_23_div_6_div_7_span_1_Template, 2, 0, "span", 32)(2, GenerateComponent_section_23_div_6_div_7_span_2_Template, 2, 0, "span", 33)(3, GenerateComponent_section_23_div_6_div_7_span_3_Template, 2, 0, "span", 34);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const q_r3 = \u0275\u0275nextContext().$implicit;
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.results[q_r3.questionId] === true);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.results[q_r3.questionId] === false);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.results[q_r3.questionId] === null);
+  }
+}
+function GenerateComponent_section_23_div_6_div_8_label_1_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r4 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "label", 40)(1, "input", 41);
+    \u0275\u0275listener("change", function GenerateComponent_section_23_div_6_div_8_label_1_Template_input_change_1_listener() {
+      const oi_r5 = \u0275\u0275restoreView(_r4).index;
+      const q_r3 = \u0275\u0275nextContext(2).$implicit;
+      const ctx_r0 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r0.choose(q_r3.questionId, oi_r5));
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(2, "span", 42);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "span", 43);
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+  }
+  if (rf & 2) {
+    const opt_r6 = ctx.$implicit;
+    const oi_r5 = ctx.index;
+    const q_r3 = \u0275\u0275nextContext(2).$implicit;
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275classProp("selected", ctx_r0.answers[q_r3.questionId] === oi_r5)("correct", ctx_r0.submitted && q_r3.correctIndex === oi_r5)("incorrect", ctx_r0.submitted && ctx_r0.answers[q_r3.questionId] === oi_r5 && q_r3.correctIndex !== oi_r5);
+    \u0275\u0275advance();
+    \u0275\u0275property("name", "q_" + q_r3.questionId)("value", oi_r5)("checked", ctx_r0.answers[q_r3.questionId] === oi_r5)("disabled", ctx_r0.submitted);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate("ABCD"[oi_r5] || oi_r5 + 1);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(opt_r6);
+  }
+}
+function GenerateComponent_section_23_div_6_div_8_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 38);
+    \u0275\u0275template(1, GenerateComponent_section_23_div_6_div_8_label_1_Template, 6, 12, "label", 39);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const q_r3 = \u0275\u0275nextContext().$implicit;
+    \u0275\u0275advance();
+    \u0275\u0275property("ngForOf", q_r3.options);
+  }
+}
+function GenerateComponent_section_23_div_6_div_9_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 44)(1, "small");
+    \u0275\u0275text(2, "Answer: ");
+    \u0275\u0275elementStart(3, "strong");
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const q_r3 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 1, ctx_r0.generated));
+    \u0275\u0275textInterpolate(q_r3.options[q_r3.correctIndex]);
+  }
+}
+function GenerateComponent_section_23_div_6_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 23)(1, "div", 24)(2, "div", 25)(3, "span", 26);
+    \u0275\u0275text(4);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "span", 27);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275template(7, GenerateComponent_section_23_div_6_div_7_Template, 4, 3, "div", 28);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(8, GenerateComponent_section_23_div_6_div_8_Template, 2, 1, "div", 29)(9, GenerateComponent_section_23_div_6_div_9_Template, 5, 1, "div", 30);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const q_r3 = ctx.$implicit;
+    const i_r7 = ctx.index;
+    const ctx_r0 = \u0275\u0275nextContext(2);
+    \u0275\u0275advance(4);
+    \u0275\u0275textInterpolate1("Q", i_r7 + 1);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(q_r3.text);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.submitted);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", q_r3.type === "MCQ");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.submitted && q_r3.correctIndex !== null && q_r3.correctIndex !== void 0);
+  }
+}
+function GenerateComponent_section_23_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "section")(1, "div", 12)(2, "h3");
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, GenerateComponent_section_23_div_4_Template, 5, 2, "div", 13);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 14);
+    \u0275\u0275template(6, GenerateComponent_section_23_div_6_Template, 10, 5, "div", 15);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "div", 16)(8, "button", 17);
+    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_8_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.submit());
+    });
+    \u0275\u0275text(9, " Submit Answers ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "button", 18);
+    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_10_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.resetAnswers());
+    });
+    \u0275\u0275text(11, " Reset ");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "details", 19)(13, "summary");
+    \u0275\u0275text(14, "Show raw response");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "pre");
+    \u0275\u0275text(16);
+    \u0275\u0275pipe(17, "json");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(18, "div", 16)(19, "button", 17);
+    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_19_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.submit());
+    });
+    \u0275\u0275text(20, "Submit Answers");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(21, "button", 20);
+    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_21_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.resetAnswers());
+    });
+    \u0275\u0275text(22, "Reset");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(23, "button", 21);
+    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_23_listener() {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.generateNewQuestions());
+    });
+    \u0275\u0275text(24);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Questions (", ctx_r0.generated.questions.length, ")");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r0.submitted);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("ngForOf", ctx_r0.generated.questions);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("disabled", ctx_r0.submitted || !ctx_r0.generated.questions.length);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("disabled", ctx_r0.loading);
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(17, 9, ctx_r0.generated));
+    \u0275\u0275advance(3);
+    \u0275\u0275property("disabled", ctx_r0.submitted);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("disabled", !ctx_r0.submitted || ctx_r0.generatingNew);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", ctx_r0.generatingNew ? "Generating..." : "Generate New Questions", " ");
   }
 }
 var GenerateComponent = class _GenerateComponent {
   questionnaireService;
-  subject = "Mathematics";
-  grade = "Grade 7";
+  // form fields
+  subject = "";
+  grade = "";
   style = "MCQ";
-  generated;
+  // state
   loading = false;
   message = "";
+  // selection state: questionId -> selected option index (or null)
+  answers = {};
+  // evaluation state after submit: questionId -> true/false/null (unanswered)
+  results = {};
+  generated;
+  submitted = false;
+  generatingNew = false;
+  nextDifficulty = "easy";
   constructor(questionnaireService) {
     this.questionnaireService = questionnaireService;
   }
   generate() {
     this.loading = true;
-    this.message = "Generating questionnaire...";
-    this.generated = null;
-    const payload = { subject: this.subject, grade: this.grade, style: this.style };
+    this.submitted = false;
+    this.message = "";
+    this.generated = void 0;
+    this.answers = {};
+    this.results = {};
+    const payload = { subject: this.subject, grade: this.grade, style: this.style, difficultyLevel: this.nextDifficulty };
     this.questionnaireService.generateQuestionnaire(payload).subscribe({
       next: (res) => {
-        this.loading = false;
-        this.generated = res;
-        this.message = "\u2705 Questionnaire generated successfully!";
+        const onlyMcq = (res.questions || []).filter((q) => (q.type || "MCQ") === "MCQ");
+        this.generated = __spreadProps(__spreadValues({}, res), { questions: onlyMcq });
+        onlyMcq.forEach((q) => this.answers[q.questionId] = null);
       },
       error: (err) => {
-        this.loading = false;
-        this.message = "\u274C Failed to generate questionnaire: " + err.message;
+        console.error(err);
+        this.message = err?.error?.message || "Failed to generate questionnaire.";
+      },
+      complete: () => this.loading = false
+    });
+  }
+  // capture a selection
+  choose(questionId, optionIndex) {
+    this.answers[questionId] = optionIndex;
+  }
+  // submit locally: compare against correctIndex and render results
+  submit() {
+    if (!this.generated?.questions?.length)
+      return;
+    this.results = {};
+    this.generated.questions.forEach((q) => {
+      const chosen = this.answers[q.questionId];
+      if (chosen === null || chosen === void 0) {
+        this.results[q.questionId] = null;
+      } else if (typeof q.correctIndex === "number") {
+        this.results[q.questionId] = chosen === q.correctIndex;
+      } else {
+        this.results[q.questionId] = null;
       }
     });
+    const answersPayload = {
+      studentId: "S1",
+      questionnaireId: "QSet1",
+      answers: Object.entries(this.answers).map(([qid, idx]) => ({
+        questionId: qid,
+        selectedIndex: idx
+      }))
+    };
+    this.questionnaireService.submitAnswers(answersPayload).subscribe({
+      next: (res) => {
+        this.submitted = true;
+        this.nextDifficulty = res.nextDifficulty;
+        console.log("Submit Result:", res);
+      },
+      error: (err) => console.error("Submit failed:", err)
+    });
+    this.submitted = true;
+  }
+  generateNewQuestions() {
+    this.generatingNew = true;
+    const prompt = `Generate ${this.nextDifficulty} level questions for ${this.subject} grade ${this.grade}.`;
+    const payload = { subject: this.subject, grade: this.grade, style: this.style, difficultyLevel: this.nextDifficulty };
+    this.questionnaireService.generateQuestionnaire(payload).subscribe({
+      next: (res) => {
+        this.generated = res;
+        this.answers = {};
+        this.results = {};
+        this.submitted = false;
+      },
+      complete: () => this.generatingNew = false
+    });
+  }
+  resetAnswers() {
+    if (!this.generated?.questions)
+      return;
+    this.generated.questions.forEach((q) => this.answers[q.questionId] = null);
+    this.results = {};
+    this.submitted = false;
+  }
+  // helpers for template
+  answeredCount() {
+    return Object.values(this.answers).filter((v) => v !== null && v !== void 0).length;
+  }
+  correctCount() {
+    return Object.values(this.results).filter((v) => v === true).length;
   }
   static \u0275fac = function GenerateComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _GenerateComponent)(\u0275\u0275directiveInject(QuestionnaireService));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GenerateComponent, selectors: [["app-generate-questionnaire"]], standalone: false, decls: 22, vars: 6, consts: [[1, "container"], [3, "ngSubmit"], ["type", "text", "name", "subject", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "name", "grade", "required", "", 3, "ngModelChange", "ngModel"], ["name", "style", 3, "ngModelChange", "ngModel"], ["value", "MCQ"], ["value", "SHORT_ANSWER"], ["type", "submit", 3, "disabled"], [4, "ngIf"]], template: function GenerateComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GenerateComponent, selectors: [["app-generate-questionnaire"]], decls: 24, vars: 7, consts: [[1, "gen-container"], [1, "gen-form", 3, "ngSubmit"], [1, "field"], ["type", "text", "name", "subject", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "name", "grade", "required", "", 3, "ngModelChange", "ngModel"], ["name", "style", 3, "ngModelChange", "ngModel"], ["value", "MCQ"], ["value", "SHORT_ANSWER"], ["type", "submit", 1, "btn", "primary", 3, "disabled"], ["class", "message", 4, "ngIf"], [4, "ngIf"], [1, "message"], [1, "summary"], ["class", "summary-inline", 4, "ngIf"], [1, "question-list"], ["class", "card", 4, "ngFor", "ngForOf"], [1, "actions"], [1, "btn", "success", 3, "click", "disabled"], [1, "btn", 3, "click", "disabled"], [1, "raw"], [1, "btn", 3, "click"], [1, "btn", "primary", 3, "click", "disabled"], [1, "summary-inline"], [1, "card"], [1, "q-header"], [1, "q-title"], [1, "q-num"], [1, "q-text"], ["class", "q-status", 4, "ngIf"], ["class", "options", 4, "ngIf"], ["class", "answer-key", 4, "ngIf"], [1, "q-status"], ["class", "badge correct", 4, "ngIf"], ["class", "badge wrong", 4, "ngIf"], ["class", "badge neutral", 4, "ngIf"], [1, "badge", "correct"], [1, "badge", "wrong"], [1, "badge", "neutral"], [1, "options"], ["class", "option", 3, "selected", "correct", "incorrect", 4, "ngFor", "ngForOf"], [1, "option"], ["type", "radio", 3, "change", "name", "value", "checked", "disabled"], [1, "opt-index"], [1, "opt-text"], [1, "answer-key"]], template: function GenerateComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "h2");
       \u0275\u0275text(2, "Generate Questionnaire");
@@ -46501,240 +46799,180 @@ var GenerateComponent = class _GenerateComponent {
       \u0275\u0275listener("ngSubmit", function GenerateComponent_Template_form_ngSubmit_3_listener() {
         return ctx.generate();
       });
-      \u0275\u0275elementStart(4, "label");
-      \u0275\u0275text(5, "Subject:");
+      \u0275\u0275elementStart(4, "div", 2)(5, "label");
+      \u0275\u0275text(6, "Subject");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "input", 2);
-      \u0275\u0275twoWayListener("ngModelChange", function GenerateComponent_Template_input_ngModelChange_6_listener($event) {
+      \u0275\u0275elementStart(7, "input", 3);
+      \u0275\u0275twoWayListener("ngModelChange", function GenerateComponent_Template_input_ngModelChange_7_listener($event) {
         \u0275\u0275twoWayBindingSet(ctx.subject, $event) || (ctx.subject = $event);
         return $event;
       });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(8, "div", 2)(9, "label");
+      \u0275\u0275text(10, "Grade");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "label");
-      \u0275\u0275text(8, "Grade:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "input", 3);
-      \u0275\u0275twoWayListener("ngModelChange", function GenerateComponent_Template_input_ngModelChange_9_listener($event) {
+      \u0275\u0275elementStart(11, "input", 4);
+      \u0275\u0275twoWayListener("ngModelChange", function GenerateComponent_Template_input_ngModelChange_11_listener($event) {
         \u0275\u0275twoWayBindingSet(ctx.grade, $event) || (ctx.grade = $event);
         return $event;
       });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(12, "div", 2)(13, "label");
+      \u0275\u0275text(14, "Question Type");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(10, "label");
-      \u0275\u0275text(11, "Question Type:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(12, "select", 4);
-      \u0275\u0275twoWayListener("ngModelChange", function GenerateComponent_Template_select_ngModelChange_12_listener($event) {
+      \u0275\u0275elementStart(15, "select", 5);
+      \u0275\u0275twoWayListener("ngModelChange", function GenerateComponent_Template_select_ngModelChange_15_listener($event) {
         \u0275\u0275twoWayBindingSet(ctx.style, $event) || (ctx.style = $event);
         return $event;
       });
-      \u0275\u0275elementStart(13, "option", 5);
-      \u0275\u0275text(14, "MCQ");
+      \u0275\u0275elementStart(16, "option", 6);
+      \u0275\u0275text(17, "MCQ");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(15, "option", 6);
-      \u0275\u0275text(16, "Short Answer");
+      \u0275\u0275elementStart(18, "option", 7);
+      \u0275\u0275text(19, "Short Answer");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(20, "button", 8);
+      \u0275\u0275text(21);
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(17, "button", 7);
-      \u0275\u0275text(18, "Generate");
-      \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(19, "p");
-      \u0275\u0275text(20);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(21, GenerateComponent_div_21_Template, 6, 3, "div", 8);
+      \u0275\u0275template(22, GenerateComponent_p_22_Template, 2, 1, "p", 9)(23, GenerateComponent_section_23_Template, 25, 11, "section", 10);
       \u0275\u0275elementEnd();
     }
     if (rf & 2) {
-      \u0275\u0275advance(6);
+      \u0275\u0275advance(7);
       \u0275\u0275twoWayProperty("ngModel", ctx.subject);
-      \u0275\u0275advance(3);
+      \u0275\u0275advance(4);
       \u0275\u0275twoWayProperty("ngModel", ctx.grade);
-      \u0275\u0275advance(3);
+      \u0275\u0275advance(4);
       \u0275\u0275twoWayProperty("ngModel", ctx.style);
       \u0275\u0275advance(5);
       \u0275\u0275property("disabled", ctx.loading);
-      \u0275\u0275advance(3);
-      \u0275\u0275textInterpolate(ctx.message);
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate1(" ", ctx.loading ? "Generating..." : "Generate", " ");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.message);
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", ctx.generated);
     }
-  }, dependencies: [NgIf, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm, JsonPipe], styles: ["\n\n.container[_ngcontent-%COMP%] {\n  max-width: 600px;\n  margin: auto;\n}\nform[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n}\ninput[_ngcontent-%COMP%], \nselect[_ngcontent-%COMP%], \nbutton[_ngcontent-%COMP%] {\n  margin-bottom: 12px;\n  padding: 6px;\n}\n/*# sourceMappingURL=generate.component.css.map */"] });
+  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm, JsonPipe], styles: ["\n\n.gen-container[_ngcontent-%COMP%] {\n  max-width: 900px;\n  margin: 24px auto;\n  padding: 0 16px;\n}\nh2[_ngcontent-%COMP%] {\n  margin-bottom: 12px;\n}\n.gen-form[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 12px 16px;\n  align-items: end;\n  margin-bottom: 16px;\n}\n.field[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-size: 0.92rem;\n  color: #444;\n}\n.field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%], \n.field[_ngcontent-%COMP%]   select[_ngcontent-%COMP%] {\n  padding: 8px 10px;\n  border: 1px solid #d6d6d6;\n  border-radius: 8px;\n  outline: none;\n}\n.btn[_ngcontent-%COMP%] {\n  padding: 10px 14px;\n  border-radius: 8px;\n  border: 1px solid #d6d6d6;\n  background: #fff;\n  cursor: pointer;\n}\n.btn.primary[_ngcontent-%COMP%] {\n  background: #0b5cff;\n  color: #fff;\n  border: none;\n}\n.btn.success[_ngcontent-%COMP%] {\n  background: #22a06b;\n  color: #fff;\n  border: none;\n}\n.btn[_ngcontent-%COMP%]:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n}\n.message[_ngcontent-%COMP%] {\n  margin: 6px 0 12px;\n  color: #b00020;\n}\n.summary[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: baseline;\n  justify-content: space-between;\n  margin: 10px 0 14px;\n}\n.summary-inline[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 16px;\n  font-size: 0.95rem;\n  color: #333;\n}\n.question-list[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 12px;\n}\n.card[_ngcontent-%COMP%] {\n  border: 1px solid #e5e5e5;\n  border-radius: 12px;\n  padding: 12px;\n  background: #fff;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);\n}\n.q-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: start;\n  gap: 12px;\n  margin-bottom: 8px;\n}\n.q-title[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 8px;\n  align-items: start;\n}\n.q-num[_ngcontent-%COMP%] {\n  display: inline-flex;\n  width: 28px;\n  height: 28px;\n  border-radius: 7px;\n  background: #eef2ff;\n  color: #0b5cff;\n  font-weight: 700;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.9rem;\n}\n.q-text[_ngcontent-%COMP%] {\n  font-weight: 600;\n  color: #222;\n}\n.q-status[_ngcontent-%COMP%]   .badge[_ngcontent-%COMP%] {\n  padding: 4px 8px;\n  border-radius: 999px;\n  font-size: 0.75rem;\n  font-weight: 600;\n}\n.badge.correct[_ngcontent-%COMP%] {\n  background: #e6f7ef;\n  color: #1b7a53;\n  border: 1px solid #c9eddc;\n}\n.badge.wrong[_ngcontent-%COMP%] {\n  background: #ffecec;\n  color: #b83b3b;\n  border: 1px solid #ffd3d3;\n}\n.badge.neutral[_ngcontent-%COMP%] {\n  background: #f5f5f5;\n  color: #666;\n  border: 1px solid #e8e8e8;\n}\n.options[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 8px;\n  margin-top: 6px;\n}\n.option[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  border: 1px solid #e7e7e7;\n  border-radius: 10px;\n  padding: 8px 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.option[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  margin: 0 2px 0 0;\n}\n.option.selected[_ngcontent-%COMP%] {\n  border-color: #bfd1ff;\n  background: #f6f9ff;\n}\n.option.correct[_ngcontent-%COMP%] {\n  border-color: #9cd7bb;\n  background: #effaf5;\n}\n.option.incorrect[_ngcontent-%COMP%] {\n  border-color: #ffb3b3;\n  background: #fff5f5;\n}\n.opt-index[_ngcontent-%COMP%] {\n  display: inline-flex;\n  width: 26px;\n  height: 26px;\n  border-radius: 8px;\n  background: #f2f2f2;\n  color: #333;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.85rem;\n  font-weight: 700;\n}\n.opt-text[_ngcontent-%COMP%] {\n  flex: 1;\n}\n.answer-key[_ngcontent-%COMP%] {\n  margin-top: 6px;\n  color: #333;\n}\n.actions[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 10px;\n  margin: 14px 0;\n}\n.raw[_ngcontent-%COMP%] {\n  margin-top: 10px;\n}\n/*# sourceMappingURL=generate.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GenerateComponent, [{
     type: Component,
-    args: [{ selector: "app-generate-questionnaire", standalone: false, template: '<div class="container">\n  <h2>Generate Questionnaire</h2>\n\n  <form (ngSubmit)="generate()">\n    <label>Subject:</label>\n    <input type="text" [(ngModel)]="subject" name="subject" required />\n\n    <label>Grade:</label>\n    <input type="text" [(ngModel)]="grade" name="grade" required />\n\n    <label>Question Type:</label>\n    <select [(ngModel)]="style" name="style">\n      <option value="MCQ">MCQ</option>\n      <option value="SHORT_ANSWER">Short Answer</option>\n    </select>\n\n    <button type="submit" [disabled]="loading">Generate</button>\n  </form>\n\n  <p>{{ message }}</p>\n\n  <div *ngIf="generated">\n    <h3>Generated Questionnaire</h3>\n    <pre>{{ generated | json }}</pre>\n  </div>\n</div>\n', styles: ["/* src/app/components/questionnaire/generate/generate.component.css */\n.container {\n  max-width: 600px;\n  margin: auto;\n}\nform {\n  display: flex;\n  flex-direction: column;\n}\ninput,\nselect,\nbutton {\n  margin-bottom: 12px;\n  padding: 6px;\n}\n/*# sourceMappingURL=generate.component.css.map */\n"] }]
-  }], () => [{ type: QuestionnaireService }], null);
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GenerateComponent, { className: "GenerateComponent", filePath: "src/app/components/questionnaire/generate/generate.component.ts", lineNumber: 10 });
-})();
+    args: [{ selector: "app-generate-questionnaire", standalone: true, imports: [CommonModule, FormsModule], template: `<div class="gen-container">
+  <h2>Generate Questionnaire</h2>
 
-// src/app/components/questionnaire/submit/submit.component.ts
-function SubmitComponent_form_8_div_1_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div")(1, "label")(2, "input", 10);
-    \u0275\u0275twoWayListener("ngModelChange", function SubmitComponent_form_8_div_1_div_4_Template_input_ngModelChange_2_listener($event) {
-      \u0275\u0275restoreView(_r3);
-      const q_r4 = \u0275\u0275nextContext().$implicit;
-      const ctx_r1 = \u0275\u0275nextContext(2);
-      \u0275\u0275twoWayBindingSet(ctx_r1.answers[q_r4.questionId], $event) || (ctx_r1.answers[q_r4.questionId] = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementEnd();
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const opt_r5 = ctx.$implicit;
-    const q_r4 = \u0275\u0275nextContext().$implicit;
-    const ctx_r1 = \u0275\u0275nextContext(2);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("name", \u0275\u0275interpolate(q_r4.questionId))("value", opt_r5);
-    \u0275\u0275twoWayProperty("ngModel", ctx_r1.answers[q_r4.questionId]);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", opt_r5, " ");
-  }
-}
-function SubmitComponent_form_8_div_1_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 8)(1, "p")(2, "b");
-    \u0275\u0275text(3);
-    \u0275\u0275elementEnd()();
-    \u0275\u0275template(4, SubmitComponent_form_8_div_1_div_4_Template, 4, 5, "div", 9);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const q_r4 = ctx.$implicit;
-    \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate(q_r4.text);
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", q_r4.options);
-  }
-}
-function SubmitComponent_form_8_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "form", 5);
-    \u0275\u0275listener("ngSubmit", function SubmitComponent_form_8_Template_form_ngSubmit_0_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.submit());
-    });
-    \u0275\u0275template(1, SubmitComponent_form_8_div_1_Template, 5, 2, "div", 6);
-    \u0275\u0275elementStart(2, "button", 7);
-    \u0275\u0275text(3, "Submit Answers");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.questions);
-  }
-}
-function SubmitComponent_div_11_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "h3");
-    \u0275\u0275text(2, "Results");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "pre");
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "json");
-    \u0275\u0275elementEnd()();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 1, ctx_r1.result));
-  }
-}
-var SubmitComponent = class _SubmitComponent {
-  questionnaireService;
-  questionnaireId = "";
-  studentId = "student-001";
-  questions = [];
-  answers = {};
-  result;
-  message = "";
-  constructor(questionnaireService) {
-    this.questionnaireService = questionnaireService;
-  }
-  // Fetch questions by questionnaireId (for demo, you may already have them)
-  loadMockQuestions() {
-    this.questions = [
-      { questionId: "q1", text: "What is 12 \xD7 8?", options: ["80", "88", "96", "102"] },
-      { questionId: "q2", text: "Simplify 4(2x + 3)", options: ["8x + 3", "8x + 12", "4x + 6", "8x + 6"] }
-    ];
-  }
-  submit() {
-    const payload = {
-      questionnaireId: this.questionnaireId,
-      studentId: this.studentId,
-      answers: Object.keys(this.answers).map((qId) => ({
-        questionId: qId,
-        selectedOptionId: this.answers[qId],
-        freeText: null
-      }))
-    };
-    this.questionnaireService.submitAnswers(payload).subscribe({
-      next: (res) => {
-        this.result = res;
-        this.message = "\u2705 Submitted successfully!";
-      },
-      error: (err) => {
-        this.message = "\u274C Submission failed: " + err.message;
-      }
-    });
-  }
-  static \u0275fac = function SubmitComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _SubmitComponent)(\u0275\u0275directiveInject(QuestionnaireService));
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SubmitComponent, selectors: [["app-submit-questionnaire"]], standalone: false, decls: 12, vars: 4, consts: [[1, "container"], ["name", "qid", 3, "ngModelChange", "ngModel"], [3, "click"], [3, "ngSubmit", 4, "ngIf"], [4, "ngIf"], [3, "ngSubmit"], ["class", "question", 4, "ngFor", "ngForOf"], ["type", "submit"], [1, "question"], [4, "ngFor", "ngForOf"], ["type", "radio", 3, "ngModelChange", "name", "value", "ngModel"]], template: function SubmitComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "h2");
-      \u0275\u0275text(2, "Submit Questionnaire");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "label");
-      \u0275\u0275text(4, "Questionnaire ID:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "input", 1);
-      \u0275\u0275twoWayListener("ngModelChange", function SubmitComponent_Template_input_ngModelChange_5_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.questionnaireId, $event) || (ctx.questionnaireId = $event);
-        return $event;
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "button", 2);
-      \u0275\u0275listener("click", function SubmitComponent_Template_button_click_6_listener() {
-        return ctx.loadMockQuestions();
-      });
-      \u0275\u0275text(7, "Load Questions (Demo)");
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(8, SubmitComponent_form_8_Template, 4, 1, "form", 3);
-      \u0275\u0275elementStart(9, "p");
-      \u0275\u0275text(10);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(11, SubmitComponent_div_11_Template, 6, 3, "div", 4);
-      \u0275\u0275elementEnd();
-    }
-    if (rf & 2) {
-      \u0275\u0275advance(5);
-      \u0275\u0275twoWayProperty("ngModel", ctx.questionnaireId);
-      \u0275\u0275advance(3);
-      \u0275\u0275property("ngIf", ctx.questions.length);
-      \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate(ctx.message);
-      \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.result);
-    }
-  }, dependencies: [NgForOf, NgIf, \u0275NgNoValidate, DefaultValueAccessor, RadioControlValueAccessor, NgControlStatus, NgControlStatusGroup, NgModel, NgForm, JsonPipe], styles: ["\n\n.container[_ngcontent-%COMP%] {\n  max-width: 600px;\n  margin: auto;\n}\n.question[_ngcontent-%COMP%] {\n  border: 1px solid #ccc;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n/*# sourceMappingURL=submit.component.css.map */"] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SubmitComponent, [{
-    type: Component,
-    args: [{ selector: "app-submit-questionnaire", standalone: false, template: '<div class="container">\n  <h2>Submit Questionnaire</h2>\n\n  <label>Questionnaire ID:</label>\n  <input [(ngModel)]="questionnaireId" name="qid" />\n\n  <button (click)="loadMockQuestions()">Load Questions (Demo)</button>\n\n  <form (ngSubmit)="submit()" *ngIf="questions.length">\n    <div *ngFor="let q of questions" class="question">\n      <p><b>{{ q.text }}</b></p>\n      <div *ngFor="let opt of q.options">\n        <label>\n          <input\n            type="radio"\n            name="{{ q.questionId }}"\n            [value]="opt"\n            [(ngModel)]="answers[q.questionId]"\n          />\n          {{ opt }}\n        </label>\n      </div>\n    </div>\n    <button type="submit">Submit Answers</button>\n  </form>\n\n  <p>{{ message }}</p>\n\n  <div *ngIf="result">\n    <h3>Results</h3>\n    <pre>{{ result | json }}</pre>\n  </div>\n</div>\n', styles: ["/* src/app/components/questionnaire/submit/submit.component.css */\n.container {\n  max-width: 600px;\n  margin: auto;\n}\n.question {\n  border: 1px solid #ccc;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n/*# sourceMappingURL=submit.component.css.map */\n"] }]
+  <form class="gen-form" (ngSubmit)="generate()">
+    <div class="field">
+      <label>Subject</label>
+      <input type="text" [(ngModel)]="subject" name="subject" required />
+    </div>
+
+    <div class="field">
+      <label>Grade</label>
+      <input type="text" [(ngModel)]="grade" name="grade" required />
+    </div>
+
+    <div class="field">
+      <label>Question Type</label>
+      <select [(ngModel)]="style" name="style">
+        <option value="MCQ">MCQ</option>
+        <option value="SHORT_ANSWER">Short Answer</option>
+      </select>
+    </div>
+
+    <button class="btn primary" type="submit" [disabled]="loading">
+      {{ loading ? 'Generating...' : 'Generate' }}
+    </button>
+  </form>
+
+  <p class="message" *ngIf="message">{{ message }}</p>
+
+  <section *ngIf="generated">
+    <div class="summary">
+      <h3>Questions ({{ generated.questions.length }})</h3>
+      <div class="summary-inline" *ngIf="submitted">
+        <span>Answered: {{ answeredCount() }}</span>
+        <span>Correct: {{ correctCount() }}</span>
+      </div>
+    </div>
+
+    <div class="question-list">
+      <div class="card" *ngFor="let q of generated.questions; let i = index">
+        <div class="q-header">
+          <div class="q-title">
+            <span class="q-num">Q{{ i + 1 }}</span>
+            <span class="q-text">{{ q.text }}</span>
+          </div>
+
+          <div class="q-status" *ngIf="submitted">
+            <span class="badge correct" *ngIf="results[q.questionId] === true">Correct</span>
+            <span class="badge wrong" *ngIf="results[q.questionId] === false">Incorrect</span>
+            <span class="badge neutral" *ngIf="results[q.questionId] === null">Unanswered</span>
+          </div>
+        </div>
+
+        <div class="options" *ngIf="q.type === 'MCQ'">
+          <label
+            class="option"
+            *ngFor="let opt of q.options; let oi = index"
+            [class.selected]="answers[q.questionId] === oi"
+            [class.correct]="submitted && q.correctIndex === oi"
+            [class.incorrect]="submitted && answers[q.questionId] === oi && q.correctIndex !== oi"
+          >
+            <input
+              type="radio"
+              [name]="'q_' + q.questionId"
+              [value]="oi"
+              [checked]="answers[q.questionId] === oi"
+              (change)="choose(q.questionId, oi)"
+              [disabled]="submitted"
+            />
+            <span class="opt-index">{{ 'ABCD'[oi] || oi + 1 }}</span>
+            <span class="opt-text">{{ opt }}</span>
+          </label>
+        </div>
+
+        <div class="answer-key" *ngIf="submitted && q.correctIndex !== null && q.correctIndex !== undefined">
+          <small>Answer: <strong>{{ q.options[q.correctIndex] }}</strong></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn success" (click)="submit()" [disabled]="submitted || !generated.questions.length">
+        Submit Answers
+      </button>
+      <button class="btn" (click)="resetAnswers()" [disabled]="loading">
+        Reset
+      </button>
+    </div>
+
+    <details class="raw">
+      <summary>Show raw response</summary>
+      <pre>{{ generated | json }}</pre>
+    </details>
+
+    <div class="actions">
+      <button class="btn success" (click)="submit()" [disabled]="submitted">Submit Answers</button>
+      <button class="btn" (click)="resetAnswers()">Reset</button>
+
+      <!-- \u{1F53D} New Button -->
+      <button
+        class="btn primary"
+        (click)="generateNewQuestions()"
+        [disabled]="!submitted || generatingNew"
+      >
+        {{ generatingNew ? 'Generating...' : 'Generate New Questions' }}
+      </button>
+    </div>
+
+  </section>
+</div>
+`, styles: ["/* src/app/components/questionnaire/generate/generate.component.css */\n.gen-container {\n  max-width: 900px;\n  margin: 24px auto;\n  padding: 0 16px;\n}\nh2 {\n  margin-bottom: 12px;\n}\n.gen-form {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 12px 16px;\n  align-items: end;\n  margin-bottom: 16px;\n}\n.field {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field label {\n  font-size: 0.92rem;\n  color: #444;\n}\n.field input,\n.field select {\n  padding: 8px 10px;\n  border: 1px solid #d6d6d6;\n  border-radius: 8px;\n  outline: none;\n}\n.btn {\n  padding: 10px 14px;\n  border-radius: 8px;\n  border: 1px solid #d6d6d6;\n  background: #fff;\n  cursor: pointer;\n}\n.btn.primary {\n  background: #0b5cff;\n  color: #fff;\n  border: none;\n}\n.btn.success {\n  background: #22a06b;\n  color: #fff;\n  border: none;\n}\n.btn:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n}\n.message {\n  margin: 6px 0 12px;\n  color: #b00020;\n}\n.summary {\n  display: flex;\n  align-items: baseline;\n  justify-content: space-between;\n  margin: 10px 0 14px;\n}\n.summary-inline {\n  display: flex;\n  gap: 16px;\n  font-size: 0.95rem;\n  color: #333;\n}\n.question-list {\n  display: grid;\n  gap: 12px;\n}\n.card {\n  border: 1px solid #e5e5e5;\n  border-radius: 12px;\n  padding: 12px;\n  background: #fff;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);\n}\n.q-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: start;\n  gap: 12px;\n  margin-bottom: 8px;\n}\n.q-title {\n  display: flex;\n  gap: 8px;\n  align-items: start;\n}\n.q-num {\n  display: inline-flex;\n  width: 28px;\n  height: 28px;\n  border-radius: 7px;\n  background: #eef2ff;\n  color: #0b5cff;\n  font-weight: 700;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.9rem;\n}\n.q-text {\n  font-weight: 600;\n  color: #222;\n}\n.q-status .badge {\n  padding: 4px 8px;\n  border-radius: 999px;\n  font-size: 0.75rem;\n  font-weight: 600;\n}\n.badge.correct {\n  background: #e6f7ef;\n  color: #1b7a53;\n  border: 1px solid #c9eddc;\n}\n.badge.wrong {\n  background: #ffecec;\n  color: #b83b3b;\n  border: 1px solid #ffd3d3;\n}\n.badge.neutral {\n  background: #f5f5f5;\n  color: #666;\n  border: 1px solid #e8e8e8;\n}\n.options {\n  display: grid;\n  gap: 8px;\n  margin-top: 6px;\n}\n.option {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  border: 1px solid #e7e7e7;\n  border-radius: 10px;\n  padding: 8px 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.option input {\n  margin: 0 2px 0 0;\n}\n.option.selected {\n  border-color: #bfd1ff;\n  background: #f6f9ff;\n}\n.option.correct {\n  border-color: #9cd7bb;\n  background: #effaf5;\n}\n.option.incorrect {\n  border-color: #ffb3b3;\n  background: #fff5f5;\n}\n.opt-index {\n  display: inline-flex;\n  width: 26px;\n  height: 26px;\n  border-radius: 8px;\n  background: #f2f2f2;\n  color: #333;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.85rem;\n  font-weight: 700;\n}\n.opt-text {\n  flex: 1;\n}\n.answer-key {\n  margin-top: 6px;\n  color: #333;\n}\n.actions {\n  display: flex;\n  gap: 10px;\n  margin: 14px 0;\n}\n.raw {\n  margin-top: 10px;\n}\n/*# sourceMappingURL=generate.component.css.map */\n"] }]
   }], () => [{ type: QuestionnaireService }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SubmitComponent, { className: "SubmitComponent", filePath: "src/app/components/questionnaire/submit/submit.component.ts", lineNumber: 10 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GenerateComponent, { className: "GenerateComponent", filePath: "src/app/components/questionnaire/generate/generate.component.ts", lineNumber: 32 });
 })();
 
 // src/app/components/questionnaire/adaptive/adaptive.component.ts
@@ -46783,7 +47021,7 @@ var AdaptiveComponent = class _AdaptiveComponent {
   static \u0275fac = function AdaptiveComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AdaptiveComponent)(\u0275\u0275directiveInject(QuestionnaireService));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AdaptiveComponent, selectors: [["app-adaptive-questionnaire"]], standalone: false, decls: 23, vars: 5, consts: [[1, "container"], ["name", "sid", 3, "ngModelChange", "ngModel"], ["name", "subject", 3, "ngModelChange", "ngModel"], ["name", "difficulty", 3, "ngModelChange", "ngModel"], ["value", "EASY"], ["value", "MEDIUM"], ["value", "HARD"], [3, "click"], [4, "ngIf"]], template: function AdaptiveComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AdaptiveComponent, selectors: [["app-adaptive-questionnaire"]], decls: 23, vars: 5, consts: [[1, "container"], ["name", "sid", 3, "ngModelChange", "ngModel"], ["name", "subject", 3, "ngModelChange", "ngModel"], ["name", "difficulty", 3, "ngModelChange", "ngModel"], ["value", "EASY"], ["value", "MEDIUM"], ["value", "HARD"], [3, "click"], [4, "ngIf"]], template: function AdaptiveComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "h2");
       \u0275\u0275text(2, "Adaptive Questionnaire");
@@ -46847,16 +47085,43 @@ var AdaptiveComponent = class _AdaptiveComponent {
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", ctx.adaptiveResponse);
     }
-  }, dependencies: [NgIf, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgModel, JsonPipe], styles: ["\n\n.container[_ngcontent-%COMP%] {\n  max-width: 600px;\n  margin: auto;\n}\ninput[_ngcontent-%COMP%], \nselect[_ngcontent-%COMP%], \nbutton[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n  padding: 6px;\n}\n/*# sourceMappingURL=adaptive.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, FormsModule, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgModel, JsonPipe], styles: ["\n\n.container[_ngcontent-%COMP%] {\n  max-width: 600px;\n  margin: auto;\n}\ninput[_ngcontent-%COMP%], \nselect[_ngcontent-%COMP%], \nbutton[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n  padding: 6px;\n}\n/*# sourceMappingURL=adaptive.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AdaptiveComponent, [{
     type: Component,
-    args: [{ selector: "app-adaptive-questionnaire", standalone: false, template: '<div class="container">\n  <h2>Adaptive Questionnaire</h2>\n\n  <label>Student ID:</label>\n  <input [(ngModel)]="studentId" name="sid" />\n\n  <label>Subject:</label>\n  <input [(ngModel)]="subject" name="subject" />\n\n  <label>Difficulty:</label>\n  <select [(ngModel)]="difficulty" name="difficulty">\n    <option value="EASY">EASY</option>\n    <option value="MEDIUM">MEDIUM</option>\n    <option value="HARD">HARD</option>\n  </select>\n\n  <button (click)="getNextAdaptive()">Get Adaptive Questionnaire</button>\n\n  <p>{{ message }}</p>\n\n  <div *ngIf="adaptiveResponse">\n    <h3>Adaptive Questionnaire</h3>\n    <pre>{{ adaptiveResponse | json }}</pre>\n  </div>\n</div>\n', styles: ["/* src/app/components/questionnaire/adaptive/adaptive.component.css */\n.container {\n  max-width: 600px;\n  margin: auto;\n}\ninput,\nselect,\nbutton {\n  margin-bottom: 10px;\n  padding: 6px;\n}\n/*# sourceMappingURL=adaptive.component.css.map */\n"] }]
+    args: [{ selector: "app-adaptive-questionnaire", standalone: true, imports: [CommonModule, FormsModule, JsonPipe], template: '<div class="container">\n  <h2>Adaptive Questionnaire</h2>\n\n  <label>Student ID:</label>\n  <input [(ngModel)]="studentId" name="sid" />\n\n  <label>Subject:</label>\n  <input [(ngModel)]="subject" name="subject" />\n\n  <label>Difficulty:</label>\n  <select [(ngModel)]="difficulty" name="difficulty">\n    <option value="EASY">EASY</option>\n    <option value="MEDIUM">MEDIUM</option>\n    <option value="HARD">HARD</option>\n  </select>\n\n  <button (click)="getNextAdaptive()">Get Adaptive Questionnaire</button>\n\n  <p>{{ message }}</p>\n\n  <div *ngIf="adaptiveResponse">\n    <h3>Adaptive Questionnaire</h3>\n    <pre>{{ adaptiveResponse | json }}</pre>\n  </div>\n</div>\n', styles: ["/* src/app/components/questionnaire/adaptive/adaptive.component.css */\n.container {\n  max-width: 600px;\n  margin: auto;\n}\ninput,\nselect,\nbutton {\n  margin-bottom: 10px;\n  padding: 6px;\n}\n/*# sourceMappingURL=adaptive.component.css.map */\n"] }]
   }], () => [{ type: QuestionnaireService }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AdaptiveComponent, { className: "AdaptiveComponent", filePath: "src/app/components/questionnaire/adaptive/adaptive.component.ts", lineNumber: 10 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AdaptiveComponent, { className: "AdaptiveComponent", filePath: "src/app/components/questionnaire/adaptive/adaptive.component.ts", lineNumber: 13 });
+})();
+
+// src/app/app-routing.module.ts
+var routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "verify-otp", component: VerifyOtpComponent },
+  { path: "questionnaire/generate", component: GenerateComponent },
+  { path: "questionnaire/adaptive", component: AdaptiveComponent },
+  { path: "**", redirectTo: "login" }
+];
+var AppRoutingModule = class _AppRoutingModule {
+  static \u0275fac = function AppRoutingModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _AppRoutingModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppRoutingModule });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [RouterModule.forRoot(routes), RouterModule] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppRoutingModule, [{
+    type: NgModule,
+    args: [{
+      imports: [RouterModule.forRoot(routes)],
+      exports: [RouterModule]
+    }]
+  }], null, null);
 })();
 
 // src/environments/environment.ts
@@ -46905,77 +47170,6 @@ var ApiService = class _ApiService {
   }], () => [{ type: HttpClient }], null);
 })();
 
-// src/app/components/quiz/quiz.component.ts
-var QuizComponent = class _QuizComponent {
-  api;
-  questionnaireId;
-  studentId = "student-1";
-  answers = [];
-  result;
-  message = "";
-  // in real app, fetch questions by id; here we keep it simple
-  constructor(api) {
-    this.api = api;
-  }
-  submit() {
-    const payload = { questionnaireId: this.questionnaireId, studentId: this.studentId, answers: this.answers };
-    this.api.submitAnswers(payload).subscribe({
-      next: (res) => this.result = res,
-      error: (err) => this.message = "Submit failed"
-    });
-  }
-  static \u0275fac = function QuizComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _QuizComponent)(\u0275\u0275directiveInject(ApiService));
-  };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _QuizComponent, selectors: [["app-quiz"]], inputs: { questionnaireId: "questionnaireId" }, decls: 2, vars: 0, template: function QuizComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      \u0275\u0275domElementStart(0, "p");
-      \u0275\u0275text(1, " quiz works!\n");
-      \u0275\u0275domElementEnd();
-    }
-  }, encapsulation: 2 });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(QuizComponent, [{
-    type: Component,
-    args: [{ selector: "app-quiz", template: "<p>\n  quiz works!\n</p>\n" }]
-  }], () => [{ type: ApiService }], { questionnaireId: [{
-    type: Input
-  }] });
-})();
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(QuizComponent, { className: "QuizComponent", filePath: "src/app/components/quiz/quiz.component.ts", lineNumber: 8 });
-})();
-
-// src/app/app-routing.module.ts
-var routes = [
-  { path: "", redirectTo: "login", pathMatch: "full" },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "verify-otp", component: VerifyOtpComponent },
-  { path: "questionnaire/generate", component: GenerateComponent },
-  { path: "questionnaire/submit", component: SubmitComponent },
-  { path: "questionnaire/adaptive", component: AdaptiveComponent },
-  { path: "questionnaire/quiz", component: QuizComponent },
-  { path: "**", redirectTo: "login" }
-];
-var AppRoutingModule = class _AppRoutingModule {
-  static \u0275fac = function AppRoutingModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AppRoutingModule)();
-  };
-  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({ type: _AppRoutingModule });
-  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({ imports: [RouterModule.forRoot(routes), RouterModule] });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppRoutingModule, [{
-    type: NgModule,
-    args: [{
-      imports: [RouterModule.forRoot(routes)],
-      exports: [RouterModule]
-    }]
-  }], null, null);
-})();
-
 // src/app/app.component.ts
 var AppComponent = class _AppComponent {
   constructor() {
@@ -47012,7 +47206,7 @@ var AppComponent = class _AppComponent {
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 10 });
 })();
 
 // src/app/app.module.ts
@@ -47027,7 +47221,8 @@ var AppModule = class _AppModule {
     FormsModule,
     HttpClientModule,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    RouterModule.forRoot(routes || [])
   ] });
 };
 (() => {
@@ -47035,11 +47230,8 @@ var AppModule = class _AppModule {
     type: NgModule,
     args: [{
       declarations: [
-        AppComponent,
         VerifyOtpComponent,
-        GenerateComponent,
-        SubmitComponent,
-        AdaptiveComponent
+        AppComponent
       ],
       imports: [
         BrowserModule,
@@ -47047,7 +47239,8 @@ var AppModule = class _AppModule {
         FormsModule,
         HttpClientModule,
         RegisterComponent,
-        LoginComponent
+        LoginComponent,
+        RouterModule.forRoot(routes || [])
       ],
       providers: [ApiService, AuthService, QuestionnaireService],
       bootstrap: [AppComponent]

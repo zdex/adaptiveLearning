@@ -9,6 +9,7 @@ public class Question {
     private String id;
     private String text;
     private String type; // MCQ/FREE_TEXT
+    private String difficulty;
 
     @ManyToOne
     private Questionnaire questionnaire;

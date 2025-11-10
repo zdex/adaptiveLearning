@@ -1,26 +1,96 @@
-<div class="container">
+<div class="gen-container">
   <h2>Generate Questionnaire</h2>
 
-  <form (ngSubmit)="generate()">
-    <label>Subject:</label>
-    <input type="text" [(ngModel)]="subject" name="subject" required />
+  <form class="gen-form" (ngSubmit)="generate()">
+    <div class="field">
+      <label>Subject</label>
+      <input type="text" [(ngModel)]="subject" name="subject" required />
+    </div>
 
-    <label>Grade:</label>
-    <input type="text" [(ngModel)]="grade" name="grade" required />
+    <div class="field">
+      <label>Grade</label>
+      <input type="text" [(ngModel)]="grade" name="grade" required />
+    </div>
 
-    <label>Question Type:</label>
-    <select [(ngModel)]="style" name="style">
-      <option value="MCQ">MCQ</option>
-      <option value="SHORT_ANSWER">Short Answer</option>
-    </select>
+    <div class="field">
+      <label>Question Type</label>
+      <select [(ngModel)]="style" name="style">
+        <option value="MCQ">MCQ</option>
+        <option value="SHORT_ANSWER">Short Answer</option>
+      </select>
+    </div>
 
-    <button type="submit" [disabled]="loading">Generate</button>
+    <button class="btn primary" type="submit" [disabled]="loading">
+      {{ loading ? 'Generating...' : 'Generate' }}
+    </button>
   </form>
 
-  <p>{{ message }}</p>
+  <p class="message" *ngIf="message">{{ message }}</p>
 
-  <div *ngIf="generated">
-    <h3>Generated Questionnaire</h3>
-    <pre>{{ generated | json }}</pre>
-  </div>
+  <section *ngIf="generated">
+    <div class="summary">
+      <h3>Questions ({{ generated.questions.length }})</h3>
+      <div class="summary-inline" *ngIf="submitted">
+        <span>Answered: {{ answeredCount() }}</span>
+        <span>Correct: {{ correctCount() }}</span>
+      </div>
+    </div>
+
+    <div class="question-list">
+      <div class="card" *ngFor="let q of generated.questions; let i = index">
+        <div class="q-header">
+          <div class="q-title">
+            <span class="q-num">Q{{ i + 1 }}</span>
+            <span class="q-text">{{ q.text }}</span>
+          </div>
+
+          <div class="q-status" *ngIf="submitted">
+            <span class="badge correct" *ngIf="results[q.questionId] === true">Correct</span>
+            <span class="badge wrong" *ngIf="results[q.questionId] === false">Incorrect</span>
+            <span class="badge neutral" *ngIf="results[q.questionId] === null">Unanswered</span>
+          </div>
+        </div>
+
+        <div class="options" *ngIf="q.type === 'MCQ'">
+          <label
+            class="option"
+            *ngFor="let opt of q.options; let oi = index"
+            [class.selected]="answers[q.questionId] === oi"
+            [class.correct]="submitted && q.correctIndex === oi"
+            [class.incorrect]="submitted && answers[q.questionId] === oi && q.correctIndex !== oi"
+          >
+            <input
+              type="radio"
+              [name]="'q_' + q.questionId"
+              [value]="oi"
+              [checked]="answers[q.questionId] === oi"
+              (change)="choose(q.questionId, oi)"
+              [disabled]="submitted"
+            />
+            <span class="opt-index">{{ 'ABCD'[oi] || oi + 1 }}</span>
+            <span class="opt-text">{{ opt }}</span>
+          </label>
+        </div>
+
+        <div class="answer-key" *ngIf="submitted && q.correctIndex !== null && q.correctIndex !== undefined">
+          <small>Answer: <strong>{{ q.options[q.correctIndex] }}</strong></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn success" (click)="submit()" [disabled]="submitted">Submit Answers</button>
+      <button class="btn" (click)="resetAnswers()">Reset</button>
+
+      <!-- 🔽 New Button -->
+      <button
+        class="btn primary"
+        (click)="generate()"
+        [disabled]="!submitted || generatingNew"
+      >
+        {{ generatingNew ? 'Generating...' : 'Generate New Questions' }}
+      </button>
+    </div>
+
+  </section>
 </div>

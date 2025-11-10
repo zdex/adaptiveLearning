@@ -3,7 +3,7 @@ package com.adap.learn.controller;
 import com.adap.learn.dto.AuthRequest;
 import com.adap.learn.dto.AuthResponse;
 import com.adap.learn.dto.RegisterRequest;
-import com.adap.learn.model.User;
+import com.adap.learn.model.Student;
 import com.adap.learn.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -41,7 +41,7 @@ public class AuthController {
     @Operation(summary = "Test secured endpoint")
     @ApiResponse(responseCode = "200", description = "Access granted")
     @GetMapping("/me")
-    public ResponseEntity<User> getCurrentUser(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<Student> getCurrentUser(@RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(authService.getCurrentUser(token));
     }
 }

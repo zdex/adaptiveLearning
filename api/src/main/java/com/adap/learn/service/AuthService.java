@@ -3,7 +3,7 @@ package com.adap.learn.service;
 import com.adap.learn.dto.AuthRequest;
 import com.adap.learn.dto.AuthResponse;
 import com.adap.learn.dto.RegisterRequest;
-import com.adap.learn.model.User;
+import com.adap.learn.model.Student;
 import com.adap.learn.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +40,7 @@ public class AuthService {
             throw new RuntimeException("Email already registered.");
         }
 
-        User user = User.builder()
+        Student user = Student.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
@@ -74,7 +74,7 @@ public class AuthService {
     /**
      * Get current logged-in user info from token
      */
-    public User getCurrentUser(String authHeader) {
+    public Student getCurrentUser(String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new RuntimeException("Invalid Authorization header");
         }

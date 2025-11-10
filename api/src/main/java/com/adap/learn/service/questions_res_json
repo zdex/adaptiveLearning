@@ -1,0 +1,44 @@
+{
+  "difficulty" : "MEDIUM",
+  "questions" : [ {
+    "text" : "What is the value of 7 × 8?",
+    "type" : "MCQ",
+    "options" : [ "54", "56", "58", "60" ],
+    "answerIndex" : 1
+  }, {
+    "text" : "Which of the following fractions is equivalent to 3/4?",
+    "type" : "MCQ",
+    "options" : [ "6/8", "2/3", "1/2", "5/6" ],
+    "answerIndex" : 0
+  }, {
+    "text" : "What is the perimeter of a rectangle with length 10 cm and width 4 cm?",
+    "type" : "MCQ",
+    "options" : [ "28 cm", "40 cm", "24 cm", "20 cm" ],
+    "answerIndex" : 0
+  }, {
+    "text" : "If x + 5 = 12, what is the value of x?",
+    "type" : "MCQ",
+    "options" : [ "7", "5", "12", "17" ],
+    "answerIndex" : 0
+  }, {
+    "text" : "What is the area of a triangle with a base of 6 cm and a height of 4 cm?",
+    "type" : "MCQ",
+    "options" : [ "12 cm²", "24 cm²", "18 cm²", "10 cm²" ],
+    "answerIndex" : 0
+  }, {
+    "text" : "Which of the following is a prime number?",
+    "type" : "MCQ",
+    "options" : [ "9", "15", "13", "21" ],
+    "answerIndex" : 2
+  }, {
+    "text" : "What is 15% of 200?",
+    "type" : "MCQ",
+    "options" : [ "30", "25", "20", "15" ],
+    "answerIndex" : 0
+  }, {
+    "text" : "What is the least common multiple (LCM) of 4 and 5?",
+    "type" : "MCQ",
+    "options" : [ "10", "20", "15", "25" ],
+    "answerIndex" : 1
+  } ]
+}

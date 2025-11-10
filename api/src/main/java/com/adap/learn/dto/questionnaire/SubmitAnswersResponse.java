@@ -1,56 +1,35 @@
 package com.adap.learn.dto.questionnaire;
 
-import lombok.*;
+import lombok.Builder;
 
 import java.util.List;
 
 /**
- * ✅ SubmitAnswersResponse
+ * ✅ SubmitAnswersResponse (record version)
  *
  * Represents the response returned after a student submits their answers
  * to a questionnaire. It includes scoring information, accuracy percentage,
  * and optionally a breakdown of each question's correctness.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class SubmitAnswersResponse {
-
-    private String questionnaireId;
-    private String studentId;
-
-    private int correctCount;
-
-    private int totalQuestions;
-
-    private double scorePercentage;
-
-    private String performanceLevel;
-
-    private List<AnswerResult> answers;
-
+public record SubmitAnswersResponse(
+        String questionnaireId,
+        String studentId,
+        int correctCount,
+        int totalQuestions,
+        double percentage,
+        String nextDifficulty,
+        String message,
+        List<AnswerResult> answers
+) {
     /**
-     * Nested DTO representing per-question evaluation result.
+     * Nested record representing per-question evaluation result.
      */
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class AnswerResult {
-
-        private String questionId;
-
-        private String text;
-
-        private String selectedAnswer;
-
-  
-        private String correctAnswer;
-
-
-        private boolean correct;
-    }
+    public record AnswerResult(
+            String questionId,
+            String text,
+            String selectedAnswer,
+            String correctAnswer,
+            boolean correct
+    ) { }
 }

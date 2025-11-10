@@ -1,5 +1,6 @@
 package com.adap.learn.dto.questionnaire;
 
+import com.adap.learn.model.Question;
 import lombok.*;
 
 import java.util.List;

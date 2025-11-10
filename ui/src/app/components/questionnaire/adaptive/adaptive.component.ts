@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { QuestionnaireService } from '../../../services/questionnaire.service';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-adaptive-questionnaire',
   templateUrl: './adaptive.component.html',
   styleUrls: ['./adaptive.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [CommonModule, FormsModule, JsonPipe]
 })
 export class AdaptiveComponent {
   studentId = 'student-001';

@@ -1,9 +1,22 @@
 package com.adap.learn.dto.questionnaire;
+
 import java.util.List;
+
+/**
+ * Immutable request object for submitting questionnaire answers.
+ * Uses Java 17+ record syntax for simplicity and thread-safety.
+ */
 public record SubmitAnswersRequest(
-        String questionnaireId,
         String studentId,
-        List<Answer> answers
+        String questionnaireId,
+        List<AnswerDTO> answers
 ) {
-    public record Answer(String questionId, String selectedOptionId, String freeText) {}
+    /**
+     * Nested record representing a single answer.
+     */
+    public record AnswerDTO(
+            String questionId,
+            Integer selectedIndex
+    ) { }
 }
+

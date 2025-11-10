@@ -8,19 +8,43 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
 
 @Service @RequiredArgsConstructor
 public class QuestionnaireService {
     private final QuestionnaireRepository questionnaireRepo;
     private final QuestionRepository questionRepo;
     private final QuestionOptionRepository optionRepo;
-    private final StudentAnswerRepository answerRepo;
+    private final AnswerRepository answerRepo;
     private final OpenAIService openAI;
 
     public GenerateQuestionnaireResponse generate(GenerateQuestionnaireRequest req, String ownerEmail) {
-        String aiJson = openAI.generateQuestions(req.subject(), req.grade(), "MEDIUM", "{}");
+        String aiJson = openAI.generateQuestions(req.subject(), req.grade(), req.nextDifficultyLevel(), "{}");
         var parsed = JsonUtils.parseAIQuestionnaire(aiJson);
+        List<GenerateQuestionnaireResponse.QuestionDTO> questions;
+        try {
 
+
+            questions = parsed.questions().stream().map(q -> {
+                GenerateQuestionnaireResponse.QuestionDTO dto = new GenerateQuestionnaireResponse.QuestionDTO();
+                dto.setQuestionId(UUID.randomUUID().toString());
+                dto.setText(q.text());
+                dto.setType(q.type() != null ? q.type() : "MCQ");
+                dto.setOptions(q.options() != null ? q.options() : List.of("A", "B", "C", "D"));
+                dto.setCorrectIndex(q.answerIndex());
+                return dto;
+            }).toList();
+
+        } catch (Exception e) {
+            GenerateQuestionnaireResponse.QuestionDTO fallback = new GenerateQuestionnaireResponse.QuestionDTO();
+            fallback.setQuestionId(UUID.randomUUID().toString());
+            fallback.setText("Could not parse AI response.");
+            fallback.setType("INFO");
+            fallback.setOptions(List.of(aiJson));
+            fallback.setCorrectIndex(0);
+            questions = List.of(fallback);
+        }
         var questionnaire = Questionnaire.builder()
                 .subject(req.subject())
                 .grade(req.grade())
@@ -45,32 +69,36 @@ public class QuestionnaireService {
             }
             questionRepo.save(ent);
         }
-        return new GenerateQuestionnaireResponse(questionnaire.getId(), questionnaire.getSubject(),
-                questionnaire.getGrade(), questionnaire.getDifficulty(), null);
+        var res = GenerateQuestionnaireResponse.builder()
+                .questionnaireId(questionnaire.getId())
+                .subject(questionnaire.getSubject())
+                .grade(questionnaire.getGrade())
+                .difficulty(questionnaire.getDifficulty())
+                .questions(questions);
+        return res.build();
     }
 
-    public SubmitAnswersResponse submit(SubmitAnswersRequest req) {
+   /* public SubmitAnswersResponse submit(SubmitAnswersRequest req) {
         int correct = 0;
         for (var a : req.answers()) {
             boolean isCorrect = false;
-            if (a.selectedOptionId()!=null) {
+            if (a.selectedIndex()!=null) {
                 var q = questionRepo.findById(a.questionId()).orElse(null);
-                isCorrect = q!=null && a.selectedOptionId().equals(q.getCorrectOptionId());
+                isCorrect = q!=null && a.selectedIndex().equals(q.getCorrectOptionId());
                 if (isCorrect) correct++;
             }
-            var ans = StudentAnswer.builder()
+            var ans = AnswerEntity.builder()
                     .questionnaireId(req.questionnaireId())
                     .questionId(a.questionId())
                     .studentId(req.studentId())
-                    .selectedOptionId(a.selectedOptionId())
-                    .freeText(a.freeText())
+                    .selectedIndex(a.selectedIndex())
                     .correct(isCorrect)
                     .build();
             answerRepo.save(ans);
         }
-        return new SubmitAnswersResponse(req.questionnaireId(), req.studentId(), correct, req.answers().size(), 0, null, null);
-    }
-
+        return new SubmitAnswersResponse(req.questionnaireId(), req.studentId(), correct, req.answers().size(), 0d, null,null, null);
+    }*/
+/*
     public GenerateQuestionnaireResponse nextAdaptive(NextAdaptiveQuestionnaireRequest req) {
         // Aggregate history by correctness per topic (simplified: per questionnaire)
         var prev = answerRepo.findByStudentIdAndQuestionnaireId(req.studentId(), req.subject()); // adapt as needed
@@ -103,5 +131,5 @@ public class QuestionnaireService {
 
         return new GenerateQuestionnaireResponse(
                 questionnaire.getId(), questionnaire.getSubject(), questionnaire.getGrade(), questionnaire.getDifficulty(), null);
-    }
+    }*/
 }

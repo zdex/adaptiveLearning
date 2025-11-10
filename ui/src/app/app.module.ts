@@ -11,25 +11,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { VerifyOtpComponent } from './components/auth/verify-otp/verify-otp.component';
-import { GenerateComponent } from './components/questionnaire/generate/generate.component';
-import { SubmitComponent } from './components/questionnaire/submit/submit.component';
-import { AdaptiveComponent } from './components/questionnaire/adaptive/adaptive.component';
 
 // Services
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { AppComponent } from './app.component';
+// (optional) if you have routes in a separate file
+import { routes } from './app-routing.module';
 
-
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
-    AppComponent,
     VerifyOtpComponent,
-    GenerateComponent,
-    SubmitComponent,
-    AdaptiveComponent,
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +32,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpClientModule,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    RouterModule.forRoot(routes || [])
 
   ],
   providers: [ApiService, AuthService, QuestionnaireService],

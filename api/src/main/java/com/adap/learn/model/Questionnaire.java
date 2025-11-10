@@ -18,5 +18,5 @@ public class Questionnaire {
     private List<Question> questions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User owner;
+    private Student owner;
 }

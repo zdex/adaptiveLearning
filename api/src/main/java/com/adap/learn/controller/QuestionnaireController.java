@@ -1,6 +1,7 @@
 package com.adap.learn.controller;
 
 import com.adap.learn.dto.questionnaire.*;
+import com.adap.learn.service.AnswerService;
 import com.adap.learn.service.QuestionnaireService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class QuestionnaireController {
 
     private final QuestionnaireService service;
+    private final AnswerService answerService;
 
     // 🔹 1. Generate questionnaire
     @PostMapping("/generate")
@@ -23,19 +25,4 @@ public class QuestionnaireController {
         return ResponseEntity.ok(response);
     }
 
-    // 🔹 2. Submit answers
-    @PostMapping("/submit")
-    public ResponseEntity<SubmitAnswersResponse> submit(@RequestBody SubmitAnswersRequest req) {
-        SubmitAnswersResponse response = service.submit(req);
-        return ResponseEntity.ok(response);
-    }
-
-    // 🔹 3. Next adaptive questionnaire
-    @PostMapping("/next-adaptive")
-    public ResponseEntity<GenerateQuestionnaireResponse> nextAdaptive(
-            @RequestBody NextAdaptiveQuestionnaireRequest req) {
-
-        GenerateQuestionnaireResponse response = service.nextAdaptive(req);
-        return ResponseEntity.ok(response);
-    }
 }
