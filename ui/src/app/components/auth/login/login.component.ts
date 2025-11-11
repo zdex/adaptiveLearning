@@ -31,9 +31,10 @@ export class LoginComponent {
         console.log('Login success:', res);
         this.message = 'Login successful! Redirecting...';
 
-        // If backend returns JWT, store it
+        // If backend returns JWT, store it and update auth status
         if (res?.token) {
-          localStorage.setItem('token', res.token);
+          // *** UPDATED: Use setToken method from AuthService for reactivity ***
+          this.authService.setToken(res.token);
         }
 
         setTimeout(() => this.router.navigate(['/questionnaire/generate']), 1500);

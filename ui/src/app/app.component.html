@@ -1,17 +1,32 @@
 <header class="app-header">
-  <div class="brand-name">
-    <a routerLink="/" class="logo-link">
-      ADAPTIVE LEARNING
-    </a>
-  </div>
+  <div class="content-container header-content">
+    <div class="logo">
+      <a routerLink="/students/manage">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Adaptive Learn
+      </a>
+    </div>
 
-  <nav class="navbar">
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-    <a routerLink="/register" routerLinkActive="active">Register</a>
-    <a routerLink="/questionnaire/generate" routerLinkActive="active">Generate</a>
-  </nav>
+    <nav class="navbar">
+      <!-- Show Login and Register links ONLY if not logged in -->
+      <ng-container *ngIf="(isLoggedIn$ | async) === false">
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+      </ng-container>
+
+      <!-- Show application links (e.g., Generate/Adaptive) regardless of login,
+           relying on Auth Guards for actual access control. -->
+      <a routerLink="/questionnaire/generate">Generate</a>
+
+      <!-- Show Logout link ONLY if logged in -->
+      <ng-container *ngIf="isLoggedIn$ | async">
+        <!-- Call the logout method on click -->
+        <a (click)="onLogout()" class="logout-link">Logout</a>
+      </ng-container>
+    </nav>
+  </div>
 </header>
 
-<main class="content-container">
+<main>
   <router-outlet></router-outlet>
 </main>

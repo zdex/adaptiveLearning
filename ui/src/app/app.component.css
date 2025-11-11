@@ -5,6 +5,8 @@
   --light-bg: #f8f9fa; /* Light Gray/Off-white */
   --dark-text: #343a40; /* Dark Gray */
   --navbar-height: 60px;
+  --danger-color: #dc3545; /* Red for Logout/Danger */
+  --light-hover: #e9ecef; /* Slightly darker light background for hover */
 }
 
 *, *::before, *::after {
@@ -14,111 +16,137 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif; /* Using a modern font */
   line-height: 1.6;
   background-color: var(--light-bg);
   color: var(--dark-text);
 }
 
-
 /* --- Header Styling --- */
 .app-header {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--dark-text);
+  width: 100%;
   padding: 0 1.5rem;
-  height: var(--navbar-height);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* --- Brand Name Styling --- */
-.app-header .brand-name .logo-link {
-  color: #000; /* Currently black for troubleshooting */
-  font-size: 1.5rem;
-  font-weight: bold;
+/* --- Logo Styling --- */
+.app-header .logo a {
+  font-size: 1.6rem;
+  font-weight: 700; /* Bolder font */
   text-decoration: none;
-}
-
-/* --- Navigation Menu Container (nested inside app-header) --- */
-.navbar {
+  color: var(--primary-color);
   display: flex;
   align-items: center;
-  padding: 0;
-  margin: 0;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
 }
 
-/* --- Default Link Styling --- */
-.app-header .navbar a {
-  /* Default color remains black for troubleshooting visibility */
-  color: #000;
-  background-color: transparent;
+.app-header .logo a:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+.app-header .logo svg {
+  color: var(--primary-color);
+}
+
+/* --- Navigation Styling (Links) --- */
+.navbar a {
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
   padding: 0.5rem 1rem;
   margin-left: 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 6px; /* Slightly more rounded */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  color: var(--dark-text);
+  border: 1px solid transparent; /* Ensures consistent height/baseline */
 }
 
-/* --- Revised Hover Logic --- */
-
-/* 1. When the mouse enters the .navbar, set ALL links to a distinct color (e.g., White) */
-.app-header .navbar:hover a {
-  color: white;
-  transition: color 0.3s ease;
+.navbar a:hover {
+  background-color: var(--light-hover);
+  color: var(--primary-color);
 }
 
-/* 2. When the mouse is over the .navbar, target all links that are NOT being hovered over. */
-.app-header .navbar:hover a:not(:hover) {
-  color: #000; /* Force non-hovered links back to black */
+/* --- Styling for the Logout Link (Specific, bordered style) --- */
+.navbar a.logout-link {
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+  cursor: pointer;
   background-color: transparent;
-  transition: color 0.3s ease;
+  padding: 0.4rem 1rem; /* Adjust padding slightly to match other links' height with the border */
 }
 
-/* 3. Style the currently hovered link to be highlighted. */
-.app-header .navbar a:hover,
-.app-header .navbar a:focus,
-.app-header .navbar a.active {
-  background-color: var(--primary-color);
-  color: blue; /* Ensure text is white against the blue background */
-  outline: none;
+.navbar a.logout-link:hover {
+  background-color: var(--danger-color);
+  color: white;
+  /* Keep border solid to maintain size */
+  border-color: var(--danger-color);
 }
 
-/* --- Main Content Styling (Adjusted) --- */
+/* --- Main Content Styling --- */
+/* This class ensures content is centered but doesn't handle vertical spacing as much */
 .content-container {
-  /* *** NEW: Adds space below the sticky header *** */
-  margin-top: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  padding: 2rem 1.5rem;
-  /* min-height calculation is adjusted to account for the new margin-top */
-  min-height: calc(100vh - var(--navbar-height) - 1.5rem);
+main {
+  padding: 2.5rem 1.5rem; /* Increased vertical padding */
+  /* Ensures the main area fills the screen below the fixed header */
+  min-height: calc(100vh - var(--navbar-height));
   width: 100%;
   max-width: 1200px;
-  margin-left: auto; /* Use auto for left/right to center it */
-  margin-right: auto; /* Use auto for left/right to center it */
-}
-
-/* --- Main Content Styling (Old 'main' block - removing redundancy and focusing on .content-container) --- */
-/* You should remove this block if your HTML only uses .content-container on the main tag. */
-main {
-  /* *** NEW: Adds space below the sticky header *** */
-  margin-top: 1.5rem;
-
-  padding: 2rem 1.5rem; /* Padding around the main content area */
-  /* Account for the sticky navbar height and new margin */
-  min-height: calc(100vh - var(--navbar-height) - 1.5rem);
-  width: 100%;
-  max-width: 1200px; /* Limits the width for better readability on large screens */
-  margin-left: auto; /* Centers the main content area */
-  margin-right: auto; /* Centers the main content area */
+  margin: 0 auto;
 }
 
 /* Style the router outlet container */
 router-outlet {
-  display: block; /* Ensures it acts as a block-level container */
+  display: block;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+  }
+
+  .app-header {
+    height: auto; /* Allow header to expand vertically */
+  }
+
+  .logo {
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap */
+    justify-content: space-around;
+  }
+
+  .navbar a {
+    margin: 0.2rem 0;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+  }
 }
