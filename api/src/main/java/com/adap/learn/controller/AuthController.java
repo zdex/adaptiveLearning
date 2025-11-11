@@ -3,7 +3,7 @@ package com.adap.learn.controller;
 import com.adap.learn.dto.AuthRequest;
 import com.adap.learn.dto.AuthResponse;
 import com.adap.learn.dto.RegisterRequest;
-import com.adap.learn.model.Student;
+import com.adap.learn.model.User;
 import com.adap.learn.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,7 +23,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @Operation(summary = "Register a new user")
+    @Operation(summary = "Register a new user (Parent/Account Owner)")
     @ApiResponse(responseCode = "200", description = "User registered successfully")
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
@@ -38,10 +38,11 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    @Operation(summary = "Test secured endpoint")
+    @Operation(summary = "Get details of the currently authenticated user (Parent/Account Owner)")
     @ApiResponse(responseCode = "200", description = "Access granted")
     @GetMapping("/me")
-    public ResponseEntity<Student> getCurrentUser(@RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(authService.getCurrentUser(token));
+    public ResponseEntity<User> getAuthenticatedUser(@RequestHeader("Authorization") String token) {
+        // Now calling the updated service method
+        return ResponseEntity.ok(authService.getAuthenticatedUser(token));
     }
 }

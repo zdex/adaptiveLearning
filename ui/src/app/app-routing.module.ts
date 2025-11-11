@@ -4,7 +4,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { VerifyOtpComponent } from './components/auth/verify-otp/verify-otp.component';
 import { GenerateComponent } from './components/questionnaire/generate/generate.component';
-import { AdaptiveComponent } from './components/questionnaire/adaptive/adaptive.component';
+import { StudentManagerComponent } from './components/student-manager/student-manager-component';
 
 
 export const routes: Routes = [
@@ -13,8 +13,9 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'verify-otp', component: VerifyOtpComponent },
   { path: 'questionnaire/generate', component: GenerateComponent },
-  { path: 'questionnaire/adaptive', component: AdaptiveComponent },
-  { path: '**', redirectTo: 'login' }
+  { path: 'students', component: StudentManagerComponent },
+  { path: '**', redirectTo: 'login' },
+
 ];
 
 @NgModule({

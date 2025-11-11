@@ -1,10 +1,17 @@
-<nav class="navbar">
-  <a routerLink="/login">Login</a>
-  <a routerLink="/register">Register</a>
-  <a routerLink="/questionnaire/generate">Generate</a>
-  <a routerLink="/questionnaire/adaptive">Adaptive</a>
-</nav>
+<header class="app-header">
+  <div class="brand-name">
+    <a routerLink="/" class="logo-link">
+      ADAPTIVE LEARNING
+    </a>
+  </div>
 
-<main>
+  <nav class="navbar">
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    <a routerLink="/questionnaire/generate" routerLinkActive="active">Generate</a>
+  </nav>
+</header>
+
+<main class="content-container">
   <router-outlet></router-outlet>
 </main>

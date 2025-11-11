@@ -1,37 +1,102 @@
+/* --- Login Component Styles --- */
 .login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   max-width: 400px;
-  margin: 80px auto;
-  padding: 25px;
-  background: #fff;
+  margin: 4rem auto;
+  background-color: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  color: var(--dark-text);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+/* --- Form Styling --- */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .login-container input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
 
+.login-container input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* --- Button Styling (Updated for Light Blue Default, Dark Blue Hover) --- */
 .login-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #0078d4;
-  color: white;
+  /* Default: Light Blue Background */
+  background-color: #a2cffd;
+  /* Text: Dark color for contrast on light background */
+  color: var(--dark-text);
+  padding: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
+  margin-top: 0.5rem;
+  /* Added color to transition for smooth text change */
+  transition: background-color 0.3s, opacity 0.3s, color 0.3s;
+}
+
+.login-container button:hover:not(:disabled) {
+  /* Hover: Dark Blue Background */
+  background-color: #0056b3;
+  /* Text: White for contrast on dark background */
+  color: white;
 }
 
 .login-container button:disabled {
-  background-color: #aaa;
+  opacity: 0.6;
+  cursor: not-allowed;
+  /* Ensure disabled state is light blue but faded */
+  background-color: #a2cffd;
+  color: var(--dark-text);
 }
 
-.message {
-  color: red;
-  margin-top: 10px;
+/* --- Message Styling (for error/success messages) --- */
+.login-container .message {
+  margin-top: 1rem;
+  color: red; /* Default to red for error messages */
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* --- Target "Register here" link --- */
+.login-container p a {
+  color: var(--primary-color); /* Use the primary color to make it stand out */
+  text-decoration: none; /* Remove underline by default */
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.login-container p a:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline; /* Add underline on hover for clear interaction */
+}
+
+/* Style for the general paragraph containing the link */
+.login-container p {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
 }

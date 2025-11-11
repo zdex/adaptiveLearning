@@ -4,17 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-// Assuming this DTO structure based on your existing register logic
+import java.time.LocalDate;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class StudentDto {
     private String firstName;
     private String lastName;
-    private String email;
-    private String password;
-    // Added role field
-    private String role;
+    private Integer age;
+    private Integer grade;
+    private LocalDate dateOfBirth;
 }

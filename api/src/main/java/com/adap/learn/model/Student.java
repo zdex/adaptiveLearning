@@ -16,22 +16,26 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
 
+    // *** FIX: Added the Many-to-One relationship to the User entity ***
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)
     private String lastName;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column
+    private Integer age;
 
-    @Column(nullable = false)
-    private String password;
-
-    private String role = "USER"; // default role
-    private boolean active = true;
+    @Column
+    private String gradeLevel;
 
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
+    // NOTE: Removed email, password, role, and active fields as they belong to the User entity.
 }

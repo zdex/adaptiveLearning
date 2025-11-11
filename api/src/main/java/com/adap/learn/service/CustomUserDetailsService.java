@@ -1,6 +1,6 @@
 package com.adap.learn.service;
 
-import com.adap.learn.model.Student;
+import com.adap.learn.model.User;
 import com.adap.learn.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Student user = userRepository.findByEmail(email)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
         return org.springframework.security.core.userdetails.User.builder()
@@ -46,10 +46,10 @@ public class CustomUserDetailsService implements UserDetailsService {
      * Returns user roles (authorities). For now, assume every user has "ROLE_USER".
      * If your User entity has roles, map them here.
      */
-    private Collection<? extends GrantedAuthority> getAuthorities(Student user) {
+    private Collection<? extends GrantedAuthority> getAuthorities(User user) {
         if (user.getRole() != null) {
             // Example: user.role = "ADMIN" or "USER"
-            return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()));
+            return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString().toUpperCase()));
         }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }

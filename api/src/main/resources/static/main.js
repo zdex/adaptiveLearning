@@ -46117,7 +46117,7 @@ var LoginComponent = class _LoginComponent {
   static \u0275fac = function LoginComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _LoginComponent)(\u0275\u0275directiveInject(AuthService), \u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 15, vars: 5, consts: [["loginForm", "ngForm"], [1, "login-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], [3, "click"]], template: function LoginComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 15, vars: 5, consts: [["loginForm", "ngForm"], [1, "login-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", "minlength", "4", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], [3, "click"]], template: function LoginComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "div", 1)(1, "h2");
@@ -46171,7 +46171,7 @@ var LoginComponent = class _LoginComponent {
       \u0275\u0275advance(2);
       \u0275\u0275textInterpolate(ctx.message);
     }
-  }, dependencies: [CommonModule, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm], styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n  max-width: 400px;\n  margin: 80px auto;\n  padding: 25px;\n  background: #fff;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.login-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:disabled {\n  background-color: #aaa;\n}\n.message[_ngcontent-%COMP%] {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=login.component.css.map */"] });
+  }, dependencies: [CommonModule, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, NgModel, NgForm], styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 2rem;\n  max-width: 400px;\n  margin: 4rem auto;\n  background-color: white;\n  border-radius: 12px;\n  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);\n}\n.login-container[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  color: var(--dark-text);\n  margin-bottom: 1.5rem;\n  font-size: 2rem;\n}\n.login-container[_ngcontent-%COMP%]   form[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n}\n.login-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  padding: 1rem;\n  margin-bottom: 1rem;\n  border: 1px solid #ced4da;\n  border-radius: 8px;\n  font-size: 1rem;\n  transition: border-color 0.3s;\n}\n.login-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  border-color: var(--primary-color);\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  background-color: #a2cffd;\n  color: var(--dark-text);\n  padding: 1rem;\n  border: none;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  font-weight: bold;\n  cursor: pointer;\n  margin-top: 0.5rem;\n  transition:\n    background-color 0.3s,\n    opacity 0.3s,\n    color 0.3s;\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background-color: #0056b3;\n  color: white;\n}\n.login-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n  background-color: #a2cffd;\n  color: var(--dark-text);\n}\n.login-container[_ngcontent-%COMP%]   .message[_ngcontent-%COMP%] {\n  margin-top: 1rem;\n  color: red;\n  font-size: 0.9rem;\n  text-align: center;\n}\n.login-container[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--primary-color);\n  text-decoration: none;\n  font-weight: bold;\n  cursor: pointer;\n  transition: color 0.3s, text-decoration 0.3s;\n}\n.login-container[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  color: #0056b3;\n  text-decoration: underline;\n}\n.login-container[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  margin-top: 1.5rem;\n  font-size: 0.95rem;\n  text-align: center;\n}\n/*# sourceMappingURL=login.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LoginComponent, [{
@@ -46181,18 +46181,26 @@ var LoginComponent = class _LoginComponent {
 
   <form (ngSubmit)="onLogin()" #loginForm="ngForm" novalidate>
     <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-    <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      minlength="4"
+    />
     <button type="submit" [disabled]="loading || !loginForm.valid">
       {{ loading ? 'Logging in...' : 'Login' }}
     </button>
+
+
 
     <p class="message">{{ message }}</p>
 
     <p>Don't have an account? <a (click)="goToRegister()">Register here</a></p>
   </form>
 </div>
-`, styles: ["/* src/app/components/auth/login/login.component.css */\n.login-container {\n  max-width: 400px;\n  margin: 80px auto;\n  padding: 25px;\n  background: #fff;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.login-container input {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.login-container button {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.login-container button:disabled {\n  background-color: #aaa;\n}\n.message {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=login.component.css.map */\n"] }]
+`, styles: ["/* src/app/components/auth/login/login.component.css */\n.login-container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 2rem;\n  max-width: 400px;\n  margin: 4rem auto;\n  background-color: white;\n  border-radius: 12px;\n  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);\n}\n.login-container h2 {\n  color: var(--dark-text);\n  margin-bottom: 1.5rem;\n  font-size: 2rem;\n}\n.login-container form {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n}\n.login-container input {\n  padding: 1rem;\n  margin-bottom: 1rem;\n  border: 1px solid #ced4da;\n  border-radius: 8px;\n  font-size: 1rem;\n  transition: border-color 0.3s;\n}\n.login-container input:focus {\n  border-color: var(--primary-color);\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);\n}\n.login-container button {\n  background-color: #a2cffd;\n  color: var(--dark-text);\n  padding: 1rem;\n  border: none;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  font-weight: bold;\n  cursor: pointer;\n  margin-top: 0.5rem;\n  transition:\n    background-color 0.3s,\n    opacity 0.3s,\n    color 0.3s;\n}\n.login-container button:hover:not(:disabled) {\n  background-color: #0056b3;\n  color: white;\n}\n.login-container button:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n  background-color: #a2cffd;\n  color: var(--dark-text);\n}\n.login-container .message {\n  margin-top: 1rem;\n  color: red;\n  font-size: 0.9rem;\n  text-align: center;\n}\n.login-container p a {\n  color: var(--primary-color);\n  text-decoration: none;\n  font-weight: bold;\n  cursor: pointer;\n  transition: color 0.3s, text-decoration 0.3s;\n}\n.login-container p a:hover {\n  color: #0056b3;\n  text-decoration: underline;\n}\n.login-container p {\n  margin-top: 1.5rem;\n  font-size: 0.95rem;\n  text-align: center;\n}\n/*# sourceMappingURL=login.component.css.map */\n"] }]
   }], () => [{ type: AuthService }, { type: Router }], null);
 })();
 (() => {
@@ -46242,7 +46250,7 @@ var RegisterComponent = class _RegisterComponent {
   static \u0275fac = function RegisterComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _RegisterComponent)(\u0275\u0275directiveInject(AuthService), \u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RegisterComponent, selectors: [["app-register"]], decls: 18, vars: 8, consts: [["registerForm", "ngForm"], [1, "register-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "text", "placeholder", "First Name", "name", "firstName", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "placeholder", "Last Name", "name", "lastName", "required", "", 3, "ngModelChange", "ngModel"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", "minlength", "6", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Confirm Password", "name", "confirmPassword", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], ["routerLink", "/login"]], template: function RegisterComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _RegisterComponent, selectors: [["app-register"]], decls: 18, vars: 8, consts: [["registerForm", "ngForm"], [1, "register-container"], ["novalidate", "", 3, "ngSubmit"], ["type", "text", "placeholder", "First Name", "name", "firstName", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "placeholder", "Last Name", "name", "lastName", "required", "", 3, "ngModelChange", "ngModel"], ["type", "email", "placeholder", "Email", "name", "email", "required", "", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Password", "name", "password", "required", "", "minlength", "4", 3, "ngModelChange", "ngModel"], ["type", "password", "placeholder", "Confirm Password", "name", "confirmPassword", "required", "", 3, "ngModelChange", "ngModel"], ["type", "submit", 3, "disabled"], [1, "message"], ["routerLink", "/login"]], template: function RegisterComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "div", 1)(1, "h2");
@@ -46319,7 +46327,7 @@ var RegisterComponent = class _RegisterComponent {
       \u0275\u0275advance(2);
       \u0275\u0275textInterpolate(ctx.message);
     }
-  }, dependencies: [CommonModule, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, NgModel, NgForm], styles: ["\n\n.register-container[_ngcontent-%COMP%] {\n  max-width: 400px;\n  margin: 60px auto;\n  padding: 20px;\n  border-radius: 12px;\n  background: #fff;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.register-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:disabled {\n  background-color: #aaa;\n}\n.message[_ngcontent-%COMP%] {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=register.component.css.map */"] });
+  }, dependencies: [CommonModule, FormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, MinLengthValidator, NgModel, NgForm], styles: ["\n\n.register-container[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 2rem;\n  max-width: 450px;\n  margin: 4rem auto;\n  background-color: white;\n  border-radius: 12px;\n  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);\n}\n.register-container[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  color: var(--dark-text);\n  margin-bottom: 1.5rem;\n  font-size: 2rem;\n}\n.register-container[_ngcontent-%COMP%]   form[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n}\n.register-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  padding: 1rem;\n  margin-bottom: 1rem;\n  border: 1px solid #ced4da;\n  border-radius: 8px;\n  font-size: 1rem;\n  transition: border-color 0.3s;\n}\n.register-container[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus {\n  border-color: var(--primary-color);\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\n  background-color: #a2cffd;\n  color: var(--dark-text);\n  padding: 1rem;\n  border: none;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  font-weight: bold;\n  cursor: pointer;\n  margin-top: 0.5rem;\n  transition:\n    background-color 0.3s,\n    opacity 0.3s,\n    color 0.3s;\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background-color: #0056b3;\n  color: white;\n}\n.register-container[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n  background-color: #a2cffd;\n  color: var(--dark-text);\n}\n.register-container[_ngcontent-%COMP%]   .message[_ngcontent-%COMP%] {\n  margin-top: 1rem;\n  color: red;\n  font-size: 0.9rem;\n  text-align: center;\n}\n.register-container[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--primary-color);\n  text-decoration: none;\n  font-weight: bold;\n  cursor: pointer;\n  transition: color 0.3s, text-decoration 0.3s;\n}\n.register-container[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\n  color: #0056b3;\n  text-decoration: underline;\n}\n.register-container[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  margin-top: 1.5rem;\n  font-size: 0.95rem;\n  text-align: center;\n}\n/*# sourceMappingURL=register.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RegisterComponent, [{
@@ -46355,7 +46363,7 @@ var RegisterComponent = class _RegisterComponent {
       [(ngModel)]="password"
       name="password"
       required
-      minlength="6"
+      minlength="4"
     />
     <input
       type="password"
@@ -46374,7 +46382,7 @@ var RegisterComponent = class _RegisterComponent {
     <p>Already have an account? <a routerLink="/login">Login here</a></p>
   </form>
 </div>
-`, styles: ["/* src/app/components/auth/register/register.component.css */\n.register-container {\n  max-width: 400px;\n  margin: 60px auto;\n  padding: 20px;\n  border-radius: 12px;\n  background: #fff;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n.register-container input {\n  display: block;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n}\n.register-container button {\n  width: 100%;\n  padding: 10px;\n  background-color: #0078d4;\n  color: white;\n  border: none;\n  border-radius: 6px;\n  cursor: pointer;\n}\n.register-container button:disabled {\n  background-color: #aaa;\n}\n.message {\n  color: red;\n  margin-top: 10px;\n}\n/*# sourceMappingURL=register.component.css.map */\n"] }]
+`, styles: ["/* src/app/components/auth/register/register.component.css */\n.register-container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 2rem;\n  max-width: 450px;\n  margin: 4rem auto;\n  background-color: white;\n  border-radius: 12px;\n  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);\n}\n.register-container h2 {\n  color: var(--dark-text);\n  margin-bottom: 1.5rem;\n  font-size: 2rem;\n}\n.register-container form {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n}\n.register-container input {\n  padding: 1rem;\n  margin-bottom: 1rem;\n  border: 1px solid #ced4da;\n  border-radius: 8px;\n  font-size: 1rem;\n  transition: border-color 0.3s;\n}\n.register-container input:focus {\n  border-color: var(--primary-color);\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);\n}\n.register-container button {\n  background-color: #a2cffd;\n  color: var(--dark-text);\n  padding: 1rem;\n  border: none;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  font-weight: bold;\n  cursor: pointer;\n  margin-top: 0.5rem;\n  transition:\n    background-color 0.3s,\n    opacity 0.3s,\n    color 0.3s;\n}\n.register-container button:hover:not(:disabled) {\n  background-color: #0056b3;\n  color: white;\n}\n.register-container button:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n  background-color: #a2cffd;\n  color: var(--dark-text);\n}\n.register-container .message {\n  margin-top: 1rem;\n  color: red;\n  font-size: 0.9rem;\n  text-align: center;\n}\n.register-container p a {\n  color: var(--primary-color);\n  text-decoration: none;\n  font-weight: bold;\n  cursor: pointer;\n  transition: color 0.3s, text-decoration 0.3s;\n}\n.register-container p a:hover {\n  color: #0056b3;\n  text-decoration: underline;\n}\n.register-container p {\n  margin-top: 1.5rem;\n  font-size: 0.95rem;\n  text-align: center;\n}\n/*# sourceMappingURL=register.component.css.map */\n"] }]
   }], () => [{ type: AuthService }, { type: Router }], null);
 })();
 (() => {
@@ -46460,7 +46468,7 @@ function GenerateComponent_p_22_Template(rf, ctx) {
 }
 function GenerateComponent_section_23_div_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22)(1, "span");
+    \u0275\u0275elementStart(0, "div", 20)(1, "span");
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "span");
@@ -46477,29 +46485,29 @@ function GenerateComponent_section_23_div_4_Template(rf, ctx) {
 }
 function GenerateComponent_section_23_div_6_div_7_span_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 35);
+    \u0275\u0275elementStart(0, "span", 33);
     \u0275\u0275text(1, "Correct");
     \u0275\u0275elementEnd();
   }
 }
 function GenerateComponent_section_23_div_6_div_7_span_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 36);
+    \u0275\u0275elementStart(0, "span", 34);
     \u0275\u0275text(1, "Incorrect");
     \u0275\u0275elementEnd();
   }
 }
 function GenerateComponent_section_23_div_6_div_7_span_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 37);
+    \u0275\u0275elementStart(0, "span", 35);
     \u0275\u0275text(1, "Unanswered");
     \u0275\u0275elementEnd();
   }
 }
 function GenerateComponent_section_23_div_6_div_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 31);
-    \u0275\u0275template(1, GenerateComponent_section_23_div_6_div_7_span_1_Template, 2, 0, "span", 32)(2, GenerateComponent_section_23_div_6_div_7_span_2_Template, 2, 0, "span", 33)(3, GenerateComponent_section_23_div_6_div_7_span_3_Template, 2, 0, "span", 34);
+    \u0275\u0275elementStart(0, "div", 29);
+    \u0275\u0275template(1, GenerateComponent_section_23_div_6_div_7_span_1_Template, 2, 0, "span", 30)(2, GenerateComponent_section_23_div_6_div_7_span_2_Template, 2, 0, "span", 31)(3, GenerateComponent_section_23_div_6_div_7_span_3_Template, 2, 0, "span", 32);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46516,7 +46524,7 @@ function GenerateComponent_section_23_div_6_div_7_Template(rf, ctx) {
 function GenerateComponent_section_23_div_6_div_8_label_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "label", 40)(1, "input", 41);
+    \u0275\u0275elementStart(0, "label", 38)(1, "input", 39);
     \u0275\u0275listener("change", function GenerateComponent_section_23_div_6_div_8_label_1_Template_input_change_1_listener() {
       const oi_r5 = \u0275\u0275restoreView(_r4).index;
       const q_r3 = \u0275\u0275nextContext(2).$implicit;
@@ -46524,10 +46532,10 @@ function GenerateComponent_section_23_div_6_div_8_label_1_Template(rf, ctx) {
       return \u0275\u0275resetView(ctx_r0.choose(q_r3.questionId, oi_r5));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(2, "span", 42);
+    \u0275\u0275elementStart(2, "span", 40);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "span", 43);
+    \u0275\u0275elementStart(4, "span", 41);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
   }
@@ -46547,8 +46555,8 @@ function GenerateComponent_section_23_div_6_div_8_label_1_Template(rf, ctx) {
 }
 function GenerateComponent_section_23_div_6_div_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 38);
-    \u0275\u0275template(1, GenerateComponent_section_23_div_6_div_8_label_1_Template, 6, 12, "label", 39);
+    \u0275\u0275elementStart(0, "div", 36);
+    \u0275\u0275template(1, GenerateComponent_section_23_div_6_div_8_label_1_Template, 6, 12, "label", 37);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46559,7 +46567,7 @@ function GenerateComponent_section_23_div_6_div_8_Template(rf, ctx) {
 }
 function GenerateComponent_section_23_div_6_div_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 44)(1, "small");
+    \u0275\u0275elementStart(0, "div", 42)(1, "small");
     \u0275\u0275text(2, "Answer: ");
     \u0275\u0275elementStart(3, "strong");
     \u0275\u0275text(4);
@@ -46573,15 +46581,15 @@ function GenerateComponent_section_23_div_6_div_9_Template(rf, ctx) {
 }
 function GenerateComponent_section_23_div_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 23)(1, "div", 24)(2, "div", 25)(3, "span", 26);
+    \u0275\u0275elementStart(0, "div", 21)(1, "div", 22)(2, "div", 23)(3, "span", 24);
     \u0275\u0275text(4);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "span", 27);
+    \u0275\u0275elementStart(5, "span", 25);
     \u0275\u0275text(6);
     \u0275\u0275elementEnd()();
-    \u0275\u0275template(7, GenerateComponent_section_23_div_6_div_7_Template, 4, 3, "div", 28);
+    \u0275\u0275template(7, GenerateComponent_section_23_div_6_div_7_Template, 4, 3, "div", 26);
     \u0275\u0275elementEnd();
-    \u0275\u0275template(8, GenerateComponent_section_23_div_6_div_8_Template, 2, 1, "div", 29)(9, GenerateComponent_section_23_div_6_div_9_Template, 5, 1, "div", 30);
+    \u0275\u0275template(8, GenerateComponent_section_23_div_6_div_8_Template, 2, 1, "div", 27)(9, GenerateComponent_section_23_div_6_div_9_Template, 5, 1, "div", 28);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -46617,7 +46625,7 @@ function GenerateComponent_section_23_Template(rf, ctx) {
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.submit());
     });
-    \u0275\u0275text(9, " Submit Answers ");
+    \u0275\u0275text(9, "Submit Answers");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(10, "button", 18);
     \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_10_listener() {
@@ -46625,38 +46633,15 @@ function GenerateComponent_section_23_Template(rf, ctx) {
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.resetAnswers());
     });
-    \u0275\u0275text(11, " Reset ");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(12, "details", 19)(13, "summary");
-    \u0275\u0275text(14, "Show raw response");
+    \u0275\u0275text(11, "Reset");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(15, "pre");
-    \u0275\u0275text(16);
-    \u0275\u0275pipe(17, "json");
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(18, "div", 16)(19, "button", 17);
-    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_19_listener() {
+    \u0275\u0275elementStart(12, "button", 19);
+    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_12_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.submit());
+      return \u0275\u0275resetView(ctx_r0.generate());
     });
-    \u0275\u0275text(20, "Submit Answers");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(21, "button", 20);
-    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_21_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.resetAnswers());
-    });
-    \u0275\u0275text(22, "Reset");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(23, "button", 21);
-    \u0275\u0275listener("click", function GenerateComponent_section_23_Template_button_click_23_listener() {
-      \u0275\u0275restoreView(_r2);
-      const ctx_r0 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r0.generateNewQuestions());
-    });
-    \u0275\u0275text(24);
+    \u0275\u0275text(13);
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
@@ -46668,12 +46653,6 @@ function GenerateComponent_section_23_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275property("ngForOf", ctx_r0.generated.questions);
     \u0275\u0275advance(2);
-    \u0275\u0275property("disabled", ctx_r0.submitted || !ctx_r0.generated.questions.length);
-    \u0275\u0275advance(2);
-    \u0275\u0275property("disabled", ctx_r0.loading);
-    \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(17, 9, ctx_r0.generated));
-    \u0275\u0275advance(3);
     \u0275\u0275property("disabled", ctx_r0.submitted);
     \u0275\u0275advance(4);
     \u0275\u0275property("disabled", !ctx_r0.submitted || ctx_r0.generatingNew);
@@ -46759,20 +46738,6 @@ var GenerateComponent = class _GenerateComponent {
     });
     this.submitted = true;
   }
-  generateNewQuestions() {
-    this.generatingNew = true;
-    const prompt = `Generate ${this.nextDifficulty} level questions for ${this.subject} grade ${this.grade}.`;
-    const payload = { subject: this.subject, grade: this.grade, style: this.style, difficultyLevel: this.nextDifficulty };
-    this.questionnaireService.generateQuestionnaire(payload).subscribe({
-      next: (res) => {
-        this.generated = res;
-        this.answers = {};
-        this.results = {};
-        this.submitted = false;
-      },
-      complete: () => this.generatingNew = false
-    });
-  }
   resetAnswers() {
     if (!this.generated?.questions)
       return;
@@ -46790,7 +46755,7 @@ var GenerateComponent = class _GenerateComponent {
   static \u0275fac = function GenerateComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _GenerateComponent)(\u0275\u0275directiveInject(QuestionnaireService));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GenerateComponent, selectors: [["app-generate-questionnaire"]], decls: 24, vars: 7, consts: [[1, "gen-container"], [1, "gen-form", 3, "ngSubmit"], [1, "field"], ["type", "text", "name", "subject", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "name", "grade", "required", "", 3, "ngModelChange", "ngModel"], ["name", "style", 3, "ngModelChange", "ngModel"], ["value", "MCQ"], ["value", "SHORT_ANSWER"], ["type", "submit", 1, "btn", "primary", 3, "disabled"], ["class", "message", 4, "ngIf"], [4, "ngIf"], [1, "message"], [1, "summary"], ["class", "summary-inline", 4, "ngIf"], [1, "question-list"], ["class", "card", 4, "ngFor", "ngForOf"], [1, "actions"], [1, "btn", "success", 3, "click", "disabled"], [1, "btn", 3, "click", "disabled"], [1, "raw"], [1, "btn", 3, "click"], [1, "btn", "primary", 3, "click", "disabled"], [1, "summary-inline"], [1, "card"], [1, "q-header"], [1, "q-title"], [1, "q-num"], [1, "q-text"], ["class", "q-status", 4, "ngIf"], ["class", "options", 4, "ngIf"], ["class", "answer-key", 4, "ngIf"], [1, "q-status"], ["class", "badge correct", 4, "ngIf"], ["class", "badge wrong", 4, "ngIf"], ["class", "badge neutral", 4, "ngIf"], [1, "badge", "correct"], [1, "badge", "wrong"], [1, "badge", "neutral"], [1, "options"], ["class", "option", 3, "selected", "correct", "incorrect", 4, "ngFor", "ngForOf"], [1, "option"], ["type", "radio", 3, "change", "name", "value", "checked", "disabled"], [1, "opt-index"], [1, "opt-text"], [1, "answer-key"]], template: function GenerateComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _GenerateComponent, selectors: [["app-generate-questionnaire"]], decls: 24, vars: 7, consts: [[1, "gen-container"], [1, "gen-form", 3, "ngSubmit"], [1, "field"], ["type", "text", "name", "subject", "required", "", 3, "ngModelChange", "ngModel"], ["type", "text", "name", "grade", "required", "", 3, "ngModelChange", "ngModel"], ["name", "style", 3, "ngModelChange", "ngModel"], ["value", "MCQ"], ["value", "SHORT_ANSWER"], ["type", "submit", 1, "btn", "primary", 3, "disabled"], ["class", "message", 4, "ngIf"], [4, "ngIf"], [1, "message"], [1, "summary"], ["class", "summary-inline", 4, "ngIf"], [1, "question-list"], ["class", "card", 4, "ngFor", "ngForOf"], [1, "actions"], [1, "btn", "success", 3, "click", "disabled"], [1, "btn", 3, "click"], [1, "btn", "primary", 3, "click", "disabled"], [1, "summary-inline"], [1, "card"], [1, "q-header"], [1, "q-title"], [1, "q-num"], [1, "q-text"], ["class", "q-status", 4, "ngIf"], ["class", "options", 4, "ngIf"], ["class", "answer-key", 4, "ngIf"], [1, "q-status"], ["class", "badge correct", 4, "ngIf"], ["class", "badge wrong", 4, "ngIf"], ["class", "badge neutral", 4, "ngIf"], [1, "badge", "correct"], [1, "badge", "wrong"], [1, "badge", "neutral"], [1, "options"], ["class", "option", 3, "selected", "correct", "incorrect", 4, "ngFor", "ngForOf"], [1, "option"], ["type", "radio", 3, "change", "name", "value", "checked", "disabled"], [1, "opt-index"], [1, "opt-text"], [1, "answer-key"]], template: function GenerateComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "h2");
       \u0275\u0275text(2, "Generate Questionnaire");
@@ -46834,7 +46799,7 @@ var GenerateComponent = class _GenerateComponent {
       \u0275\u0275elementStart(20, "button", 8);
       \u0275\u0275text(21);
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(22, GenerateComponent_p_22_Template, 2, 1, "p", 9)(23, GenerateComponent_section_23_Template, 25, 11, "section", 10);
+      \u0275\u0275template(22, GenerateComponent_p_22_Template, 2, 1, "p", 9)(23, GenerateComponent_section_23_Template, 14, 6, "section", 10);
       \u0275\u0275elementEnd();
     }
     if (rf & 2) {
@@ -46853,7 +46818,7 @@ var GenerateComponent = class _GenerateComponent {
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", ctx.generated);
     }
-  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm, JsonPipe], styles: ["\n\n.gen-container[_ngcontent-%COMP%] {\n  max-width: 900px;\n  margin: 24px auto;\n  padding: 0 16px;\n}\nh2[_ngcontent-%COMP%] {\n  margin-bottom: 12px;\n}\n.gen-form[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 12px 16px;\n  align-items: end;\n  margin-bottom: 16px;\n}\n.field[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-size: 0.92rem;\n  color: #444;\n}\n.field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%], \n.field[_ngcontent-%COMP%]   select[_ngcontent-%COMP%] {\n  padding: 8px 10px;\n  border: 1px solid #d6d6d6;\n  border-radius: 8px;\n  outline: none;\n}\n.btn[_ngcontent-%COMP%] {\n  padding: 10px 14px;\n  border-radius: 8px;\n  border: 1px solid #d6d6d6;\n  background: #fff;\n  cursor: pointer;\n}\n.btn.primary[_ngcontent-%COMP%] {\n  background: #0b5cff;\n  color: #fff;\n  border: none;\n}\n.btn.success[_ngcontent-%COMP%] {\n  background: #22a06b;\n  color: #fff;\n  border: none;\n}\n.btn[_ngcontent-%COMP%]:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n}\n.message[_ngcontent-%COMP%] {\n  margin: 6px 0 12px;\n  color: #b00020;\n}\n.summary[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: baseline;\n  justify-content: space-between;\n  margin: 10px 0 14px;\n}\n.summary-inline[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 16px;\n  font-size: 0.95rem;\n  color: #333;\n}\n.question-list[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 12px;\n}\n.card[_ngcontent-%COMP%] {\n  border: 1px solid #e5e5e5;\n  border-radius: 12px;\n  padding: 12px;\n  background: #fff;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);\n}\n.q-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: start;\n  gap: 12px;\n  margin-bottom: 8px;\n}\n.q-title[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 8px;\n  align-items: start;\n}\n.q-num[_ngcontent-%COMP%] {\n  display: inline-flex;\n  width: 28px;\n  height: 28px;\n  border-radius: 7px;\n  background: #eef2ff;\n  color: #0b5cff;\n  font-weight: 700;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.9rem;\n}\n.q-text[_ngcontent-%COMP%] {\n  font-weight: 600;\n  color: #222;\n}\n.q-status[_ngcontent-%COMP%]   .badge[_ngcontent-%COMP%] {\n  padding: 4px 8px;\n  border-radius: 999px;\n  font-size: 0.75rem;\n  font-weight: 600;\n}\n.badge.correct[_ngcontent-%COMP%] {\n  background: #e6f7ef;\n  color: #1b7a53;\n  border: 1px solid #c9eddc;\n}\n.badge.wrong[_ngcontent-%COMP%] {\n  background: #ffecec;\n  color: #b83b3b;\n  border: 1px solid #ffd3d3;\n}\n.badge.neutral[_ngcontent-%COMP%] {\n  background: #f5f5f5;\n  color: #666;\n  border: 1px solid #e8e8e8;\n}\n.options[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 8px;\n  margin-top: 6px;\n}\n.option[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  border: 1px solid #e7e7e7;\n  border-radius: 10px;\n  padding: 8px 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.option[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  margin: 0 2px 0 0;\n}\n.option.selected[_ngcontent-%COMP%] {\n  border-color: #bfd1ff;\n  background: #f6f9ff;\n}\n.option.correct[_ngcontent-%COMP%] {\n  border-color: #9cd7bb;\n  background: #effaf5;\n}\n.option.incorrect[_ngcontent-%COMP%] {\n  border-color: #ffb3b3;\n  background: #fff5f5;\n}\n.opt-index[_ngcontent-%COMP%] {\n  display: inline-flex;\n  width: 26px;\n  height: 26px;\n  border-radius: 8px;\n  background: #f2f2f2;\n  color: #333;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.85rem;\n  font-weight: 700;\n}\n.opt-text[_ngcontent-%COMP%] {\n  flex: 1;\n}\n.answer-key[_ngcontent-%COMP%] {\n  margin-top: 6px;\n  color: #333;\n}\n.actions[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 10px;\n  margin: 14px 0;\n}\n.raw[_ngcontent-%COMP%] {\n  margin-top: 10px;\n}\n/*# sourceMappingURL=generate.component.css.map */"] });
+  }, dependencies: [CommonModule, NgForOf, NgIf, FormsModule, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, RequiredValidator, NgModel, NgForm], styles: ["\n\n.gen-container[_ngcontent-%COMP%] {\n  max-width: 900px;\n  margin: 24px auto;\n  padding: 0 16px;\n}\nh2[_ngcontent-%COMP%] {\n  margin-bottom: 12px;\n}\n.gen-form[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 12px 16px;\n  align-items: end;\n  margin-bottom: 16px;\n}\n.field[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n}\n.field[_ngcontent-%COMP%]   label[_ngcontent-%COMP%] {\n  font-size: 0.92rem;\n  color: #444;\n}\n.field[_ngcontent-%COMP%]   input[_ngcontent-%COMP%], \n.field[_ngcontent-%COMP%]   select[_ngcontent-%COMP%] {\n  padding: 8px 10px;\n  border: 1px solid #d6d6d6;\n  border-radius: 8px;\n  outline: none;\n}\n.btn[_ngcontent-%COMP%] {\n  padding: 10px 14px;\n  border-radius: 8px;\n  border: 1px solid #d6d6d6;\n  background: #fff;\n  cursor: pointer;\n}\n.btn.primary[_ngcontent-%COMP%] {\n  background: #0b5cff;\n  color: #fff;\n  border: none;\n}\n.btn.success[_ngcontent-%COMP%] {\n  background: #22a06b;\n  color: #fff;\n  border: none;\n}\n.btn[_ngcontent-%COMP%]:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n}\n.message[_ngcontent-%COMP%] {\n  margin: 6px 0 12px;\n  color: #b00020;\n}\n.summary[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: baseline;\n  justify-content: space-between;\n  margin: 10px 0 14px;\n}\n.summary-inline[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 16px;\n  font-size: 0.95rem;\n  color: #333;\n}\n.question-list[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 12px;\n}\n.card[_ngcontent-%COMP%] {\n  border: 1px solid #e5e5e5;\n  border-radius: 12px;\n  padding: 12px;\n  background: #fff;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);\n}\n.q-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: start;\n  gap: 12px;\n  margin-bottom: 8px;\n}\n.q-title[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 8px;\n  align-items: start;\n}\n.q-num[_ngcontent-%COMP%] {\n  display: inline-flex;\n  width: 28px;\n  height: 28px;\n  border-radius: 7px;\n  background: #eef2ff;\n  color: #0b5cff;\n  font-weight: 700;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.9rem;\n}\n.q-text[_ngcontent-%COMP%] {\n  font-weight: 600;\n  color: #222;\n}\n.q-status[_ngcontent-%COMP%]   .badge[_ngcontent-%COMP%] {\n  padding: 4px 8px;\n  border-radius: 999px;\n  font-size: 0.75rem;\n  font-weight: 600;\n}\n.badge.correct[_ngcontent-%COMP%] {\n  background: #e6f7ef;\n  color: #1b7a53;\n  border: 1px solid #c9eddc;\n}\n.badge.wrong[_ngcontent-%COMP%] {\n  background: #ffecec;\n  color: #b83b3b;\n  border: 1px solid #ffd3d3;\n}\n.badge.neutral[_ngcontent-%COMP%] {\n  background: #f5f5f5;\n  color: #666;\n  border: 1px solid #e8e8e8;\n}\n.options[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 8px;\n  margin-top: 6px;\n}\n.option[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  border: 1px solid #e7e7e7;\n  border-radius: 10px;\n  padding: 8px 10px;\n  cursor: pointer;\n  -webkit-user-select: none;\n  user-select: none;\n}\n.option[_ngcontent-%COMP%]   input[_ngcontent-%COMP%] {\n  margin: 0 2px 0 0;\n}\n.option.selected[_ngcontent-%COMP%] {\n  border-color: #bfd1ff;\n  background: #f6f9ff;\n}\n.option.correct[_ngcontent-%COMP%] {\n  border-color: #9cd7bb;\n  background: #effaf5;\n}\n.option.incorrect[_ngcontent-%COMP%] {\n  border-color: #ffb3b3;\n  background: #fff5f5;\n}\n.opt-index[_ngcontent-%COMP%] {\n  display: inline-flex;\n  width: 26px;\n  height: 26px;\n  border-radius: 8px;\n  background: #f2f2f2;\n  color: #333;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.85rem;\n  font-weight: 700;\n}\n.opt-text[_ngcontent-%COMP%] {\n  flex: 1;\n}\n.answer-key[_ngcontent-%COMP%] {\n  margin-top: 6px;\n  color: #333;\n}\n.actions[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 10px;\n  margin: 14px 0;\n}\n.raw[_ngcontent-%COMP%] {\n  margin-top: 10px;\n}\n/*# sourceMappingURL=generate.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(GenerateComponent, [{
@@ -46939,27 +46904,13 @@ var GenerateComponent = class _GenerateComponent {
     </div>
 
     <div class="actions">
-      <button class="btn success" (click)="submit()" [disabled]="submitted || !generated.questions.length">
-        Submit Answers
-      </button>
-      <button class="btn" (click)="resetAnswers()" [disabled]="loading">
-        Reset
-      </button>
-    </div>
-
-    <details class="raw">
-      <summary>Show raw response</summary>
-      <pre>{{ generated | json }}</pre>
-    </details>
-
-    <div class="actions">
       <button class="btn success" (click)="submit()" [disabled]="submitted">Submit Answers</button>
       <button class="btn" (click)="resetAnswers()">Reset</button>
 
       <!-- \u{1F53D} New Button -->
       <button
         class="btn primary"
-        (click)="generateNewQuestions()"
+        (click)="generate()"
         [disabled]="!submitted || generatingNew"
       >
         {{ generatingNew ? 'Generating...' : 'Generate New Questions' }}
@@ -46975,126 +46926,402 @@ var GenerateComponent = class _GenerateComponent {
   (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(GenerateComponent, { className: "GenerateComponent", filePath: "src/app/components/questionnaire/generate/generate.component.ts", lineNumber: 32 });
 })();
 
-// src/app/components/questionnaire/adaptive/adaptive.component.ts
-function AdaptiveComponent_div_22_Template(rf, ctx) {
+// src/app/services/StudentService.ts
+var StudentService = class _StudentService {
+  http;
+  apiUrl = "http://localhost:8080/api/students";
+  // Adjust port if necessary
+  constructor(http) {
+    this.http = http;
+  }
+  /**
+   * Submits a list of student profiles to the backend, attaching the JWT for authentication.
+   * The Observable return type is explicitly typed as StudentDto[].
+   */
+  saveStudents(students) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found. Please log in.");
+    }
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    });
+    return this.http.post(this.apiUrl, students, { headers });
+  }
+  static \u0275fac = function StudentService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _StudentService)(\u0275\u0275inject(HttpClient));
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _StudentService, factory: _StudentService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StudentService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], () => [{ type: HttpClient }], null);
+})();
+
+// src/app/components/student-manager/student-manager-component.ts
+function StudentManagerComponent_For_7_button_4_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div")(1, "h3");
-    \u0275\u0275text(2, "Adaptive Questionnaire");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "pre");
-    \u0275\u0275text(4);
-    \u0275\u0275pipe(5, "json");
+    const _r2 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 24);
+    \u0275\u0275listener("click", function StudentManagerComponent_For_7_button_4_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r2);
+      const \u0275$index_11_r3 = \u0275\u0275nextContext().$index;
+      const ctx_r3 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r3.removeStudent(\u0275$index_11_r3));
+    });
+    \u0275\u0275namespaceSVG();
+    \u0275\u0275elementStart(1, "svg", 25);
+    \u0275\u0275element(2, "path", 26)(3, "path", 27);
     \u0275\u0275elementEnd()();
   }
+}
+function StudentManagerComponent_For_7_For_14_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "option", 22);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
   if (rf & 2) {
-    const ctx_r0 = \u0275\u0275nextContext();
-    \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind1(5, 1, ctx_r0.adaptiveResponse));
+    const grade_r6 = ctx.$implicit;
+    \u0275\u0275property("ngValue", grade_r6);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(grade_r6 === 0 ? "Kindergarten" : "Grade " + grade_r6);
   }
 }
-var AdaptiveComponent = class _AdaptiveComponent {
-  questionnaireService;
-  studentId = "student-001";
-  subject = "Mathematics";
-  difficulty = "MEDIUM";
-  adaptiveResponse;
-  message = "";
-  constructor(questionnaireService) {
-    this.questionnaireService = questionnaireService;
+function StudentManagerComponent_For_7_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12)(1, "div", 13)(2, "h3");
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275template(4, StudentManagerComponent_For_7_button_4_Template, 4, 0, "button", 14);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(5, "div", 15)(6, "input", 16);
+    \u0275\u0275twoWayListener("ngModelChange", function StudentManagerComponent_For_7_Template_input_ngModelChange_6_listener($event) {
+      const student_r5 = \u0275\u0275restoreView(_r1).$implicit;
+      \u0275\u0275twoWayBindingSet(student_r5.firstName, $event) || (student_r5.firstName = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "input", 17);
+    \u0275\u0275twoWayListener("ngModelChange", function StudentManagerComponent_For_7_Template_input_ngModelChange_7_listener($event) {
+      const student_r5 = \u0275\u0275restoreView(_r1).$implicit;
+      \u0275\u0275twoWayBindingSet(student_r5.lastName, $event) || (student_r5.lastName = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(8, "div", 18)(9, "input", 19);
+    \u0275\u0275twoWayListener("ngModelChange", function StudentManagerComponent_For_7_Template_input_ngModelChange_9_listener($event) {
+      const student_r5 = \u0275\u0275restoreView(_r1).$implicit;
+      \u0275\u0275twoWayBindingSet(student_r5.age, $event) || (student_r5.age = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(10, "select", 20);
+    \u0275\u0275twoWayListener("ngModelChange", function StudentManagerComponent_For_7_Template_select_ngModelChange_10_listener($event) {
+      const student_r5 = \u0275\u0275restoreView(_r1).$implicit;
+      \u0275\u0275twoWayBindingSet(student_r5.grade, $event) || (student_r5.grade = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementStart(11, "option", 21);
+    \u0275\u0275text(12, "Select Grade *");
+    \u0275\u0275elementEnd();
+    \u0275\u0275repeaterCreate(13, StudentManagerComponent_For_7_For_14_Template, 2, 2, "option", 22, \u0275\u0275repeaterTrackByIdentity);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(15, "input", 23);
+    \u0275\u0275twoWayListener("ngModelChange", function StudentManagerComponent_For_7_Template_input_ngModelChange_15_listener($event) {
+      const student_r5 = \u0275\u0275restoreView(_r1).$implicit;
+      \u0275\u0275twoWayBindingSet(student_r5.dateOfBirth, $event) || (student_r5.dateOfBirth = $event);
+      return \u0275\u0275resetView($event);
+    });
+    \u0275\u0275elementEnd()()();
   }
-  getNextAdaptive() {
-    const payload = {
-      studentId: this.studentId,
-      subject: this.subject,
-      targetDifficulty: this.difficulty
-    };
-    this.questionnaireService.nextAdaptive(payload).subscribe({
-      next: (res) => {
-        this.adaptiveResponse = res;
-        this.message = "\u2705 Adaptive questionnaire generated!";
+  if (rf & 2) {
+    const student_r5 = ctx.$implicit;
+    const \u0275$index_11_r3 = ctx.$index;
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275classProp("invalid-card", !ctx_r3.isStudentValid(student_r5));
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Student #", \u0275$index_11_r3 + 1);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", ctx_r3.students.length > 1);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("name", \u0275\u0275interpolate1("firstName-", \u0275$index_11_r3));
+    \u0275\u0275twoWayProperty("ngModel", student_r5.firstName);
+    \u0275\u0275advance();
+    \u0275\u0275property("name", \u0275\u0275interpolate1("lastName-", \u0275$index_11_r3));
+    \u0275\u0275twoWayProperty("ngModel", student_r5.lastName);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("name", \u0275\u0275interpolate1("age-", \u0275$index_11_r3));
+    \u0275\u0275twoWayProperty("ngModel", student_r5.age);
+    \u0275\u0275advance();
+    \u0275\u0275property("name", \u0275\u0275interpolate1("grade-", \u0275$index_11_r3));
+    \u0275\u0275twoWayProperty("ngModel", student_r5.grade);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngValue", null);
+    \u0275\u0275advance(2);
+    \u0275\u0275repeater(ctx_r3.validGrades);
+    \u0275\u0275advance(2);
+    \u0275\u0275property("name", \u0275\u0275interpolate1("dob-", \u0275$index_11_r3));
+    \u0275\u0275twoWayProperty("ngModel", student_r5.dateOfBirth);
+  }
+}
+function StudentManagerComponent_span_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r3 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1("Save and Continue (", ctx_r3.students.length, " Profiles)");
+  }
+}
+function StudentManagerComponent_span_18_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "span");
+    \u0275\u0275text(1, "Saving...");
+    \u0275\u0275elementEnd();
+  }
+}
+var StudentManagerComponent = class _StudentManagerComponent {
+  studentService;
+  router;
+  // List of students to be submitted
+  students = [];
+  // Model for the new student input form
+  newStudent = {
+    firstName: "",
+    lastName: "",
+    age: null,
+    grade: null,
+    dateOfBirth: ""
+  };
+  message = "";
+  loading = false;
+  // List of valid grades for a dropdown (e.g., K-12)
+  validGrades = Array.from({ length: 13 }, (_, i) => i);
+  // 0 (Kindergarten) to 12
+  constructor(studentService, router) {
+    this.studentService = studentService;
+    this.router = router;
+    this.addStudent();
+  }
+  /**
+   * Adds a new, empty student DTO to the list.
+   * It uses a deep copy of the empty template to prevent binding issues.
+   */
+  addStudent() {
+    this.students.push(__spreadValues({}, this.newStudent));
+  }
+  /**
+   * Removes a student from the list by index.
+   * @param index The index of the student to remove.
+   */
+  removeStudent(index) {
+    this.students.splice(index, 1);
+  }
+  /**
+   * Checks if a single student entry is valid.
+   */
+  isStudentValid(student) {
+    return !!student.firstName && !!student.lastName && (student.grade !== null && student.grade !== void 0) && // Check for grade explicitly
+    !!student.dateOfBirth;
+  }
+  /**
+   * Checks if the entire list of students is valid for submission.
+   */
+  isFormValid() {
+    if (this.students.length === 0)
+      return false;
+    return this.students.every((s) => this.isStudentValid(s));
+  }
+  /**
+   * Submits the list of valid students to the Spring Boot backend.
+   */
+  onSubmitStudents() {
+    if (!this.isFormValid()) {
+      this.message = "Please fill out all required fields for every student.";
+      return;
+    }
+    this.loading = true;
+    this.message = "Submitting profiles...";
+    const validStudents = this.students.filter((s) => this.isStudentValid(s));
+    this.studentService.saveStudents(validStudents).subscribe({
+      // FIX APPLIED HERE: Explicitly type 'savedStudents' as StudentDto[]
+      next: (savedStudents) => {
+        this.message = `${savedStudents.length} student profile(s) successfully created!`;
+        this.loading = false;
+        setTimeout(() => {
+          this.router.navigate(["/questionnaire/generate"]);
+        }, 1500);
       },
       error: (err) => {
-        this.message = "\u274C Failed: " + err.message;
+        console.error("Submission failed:", err);
+        this.message = `Error saving student profiles: ${err || "Check the console for details."}`;
+        this.loading = false;
       }
     });
   }
-  static \u0275fac = function AdaptiveComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _AdaptiveComponent)(\u0275\u0275directiveInject(QuestionnaireService));
+  // Helper for tracking in the ngFor loop
+  trackByFn(index, student) {
+    return index;
+  }
+  static \u0275fac = function StudentManagerComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _StudentManagerComponent)(\u0275\u0275directiveInject(StudentService), \u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AdaptiveComponent, selectors: [["app-adaptive-questionnaire"]], decls: 23, vars: 5, consts: [[1, "container"], ["name", "sid", 3, "ngModelChange", "ngModel"], ["name", "subject", 3, "ngModelChange", "ngModel"], ["name", "difficulty", 3, "ngModelChange", "ngModel"], ["value", "EASY"], ["value", "MEDIUM"], ["value", "HARD"], [3, "click"], [4, "ngIf"]], template: function AdaptiveComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _StudentManagerComponent, selectors: [["app-student-manager"]], decls: 19, vars: 6, consts: [[1, "student-manager-container"], [1, "description"], [1, "student-list"], [1, "student-card", 3, "invalid-card"], [1, "add-more-btn", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "24", "height", "24", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round"], ["d", "M12 5v14M5 12h14"], [1, "separator"], [1, "submission-area"], [1, "message"], [1, "submit-btn", 3, "click", "disabled"], [4, "ngIf"], [1, "student-card"], [1, "card-header"], ["class", "remove-btn", "title", "Remove student", 3, "click", 4, "ngIf"], [1, "form-group"], ["type", "text", "placeholder", "First Name", "required", "", 3, "ngModelChange", "ngModel", "name"], ["type", "text", "placeholder", "Last Name", "required", "", 3, "ngModelChange", "ngModel", "name"], [1, "form-group-triple"], ["type", "number", "placeholder", "Age", "min", "3", "max", "18", 3, "ngModelChange", "ngModel", "name"], ["required", "", 3, "ngModelChange", "ngModel", "name"], ["disabled", "", "selected", "", 3, "ngValue"], [3, "ngValue"], ["type", "date", "placeholder", "Date of Birth *", "required", "", 3, "ngModelChange", "ngModel", "name"], ["title", "Remove student", 1, "remove-btn", 3, "click"], ["xmlns", "http://www.w3.org/2000/svg", "width", "20", "height", "20", "viewBox", "0 0 24 24", "fill", "none", "stroke", "currentColor", "stroke-width", "2", "stroke-linecap", "round", "stroke-linejoin", "round"], ["d", "M18 6L6 18"], ["d", "M6 6l12 12"]], template: function StudentManagerComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "h2");
-      \u0275\u0275text(2, "Adaptive Questionnaire");
+      \u0275\u0275text(2, "Manage Student Profiles");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "label");
-      \u0275\u0275text(4, "Student ID:");
+      \u0275\u0275elementStart(3, "p", 1);
+      \u0275\u0275text(4, "Please add the profile for each child who will be using the application. You must enter at least one profile to continue.");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "input", 1);
-      \u0275\u0275twoWayListener("ngModelChange", function AdaptiveComponent_Template_input_ngModelChange_5_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.studentId, $event) || (ctx.studentId = $event);
-        return $event;
+      \u0275\u0275elementStart(5, "div", 2);
+      \u0275\u0275repeaterCreate(6, StudentManagerComponent_For_7_Template, 16, 20, "div", 3, ctx.trackByFn, true);
+      \u0275\u0275elementStart(8, "button", 4);
+      \u0275\u0275listener("click", function StudentManagerComponent_Template_button_click_8_listener() {
+        return ctx.addStudent();
       });
+      \u0275\u0275namespaceSVG();
+      \u0275\u0275elementStart(9, "svg", 5);
+      \u0275\u0275element(10, "path", 6);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "label");
-      \u0275\u0275text(7, "Subject:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(8, "input", 2);
-      \u0275\u0275twoWayListener("ngModelChange", function AdaptiveComponent_Template_input_ngModelChange_8_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.subject, $event) || (ctx.subject = $event);
-        return $event;
-      });
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "label");
-      \u0275\u0275text(10, "Difficulty:");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(11, "select", 3);
-      \u0275\u0275twoWayListener("ngModelChange", function AdaptiveComponent_Template_select_ngModelChange_11_listener($event) {
-        \u0275\u0275twoWayBindingSet(ctx.difficulty, $event) || (ctx.difficulty = $event);
-        return $event;
-      });
-      \u0275\u0275elementStart(12, "option", 4);
-      \u0275\u0275text(13, "EASY");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(14, "option", 5);
-      \u0275\u0275text(15, "MEDIUM");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(16, "option", 6);
-      \u0275\u0275text(17, "HARD");
+      \u0275\u0275text(11, " Add Another Student ");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(18, "button", 7);
-      \u0275\u0275listener("click", function AdaptiveComponent_Template_button_click_18_listener() {
-        return ctx.getNextAdaptive();
+      \u0275\u0275namespaceHTML();
+      \u0275\u0275element(12, "hr", 7);
+      \u0275\u0275elementStart(13, "div", 8)(14, "p", 9);
+      \u0275\u0275text(15);
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(16, "button", 10);
+      \u0275\u0275listener("click", function StudentManagerComponent_Template_button_click_16_listener() {
+        return ctx.onSubmitStudents();
       });
-      \u0275\u0275text(19, "Get Adaptive Questionnaire");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(20, "p");
-      \u0275\u0275text(21);
-      \u0275\u0275elementEnd();
-      \u0275\u0275template(22, AdaptiveComponent_div_22_Template, 6, 3, "div", 8);
-      \u0275\u0275elementEnd();
+      \u0275\u0275template(17, StudentManagerComponent_span_17_Template, 2, 1, "span", 11)(18, StudentManagerComponent_span_18_Template, 2, 0, "span", 11);
+      \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(5);
-      \u0275\u0275twoWayProperty("ngModel", ctx.studentId);
-      \u0275\u0275advance(3);
-      \u0275\u0275twoWayProperty("ngModel", ctx.subject);
-      \u0275\u0275advance(3);
-      \u0275\u0275twoWayProperty("ngModel", ctx.difficulty);
-      \u0275\u0275advance(10);
+      \u0275\u0275advance(6);
+      \u0275\u0275repeater(ctx.students);
+      \u0275\u0275advance(8);
+      \u0275\u0275classProp("error", ctx.message.includes("Error"));
+      \u0275\u0275advance();
       \u0275\u0275textInterpolate(ctx.message);
       \u0275\u0275advance();
-      \u0275\u0275property("ngIf", ctx.adaptiveResponse);
+      \u0275\u0275property("disabled", ctx.loading || !ctx.isFormValid());
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", !ctx.loading);
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.loading);
     }
-  }, dependencies: [CommonModule, NgIf, FormsModule, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, SelectControlValueAccessor, NgControlStatus, NgModel, JsonPipe], styles: ["\n\n.container[_ngcontent-%COMP%] {\n  max-width: 600px;\n  margin: auto;\n}\ninput[_ngcontent-%COMP%], \nselect[_ngcontent-%COMP%], \nbutton[_ngcontent-%COMP%] {\n  margin-bottom: 10px;\n  padding: 6px;\n}\n/*# sourceMappingURL=adaptive.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, FormsModule, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, NumberValueAccessor, SelectControlValueAccessor, NgControlStatus, RequiredValidator, MinValidator, MaxValidator, NgModel, HttpClientModule], styles: ["\n\n[_ngcontent-%COMP%]:root {\n  --primary-color: #007bff;\n  --dark-text: #343a40;\n  --light-bg: #f8f9fa;\n  --card-bg: white;\n  --border-color: #ced4da;\n  --danger-color: #dc3545;\n}\n.student-manager-container[_ngcontent-%COMP%] {\n  max-width: 800px;\n  margin: 2rem auto;\n  padding: 2rem;\n  background-color: var(--light-bg);\n  border-radius: 12px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);\n}\n.student-manager-container[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  text-align: center;\n  color: var(--primary-color);\n  margin-bottom: 0.5rem;\n  font-size: 2rem;\n}\n.description[_ngcontent-%COMP%] {\n  text-align: center;\n  color: var(--dark-text);\n  margin-bottom: 2rem;\n  font-size: 1rem;\n}\n.student-card[_ngcontent-%COMP%] {\n  background-color: var(--card-bg);\n  padding: 1.5rem;\n  margin-bottom: 1.5rem;\n  border-radius: 10px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);\n  border: 1px solid var(--border-color);\n  transition: border-color 0.3s, box-shadow 0.3s;\n}\n.invalid-card[_ngcontent-%COMP%] {\n  border-left: 5px solid var(--danger-color);\n}\n.card-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 1rem;\n}\n.card-header[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  color: var(--dark-text);\n  font-size: 1.25rem;\n}\n.form-group[_ngcontent-%COMP%], \n.form-group-triple[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n.form-group[_ngcontent-%COMP%]   input[_ngcontent-%COMP%], \n.form-group-triple[_ngcontent-%COMP%]   input[_ngcontent-%COMP%], \n.form-group-triple[_ngcontent-%COMP%]   select[_ngcontent-%COMP%] {\n  flex-grow: 1;\n  padding: 0.75rem;\n  border: 1px solid var(--border-color);\n  border-radius: 8px;\n  font-size: 1rem;\n  transition: border-color 0.3s;\n  min-width: 0;\n}\n.form-group[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus, \n.form-group-triple[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:focus, \n.form-group-triple[_ngcontent-%COMP%]   select[_ngcontent-%COMP%]:focus {\n  border-color: var(--primary-color);\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);\n}\n.remove-btn[_ngcontent-%COMP%] {\n  background: transparent;\n  border: none;\n  color: var(--danger-color);\n  cursor: pointer;\n  padding: 0.25rem;\n  border-radius: 4px;\n  transition: background-color 0.2s;\n}\n.remove-btn[_ngcontent-%COMP%]:hover {\n  background-color: rgba(220, 53, 69, 0.1);\n}\n.add-more-btn[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.75rem;\n  background-color: #f0f0f0;\n  color: var(--dark-text);\n  border: 1px dashed var(--border-color);\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n  transition: background-color 0.3s, color 0.3s;\n}\n.add-more-btn[_ngcontent-%COMP%]:hover {\n  background-color: #e0e0e0;\n  color: var(--primary-color);\n  border-color: var(--primary-color);\n}\n.add-more-btn[_ngcontent-%COMP%]   svg[_ngcontent-%COMP%] {\n  margin-right: 0.5rem;\n}\n.separator[_ngcontent-%COMP%] {\n  border: 0;\n  height: 1px;\n  background-color: var(--border-color);\n  margin: 2rem 0;\n}\n.submission-area[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.message[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n  color: green;\n  font-weight: 500;\n}\n.message.error[_ngcontent-%COMP%] {\n  color: var(--danger-color);\n}\n.submit-btn[_ngcontent-%COMP%] {\n  padding: 1rem 2rem;\n  background-color: var(--primary-color);\n  color: white;\n  border: none;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  font-weight: bold;\n  cursor: pointer;\n  transition: background-color 0.3s, opacity 0.3s;\n  width: 100%;\n  max-width: 300px;\n}\n.submit-btn[_ngcontent-%COMP%]:hover:not(:disabled) {\n  background-color: #0056b3;\n}\n.submit-btn[_ngcontent-%COMP%]:disabled {\n  background-color: #a2cffd;\n  cursor: not-allowed;\n  opacity: 0.7;\n}\n@media (max-width: 600px) {\n  .form-group[_ngcontent-%COMP%], \n   .form-group-triple[_ngcontent-%COMP%] {\n    flex-direction: column;\n    gap: 0.5rem;\n  }\n}\n/*# sourceMappingURL=student-manager-component.css.map */"] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AdaptiveComponent, [{
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(StudentManagerComponent, [{
     type: Component,
-    args: [{ selector: "app-adaptive-questionnaire", standalone: true, imports: [CommonModule, FormsModule, JsonPipe], template: '<div class="container">\n  <h2>Adaptive Questionnaire</h2>\n\n  <label>Student ID:</label>\n  <input [(ngModel)]="studentId" name="sid" />\n\n  <label>Subject:</label>\n  <input [(ngModel)]="subject" name="subject" />\n\n  <label>Difficulty:</label>\n  <select [(ngModel)]="difficulty" name="difficulty">\n    <option value="EASY">EASY</option>\n    <option value="MEDIUM">MEDIUM</option>\n    <option value="HARD">HARD</option>\n  </select>\n\n  <button (click)="getNextAdaptive()">Get Adaptive Questionnaire</button>\n\n  <p>{{ message }}</p>\n\n  <div *ngIf="adaptiveResponse">\n    <h3>Adaptive Questionnaire</h3>\n    <pre>{{ adaptiveResponse | json }}</pre>\n  </div>\n</div>\n', styles: ["/* src/app/components/questionnaire/adaptive/adaptive.component.css */\n.container {\n  max-width: 600px;\n  margin: auto;\n}\ninput,\nselect,\nbutton {\n  margin-bottom: 10px;\n  padding: 6px;\n}\n/*# sourceMappingURL=adaptive.component.css.map */\n"] }]
-  }], () => [{ type: QuestionnaireService }], null);
+    args: [{ selector: "app-student-manager", standalone: true, imports: [CommonModule, FormsModule, HttpClientModule], template: `<div class="student-manager-container">\r
+  <h2>Manage Student Profiles</h2>\r
+  <p class="description">Please add the profile for each child who will be using the application. You must enter at least one profile to continue.</p>\r
+\r
+  <!-- Student List Display & Input Forms -->\r
+  <div class="student-list">\r
+    @for (student of students; track trackByFn(i, student); let i = $index) {\r
+      <div class="student-card" [class.invalid-card]="!isStudentValid(student)">\r
+        <div class="card-header">\r
+          <h3>Student #{{ i + 1 }}</h3>\r
+          <button\r
+            *ngIf="students.length > 1"\r
+            class="remove-btn"\r
+            (click)="removeStudent(i)"\r
+            title="Remove student"\r
+          >\r
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>\r
+          </button>\r
+        </div>\r
+\r
+        <div class="form-group">\r
+          <input\r
+            type="text"\r
+            placeholder="First Name"\r
+            [(ngModel)]="student.firstName"\r
+            name="firstName-{{ i }}"\r
+            required\r
+          />\r
+          <input\r
+            type="text"\r
+            placeholder="Last Name"\r
+            [(ngModel)]="student.lastName"\r
+            name="lastName-{{ i }}"\r
+            required\r
+          />\r
+        </div>\r
+\r
+        <div class="form-group-triple">\r
+          <input\r
+            type="number"\r
+            placeholder="Age"\r
+            [(ngModel)]="student.age"\r
+            name="age-{{ i }}"\r
+            min="3"\r
+            max="18"\r
+          />\r
+          <select\r
+            [(ngModel)]="student.grade"\r
+            name="grade-{{ i }}"\r
+            required\r
+          >\r
+            <option [ngValue]="null" disabled selected>Select Grade *</option>\r
+            @for (grade of validGrades; track grade) {\r
+              <option [ngValue]="grade">{{ grade === 0 ? 'Kindergarten' : 'Grade ' + grade }}</option>\r
+            }\r
+          </select>\r
+          <input\r
+            type="date"\r
+            placeholder="Date of Birth *"\r
+            [(ngModel)]="student.dateOfBirth"\r
+            name="dob-{{ i }}"\r
+            required\r
+          />\r
+        </div>\r
+      </div>\r
+    }\r
+\r
+    <!-- Button to Add More Students -->\r
+    <button class="add-more-btn" (click)="addStudent()">\r
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>\r
+      Add Another Student\r
+    </button>\r
+  </div>\r
+\r
+  <hr class="separator">\r
+\r
+  <!-- Submission Area -->\r
+  <div class="submission-area">\r
+    <p class="message" [class.error]="message.includes('Error')">{{ message }}</p>\r
+\r
+    <button\r
+      class="submit-btn"\r
+      (click)="onSubmitStudents()"\r
+      [disabled]="loading || !isFormValid()"\r
+    >\r
+      <span *ngIf="!loading">Save and Continue ({{ students.length }} Profiles)</span>\r
+      <span *ngIf="loading">Saving...</span>\r
+    </button>\r
+  </div>\r
+</div>\r
+`, styles: ["/* src/app/components/student-manager/student-manager-component.css */\n:root {\n  --primary-color: #007bff;\n  --dark-text: #343a40;\n  --light-bg: #f8f9fa;\n  --card-bg: white;\n  --border-color: #ced4da;\n  --danger-color: #dc3545;\n}\n.student-manager-container {\n  max-width: 800px;\n  margin: 2rem auto;\n  padding: 2rem;\n  background-color: var(--light-bg);\n  border-radius: 12px;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);\n}\n.student-manager-container h2 {\n  text-align: center;\n  color: var(--primary-color);\n  margin-bottom: 0.5rem;\n  font-size: 2rem;\n}\n.description {\n  text-align: center;\n  color: var(--dark-text);\n  margin-bottom: 2rem;\n  font-size: 1rem;\n}\n.student-card {\n  background-color: var(--card-bg);\n  padding: 1.5rem;\n  margin-bottom: 1.5rem;\n  border-radius: 10px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);\n  border: 1px solid var(--border-color);\n  transition: border-color 0.3s, box-shadow 0.3s;\n}\n.invalid-card {\n  border-left: 5px solid var(--danger-color);\n}\n.card-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 1rem;\n}\n.card-header h3 {\n  color: var(--dark-text);\n  font-size: 1.25rem;\n}\n.form-group,\n.form-group-triple {\n  display: flex;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n.form-group input,\n.form-group-triple input,\n.form-group-triple select {\n  flex-grow: 1;\n  padding: 0.75rem;\n  border: 1px solid var(--border-color);\n  border-radius: 8px;\n  font-size: 1rem;\n  transition: border-color 0.3s;\n  min-width: 0;\n}\n.form-group input:focus,\n.form-group-triple input:focus,\n.form-group-triple select:focus {\n  border-color: var(--primary-color);\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);\n}\n.remove-btn {\n  background: transparent;\n  border: none;\n  color: var(--danger-color);\n  cursor: pointer;\n  padding: 0.25rem;\n  border-radius: 4px;\n  transition: background-color 0.2s;\n}\n.remove-btn:hover {\n  background-color: rgba(220, 53, 69, 0.1);\n}\n.add-more-btn {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  padding: 0.75rem;\n  background-color: #f0f0f0;\n  color: var(--dark-text);\n  border: 1px dashed var(--border-color);\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n  transition: background-color 0.3s, color 0.3s;\n}\n.add-more-btn:hover {\n  background-color: #e0e0e0;\n  color: var(--primary-color);\n  border-color: var(--primary-color);\n}\n.add-more-btn svg {\n  margin-right: 0.5rem;\n}\n.separator {\n  border: 0;\n  height: 1px;\n  background-color: var(--border-color);\n  margin: 2rem 0;\n}\n.submission-area {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.message {\n  margin-bottom: 1rem;\n  color: green;\n  font-weight: 500;\n}\n.message.error {\n  color: var(--danger-color);\n}\n.submit-btn {\n  padding: 1rem 2rem;\n  background-color: var(--primary-color);\n  color: white;\n  border: none;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  font-weight: bold;\n  cursor: pointer;\n  transition: background-color 0.3s, opacity 0.3s;\n  width: 100%;\n  max-width: 300px;\n}\n.submit-btn:hover:not(:disabled) {\n  background-color: #0056b3;\n}\n.submit-btn:disabled {\n  background-color: #a2cffd;\n  cursor: not-allowed;\n  opacity: 0.7;\n}\n@media (max-width: 600px) {\n  .form-group,\n  .form-group-triple {\n    flex-direction: column;\n    gap: 0.5rem;\n  }\n}\n/*# sourceMappingURL=student-manager-component.css.map */\n"] }]
+  }], () => [{ type: StudentService }, { type: Router }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AdaptiveComponent, { className: "AdaptiveComponent", filePath: "src/app/components/questionnaire/adaptive/adaptive.component.ts", lineNumber: 13 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(StudentManagerComponent, { className: "StudentManagerComponent", filePath: "src/app/components/student-manager/student-manager-component.ts", lineNumber: 16 });
 })();
 
 // src/app/app-routing.module.ts
@@ -47104,7 +47331,7 @@ var routes = [
   { path: "register", component: RegisterComponent },
   { path: "verify-otp", component: VerifyOtpComponent },
   { path: "questionnaire/generate", component: GenerateComponent },
-  { path: "questionnaire/adaptive", component: AdaptiveComponent },
+  { path: "students", component: StudentManagerComponent },
   { path: "**", redirectTo: "login" }
 ];
 var AppRoutingModule = class _AppRoutingModule {
@@ -47179,30 +47406,30 @@ var AppComponent = class _AppComponent {
   static \u0275fac = function AppComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _AppComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: false, decls: 11, vars: 0, consts: [[1, "navbar"], ["routerLink", "/login"], ["routerLink", "/register"], ["routerLink", "/questionnaire/generate"], ["routerLink", "/questionnaire/adaptive"]], template: function AppComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _AppComponent, selectors: [["app-root"]], standalone: false, decls: 13, vars: 0, consts: [[1, "app-header"], [1, "brand-name"], ["routerLink", "/", 1, "logo-link"], [1, "navbar"], ["routerLink", "/login", "routerLinkActive", "active"], ["routerLink", "/register", "routerLinkActive", "active"], ["routerLink", "/questionnaire/generate", "routerLinkActive", "active"], [1, "content-container"]], template: function AppComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "nav", 0)(1, "a", 1);
-      \u0275\u0275text(2, "Login");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "a", 2);
-      \u0275\u0275text(4, "Register");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "a", 3);
-      \u0275\u0275text(6, "Generate");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(7, "a", 4);
-      \u0275\u0275text(8, "Adaptive");
+      \u0275\u0275elementStart(0, "header", 0)(1, "div", 1)(2, "a", 2);
+      \u0275\u0275text(3, " ADAPTIVE LEARNING ");
       \u0275\u0275elementEnd()();
-      \u0275\u0275elementStart(9, "main");
-      \u0275\u0275element(10, "router-outlet");
+      \u0275\u0275elementStart(4, "nav", 3)(5, "a", 4);
+      \u0275\u0275text(6, "Login");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(7, "a", 5);
+      \u0275\u0275text(8, "Register");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(9, "a", 6);
+      \u0275\u0275text(10, "Generate");
+      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(11, "main", 7);
+      \u0275\u0275element(12, "router-outlet");
       \u0275\u0275elementEnd();
     }
-  }, dependencies: [RouterOutlet, RouterLink], encapsulation: 2 });
+  }, dependencies: [RouterOutlet, RouterLink, RouterLinkActive], styles: ["\n\n[_ngcontent-%COMP%]:root {\n  --primary-color: #007bff;\n  --secondary-color: #6c757d;\n  --light-bg: #f8f9fa;\n  --dark-text: #343a40;\n  --navbar-height: 60px;\n}\n*[_ngcontent-%COMP%], \n*[_ngcontent-%COMP%]::before, \n*[_ngcontent-%COMP%]::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nbody[_ngcontent-%COMP%] {\n  font-family: Arial, sans-serif;\n  line-height: 1.6;\n  background-color: var(--light-bg);\n  color: var(--dark-text);\n}\n.app-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: var(--dark-text);\n  padding: 0 1.5rem;\n  height: var(--navbar-height);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  position: sticky;\n  top: 0;\n  z-index: 1000;\n}\n.app-header[_ngcontent-%COMP%]   .brand-name[_ngcontent-%COMP%]   .logo-link[_ngcontent-%COMP%] {\n  color: #000;\n  font-size: 1.5rem;\n  font-weight: bold;\n  text-decoration: none;\n}\n.navbar[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  margin: 0;\n}\n.app-header[_ngcontent-%COMP%]   .navbar[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: #000;\n  background-color: transparent;\n  text-decoration: none;\n  font-weight: 500;\n  font-size: 1rem;\n  padding: 0.5rem 1rem;\n  margin-left: 0.5rem;\n  border-radius: 4px;\n  transition: background-color 0.3s ease, color 0.3s ease;\n}\n.app-header[_ngcontent-%COMP%]   .navbar[_ngcontent-%COMP%]:hover   a[_ngcontent-%COMP%] {\n  color: white;\n  transition: color 0.3s ease;\n}\n.app-header[_ngcontent-%COMP%]   .navbar[_ngcontent-%COMP%]:hover   a[_ngcontent-%COMP%]:not(:hover) {\n  color: #000;\n  background-color: transparent;\n  transition: color 0.3s ease;\n}\n.app-header[_ngcontent-%COMP%]   .navbar[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover, \n.app-header[_ngcontent-%COMP%]   .navbar[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:focus, \n.app-header[_ngcontent-%COMP%]   .navbar[_ngcontent-%COMP%]   a.active[_ngcontent-%COMP%] {\n  background-color: var(--primary-color);\n  color: blue;\n  outline: none;\n}\n.content-container[_ngcontent-%COMP%] {\n  margin-top: 1.5rem;\n  padding: 2rem 1.5rem;\n  min-height: calc(100vh - var(--navbar-height) - 1.5rem);\n  width: 100%;\n  max-width: 1200px;\n  margin-left: auto;\n  margin-right: auto;\n}\nmain[_ngcontent-%COMP%] {\n  margin-top: 1.5rem;\n  padding: 2rem 1.5rem;\n  min-height: calc(100vh - var(--navbar-height) - 1.5rem);\n  width: 100%;\n  max-width: 1200px;\n  margin-left: auto;\n  margin-right: auto;\n}\nrouter-outlet[_ngcontent-%COMP%] {\n  display: block;\n}\n/*# sourceMappingURL=app.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
-    args: [{ selector: "app-root", standalone: false, template: '<nav class="navbar">\n  <a routerLink="/login">Login</a>\n  <a routerLink="/register">Register</a>\n  <a routerLink="/questionnaire/generate">Generate</a>\n  <a routerLink="/questionnaire/adaptive">Adaptive</a>\n</nav>\n\n<main>\n  <router-outlet></router-outlet>\n</main>\n' }]
+    args: [{ selector: "app-root", standalone: false, template: '<header class="app-header">\n  <div class="brand-name">\n    <a routerLink="/" class="logo-link">\n      ADAPTIVE LEARNING\n    </a>\n  </div>\n\n  <nav class="navbar">\n    <a routerLink="/login" routerLinkActive="active">Login</a>\n    <a routerLink="/register" routerLinkActive="active">Register</a>\n    <a routerLink="/questionnaire/generate" routerLinkActive="active">Generate</a>\n  </nav>\n</header>\n\n<main class="content-container">\n  <router-outlet></router-outlet>\n</main>\n', styles: ["/* src/app/app.component.css */\n:root {\n  --primary-color: #007bff;\n  --secondary-color: #6c757d;\n  --light-bg: #f8f9fa;\n  --dark-text: #343a40;\n  --navbar-height: 60px;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nbody {\n  font-family: Arial, sans-serif;\n  line-height: 1.6;\n  background-color: var(--light-bg);\n  color: var(--dark-text);\n}\n.app-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: var(--dark-text);\n  padding: 0 1.5rem;\n  height: var(--navbar-height);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  position: sticky;\n  top: 0;\n  z-index: 1000;\n}\n.app-header .brand-name .logo-link {\n  color: #000;\n  font-size: 1.5rem;\n  font-weight: bold;\n  text-decoration: none;\n}\n.navbar {\n  display: flex;\n  align-items: center;\n  padding: 0;\n  margin: 0;\n}\n.app-header .navbar a {\n  color: #000;\n  background-color: transparent;\n  text-decoration: none;\n  font-weight: 500;\n  font-size: 1rem;\n  padding: 0.5rem 1rem;\n  margin-left: 0.5rem;\n  border-radius: 4px;\n  transition: background-color 0.3s ease, color 0.3s ease;\n}\n.app-header .navbar:hover a {\n  color: white;\n  transition: color 0.3s ease;\n}\n.app-header .navbar:hover a:not(:hover) {\n  color: #000;\n  background-color: transparent;\n  transition: color 0.3s ease;\n}\n.app-header .navbar a:hover,\n.app-header .navbar a:focus,\n.app-header .navbar a.active {\n  background-color: var(--primary-color);\n  color: blue;\n  outline: none;\n}\n.content-container {\n  margin-top: 1.5rem;\n  padding: 2rem 1.5rem;\n  min-height: calc(100vh - var(--navbar-height) - 1.5rem);\n  width: 100%;\n  max-width: 1200px;\n  margin-left: auto;\n  margin-right: auto;\n}\nmain {\n  margin-top: 1.5rem;\n  padding: 2rem 1.5rem;\n  min-height: calc(100vh - var(--navbar-height) - 1.5rem);\n  width: 100%;\n  max-width: 1200px;\n  margin-left: auto;\n  margin-right: auto;\n}\nrouter-outlet {\n  display: block;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
   }], () => [], null);
 })();
 (() => {

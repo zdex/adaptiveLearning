@@ -1,37 +1,100 @@
+/* --- Register Component Styles --- */
 .register-container {
-  max-width: 400px;
-  margin: 60px auto;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 450px; /* Slightly wider to accommodate more input fields */
+  margin: 4rem auto;
+  background-color: white;
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h2 {
+  color: var(--dark-text);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+/* --- Form Styling --- */
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .register-container input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
 
+.register-container input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* --- Button Styling (Consistent with Login Component) --- */
 .register-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #0078d4;
-  color: white;
+  /* Default: Light Blue Background */
+  background-color: #a2cffd;
+  /* Text: Dark color for contrast on light background */
+  color: var(--dark-text);
+  padding: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s, opacity 0.3s, color 0.3s;
+}
+
+.register-container button:hover:not(:disabled) {
+  /* Hover: Dark Blue Background */
+  background-color: #0056b3;
+  /* Text: White for contrast on dark background */
+  color: white;
 }
 
 .register-container button:disabled {
-  background-color: #aaa;
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #a2cffd;
+  color: var(--dark-text);
 }
 
-.message {
+/* --- Message Styling (for error/success messages) --- */
+.register-container .message {
+  margin-top: 1rem;
   color: red;
-  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* --- Target "Login here" link (The requested styling) --- */
+.register-container p a {
+  color: var(--primary-color); /* Use the primary color to make it stand out */
+  text-decoration: none; /* Remove underline by default */
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.register-container p a:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline; /* Add underline on hover for clear interaction */
+}
+
+/* Style for the general paragraph containing the link */
+.register-container p {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
 }

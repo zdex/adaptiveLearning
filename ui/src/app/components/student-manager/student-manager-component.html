@@ -1,0 +1,90 @@
+<div class="student-manager-container">
+  <h2>Manage Student Profiles</h2>
+  <p class="description">Please add the profile for each child who will be using the application. You must enter at least one profile to continue.</p>
+
+  <!-- Student List Display & Input Forms -->
+  <div class="student-list">
+    @for (student of students; track trackByFn(i, student); let i = $index) {
+      <div class="student-card" [class.invalid-card]="!isStudentValid(student)">
+        <div class="card-header">
+          <h3>Student #{{ i + 1 }}</h3>
+          <button
+            *ngIf="students.length > 1"
+            class="remove-btn"
+            (click)="removeStudent(i)"
+            title="Remove student"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="First Name"
+            [(ngModel)]="student.firstName"
+            name="firstName-{{ i }}"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            [(ngModel)]="student.lastName"
+            name="lastName-{{ i }}"
+            required
+          />
+        </div>
+
+        <div class="form-group-triple">
+          <input
+            type="number"
+            placeholder="Age"
+            [(ngModel)]="student.age"
+            name="age-{{ i }}"
+            min="3"
+            max="18"
+          />
+          <select
+            [(ngModel)]="student.grade"
+            name="grade-{{ i }}"
+            required
+          >
+            <option [ngValue]="null" disabled selected>Select Grade *</option>
+            @for (grade of validGrades; track grade) {
+              <option [ngValue]="grade">{{ grade === 0 ? 'Kindergarten' : 'Grade ' + grade }}</option>
+            }
+          </select>
+          <input
+            type="date"
+            placeholder="Date of Birth *"
+            [(ngModel)]="student.dateOfBirth"
+            name="dob-{{ i }}"
+            required
+          />
+        </div>
+      </div>
+    }
+
+    <!-- Button to Add More Students -->
+    <button class="add-more-btn" (click)="addStudent()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+      Add Another Student
+    </button>
+  </div>
+
+  <hr class="separator">
+
+  <!-- Submission Area -->
+  <div class="submission-area">
+    <p class="message" [class.error]="message.includes('Error')">{{ message }}</p>
+
+    <button
+      class="submit-btn"
+      (click)="onSubmitStudents()"
+      [disabled]="loading || !isFormValid()"
+    >
+      <span *ngIf="!loading">Save and Continue ({{ students.length }} Profiles)</span>
+      <span *ngIf="loading">Saving...</span>
+    </button>
+  </div>
+</div>

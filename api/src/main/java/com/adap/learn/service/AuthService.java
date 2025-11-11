@@ -3,7 +3,7 @@ package com.adap.learn.service;
 import com.adap.learn.dto.AuthRequest;
 import com.adap.learn.dto.AuthResponse;
 import com.adap.learn.dto.RegisterRequest;
-import com.adap.learn.model.Student;
+import com.adap.learn.model.User; // Use User model
 import com.adap.learn.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,14 +33,10 @@ public class AuthService {
     }
 
     /**
-     * Register a new user and return a JWT token
+     * Register a new user (parent/account owner)
      */
     public AuthResponse register(RegisterRequest request) {
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already registered.");
-        }
-
-        Student user = Student.builder()
+        User user = User.builder() // Changed from Student to User
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
@@ -72,15 +68,17 @@ public class AuthService {
     }
 
     /**
-     * Get current logged-in user info from token
+     * Get current logged-in user (parent/account owner) info from token
      */
-    public Student getCurrentUser(String authHeader) {
+    public User getAuthenticatedUser(String authHeader) { // *** FIX: Changed return type to User ***
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new RuntimeException("Invalid Authorization header");
         }
 
         String token = authHeader.substring(7);
         String email = jwtService.extractUsername(token);
+
+        // This correctly finds the User (Parent) account by email.
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }

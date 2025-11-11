@@ -1,0 +1,124 @@
+/* Global Reset and Box Sizing */
+:root {
+  --primary-color: #007bff; /* Blue */
+  --secondary-color: #6c757d; /* Gray */
+  --light-bg: #f8f9fa; /* Light Gray/Off-white */
+  --dark-text: #343a40; /* Dark Gray */
+  --navbar-height: 60px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+}
+
+
+/* --- Header Styling --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--dark-text);
+  padding: 0 1.5rem;
+  height: var(--navbar-height);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* --- Brand Name Styling --- */
+.app-header .brand-name .logo-link {
+  color: #000; /* Currently black for troubleshooting */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* --- Navigation Menu Container (nested inside app-header) --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Default Link Styling --- */
+.app-header .navbar a {
+  /* Default color remains black for troubleshooting visibility */
+  color: #000;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Revised Hover Logic --- */
+
+/* 1. When the mouse enters the .navbar, set ALL links to a distinct color (e.g., White) */
+.app-header .navbar:hover a {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+/* 2. When the mouse is over the .navbar, target all links that are NOT being hovered over. */
+.app-header .navbar:hover a:not(:hover) {
+  color: #000; /* Force non-hovered links back to black */
+  background-color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 3. Style the currently hovered link to be highlighted. */
+.app-header .navbar a:hover,
+.app-header .navbar a:focus,
+.app-header .navbar a.active {
+  background-color: var(--primary-color);
+  color: blue; /* Ensure text is white against the blue background */
+  outline: none;
+}
+
+/* --- Main Content Styling (Adjusted) --- */
+.content-container {
+  /* *** NEW: Adds space below the sticky header *** */
+  margin-top: 1.5rem;
+
+  padding: 2rem 1.5rem;
+  /* min-height calculation is adjusted to account for the new margin-top */
+  min-height: calc(100vh - var(--navbar-height) - 1.5rem);
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto; /* Use auto for left/right to center it */
+  margin-right: auto; /* Use auto for left/right to center it */
+}
+
+/* --- Main Content Styling (Old 'main' block - removing redundancy and focusing on .content-container) --- */
+/* You should remove this block if your HTML only uses .content-container on the main tag. */
+main {
+  /* *** NEW: Adds space below the sticky header *** */
+  margin-top: 1.5rem;
+
+  padding: 2rem 1.5rem; /* Padding around the main content area */
+  /* Account for the sticky navbar height and new margin */
+  min-height: calc(100vh - var(--navbar-height) - 1.5rem);
+  width: 100%;
+  max-width: 1200px; /* Limits the width for better readability on large screens */
+  margin-left: auto; /* Centers the main content area */
+  margin-right: auto; /* Centers the main content area */
+}
+
+/* Style the router outlet container */
+router-outlet {
+  display: block; /* Ensures it acts as a block-level container */
+}
