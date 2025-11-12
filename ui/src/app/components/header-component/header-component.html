@@ -1,53 +1,55 @@
 <header class="app-header">
   <div class="content-container header-content">
     <div class="logo">
-      <!-- Link to the default landing page for logged-in users (e.g., student management) -->
-      <a routerLink="/students/manage">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="feather feather-book-open">
-          <path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
+      <!-- Link to a parent/student dashboard or student management page -->
+      <a routerLink="/dashboard">
+        <!-- SVG for a book or learning symbol -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg>
         Adaptive Learn
       </a>
     </div>
 
     <nav class="navbar">
-      <!-- Show Login and Register links ONLY if not logged in -->
-      <ng-container *ngIf="(isLoggedIn$ | async) === false">
-        <a routerLink="/login">Login</a>
-        <a routerLink="/register">Register</a>
-      </ng-container>
-
-      <!-- DROPDOWN FOR STUDENTS -->
+      <!-- Student Dropdown (Visible only when logged in and students are loaded) -->
       <ng-container *ngIf="isLoggedIn$ | async">
-        <div class="dropdown">
-          <button class="dropbtn">
-            Parent
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+        <div class="student-dropdown-container" (click)="toggleDropdown()">
+          <button class="dropdown-toggle" [class.open]="isDropdownOpen">
+            <!-- Display selected student name or a default message -->
+            <span class="truncate-text">{{ selectedStudent ? selectedStudent.firstName : 'Select Student' }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="dropdown-content">
-            <hr>
-            <!-- Dynamically generated student links -->
-            <a *ngFor="let student of students" (click)="onSelectStudent(student.studentId)">
-              {{ student.fullName }}
+
+          <div class="dropdown-menu" [class.show]="isDropdownOpen && students.length > 0">
+            <a *ngFor="let student of students"
+               class="dropdown-item"
+               [class.active]="student === selectedStudent"
+               (click)="selectStudent(student); $event.stopPropagation()">
+              {{ student.firstName + ' ' +student.lastName }}
             </a>
-            <hr>
-            <a routerLink="/students/add">Add New Student</a>
+            <!-- Link to manage students (create new, edit, etc.) -->
+            <div class="dropdown-divider"></div>
+            <a routerLink="/students/manage" class="dropdown-item dropdown-manage-link" (click)="$event.stopPropagation()">
+              Manage Students
+            </a>
           </div>
         </div>
       </ng-container>
 
-      <!-- Show application links -->
-      <a routerLink="/questionnaire/generate">Generate</a>
 
-      <!-- Show Logout link ONLY if logged in -->
+      <!-- General Links - Visible when logged in -->
       <ng-container *ngIf="isLoggedIn$ | async">
-        <!-- Call the logout method on click -->
+        <a routerLink="/questionnaire/generate" routerLinkActive="active-link">Generate</a>
+        <a routerLink="/questionnaire/adaptive" routerLinkActive="active-link">Adaptive</a>
+      </ng-container>
+
+      <!-- Auth Links - Visible only if NOT logged in -->
+      <ng-container *ngIf="(isLoggedIn$ | async) === false">
+        <a routerLink="/login" routerLinkActive="active-link">Login</a>
+        <a routerLink="/register" routerLinkActive="active-link">Register</a>
+      </ng-container>
+
+      <!-- Logout link ONLY if logged in -->
+      <ng-container *ngIf="isLoggedIn$ | async">
         <a (click)="onLogout()" class="logout-link">Logout</a>
       </ng-container>
     </nav>

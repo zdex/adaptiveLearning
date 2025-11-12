@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // IMPORTANT: Import both StudentService and StudentDto
-import { StudentService, StudentDto } from '../../services/StudentService';
+import { StudentService, StudentDTO } from '../../services/StudentService';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -16,14 +16,14 @@ import { Router } from '@angular/router';
 export class StudentManagerComponent {
 
   // List of students to be submitted
-  students: StudentDto[] = [];
+  students: StudentDTO[] = [];
 
   // Model for the new student input form
-  newStudent: StudentDto = {
+  newStudent: StudentDTO = {
     firstName: '',
     lastName: '',
-    age: null,
-    grade: null,
+    age: 0,
+    grade: '',
     dateOfBirth: ''
   };
 
@@ -60,7 +60,7 @@ export class StudentManagerComponent {
   /**
    * Checks if a single student entry is valid.
    */
-  isStudentValid(student: StudentDto): boolean {
+  isStudentValid(student: StudentDTO): boolean {
     return !!student.firstName &&
       !!student.lastName &&
       (student.grade !== null && student.grade !== undefined) && // Check for grade explicitly
@@ -94,7 +94,7 @@ export class StudentManagerComponent {
     // @ts-ignore
     this.studentService.saveStudents(validStudents).subscribe({
       // FIX APPLIED HERE: Explicitly type 'savedStudents' as StudentDto[]
-      next: (savedStudents: StudentDto[]) => {
+      next: (savedStudents: StudentDTO[]) => {
         this.message = `${savedStudents.length} student profile(s) successfully created!`;
         this.loading = false;
         // Navigate to the next step
@@ -102,7 +102,7 @@ export class StudentManagerComponent {
           this.router.navigate(['/questionnaire/generate']);
         }, 1500);
       },
-      error: (err) => {
+      error: (err:string) => {
         console.error('Submission failed:', err);
         this.message = `Error saving student profiles: ${err || 'Check the console for details.'}`;
         this.loading = false;
@@ -111,7 +111,7 @@ export class StudentManagerComponent {
   }
 
   // Helper for tracking in the ngFor loop
-  trackByFn(index: number, student: StudentDto): any {
+  trackByFn(index: number, student: StudentDTO): any {
     return index;
   }
 }

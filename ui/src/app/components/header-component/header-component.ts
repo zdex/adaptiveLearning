@@ -1,36 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
+import {StudentDTO, StudentService} from '../../services/StudentService';
 
-interface Student {
-  studentId: number;
-  fullName: string;
-}
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: false,
   templateUrl: './header-component.html',
-  styleUrls: ['./header-component.css'],
+  styleUrls: ['../../app.component.css'] // Reusing main app CSS for header styles
 })
-export class HeaderComponent implements OnInit {
-  // Observable to hold the login status
+export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn$!: Observable<boolean>;
+  students: StudentDTO[] = [];
+  selectedStudent: StudentDTO | null = null;
+  isDropdownOpen: boolean = false;
+  private authSubscription!: Subscription;
 
-  // Mock student data to populate the dropdown
-  students: Student[] = [
-    { studentId: 1, fullName: 'Alice Johnson' },
-    { studentId: 2, fullName: 'Bob Smith' },
-    { studentId: 3, fullName: 'Charlie Brown' },
-  ];
-
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private studentService: StudentService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // Get the reactive status from the AuthService
     this.isLoggedIn$ = this.authService.isLoggedIn$;
+
+    // Subscribe to login status changes to automatically fetch students
+    this.authSubscription = this.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.fetchStudents();
+      } else {
+        // Clear students list if user logs out
+        this.students = [];
+        this.selectedStudent = null;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
+  fetchStudents(): void {
+    this.studentService.getStudentsForParent("parentId").subscribe({
+      next: (data) => {
+        this.students = data;
+        if (this.students.length > 0) {
+          // Auto-select the first student if none is selected
+          this.selectStudent(this.students[0]);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to fetch students:', err);
+        // Handle error (e.g., token expired, or user not authorized as a parent)
+      }
+    });
+  }
+
+  selectStudent(student: StudentDTO): void {
+    this.selectedStudent = student;
+    this.studentService.setSelectedStudent(student);
+    this.isDropdownOpen = false; // Close dropdown after selection
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   /**
@@ -39,16 +78,5 @@ export class HeaderComponent implements OnInit {
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/login']); // Redirect to login page after logout
-  }
-
-  /**
-   * Example navigation function for selecting a student
-   * @param studentId The ID of the selected student
-   */
-  onSelectStudent(studentId: number): void {
-    console.log('Selected student ID:', studentId);
-    // In a real application, you would navigate to a dashboard for this student,
-    // or set the student as the active context in a service.
-    this.router.navigate(['/students', studentId, 'dashboard']);
   }
 }
