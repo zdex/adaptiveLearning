@@ -1,0 +1,39 @@
+<header class="app-header">
+  <div class="content-container header-content">
+    <div class="logo">
+      <a routerLink="/students/manage">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Adaptive Learn
+      </a>
+    </div>
+
+    <nav class="navbar">
+      <!-- Show Login and Register links ONLY if not logged in -->
+      <ng-container *ngIf="(isLoggedIn$ | async) === false">
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+      </ng-container>
+
+      <!-- Always show the main application link -->
+      <a routerLink="/questionnaire/generate">Generate</a>
+
+      <!-- User/Logout Dropdown for logged-in users -->
+      <ng-container *ngIf="isLoggedIn$ | async">
+        <div class="dropdown-menu-container" (mouseleave)="isDropdownOpen = false">
+
+          <!-- This is the element that was causing the error due to an incorrect method signature -->
+          <a class="dropdown-toggle" (click)="toggleDropdown()" [class.active]="isDropdownOpen" role="button">
+            My Account
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.5rem;"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+
+          <!-- Dropdown content -->
+          <div class="dropdown-content" [class.show]="isDropdownOpen">
+            <a routerLink="/students/manage" (click)="isDropdownOpen = false">Manage Students</a>
+            <a (click)="onLogout(); isDropdownOpen = false" class="logout-link">Logout</a>
+          </div>
+        </div>
+      </ng-container>
+    </nav>
+  </div>
+</header>

@@ -1,3 +1,63 @@
+/* --- Dropdown Styling --- */
+
+.dropdown-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  /* Inherits existing .navbar a styles, but adds specific hover/active state */
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.dropdown-toggle.active,
+.dropdown-toggle:hover {
+  background-color: var(--light-hover);
+  border-radius: 4px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position right below the toggle button */
+  right: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1001; /* Above the header */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.dropdown-content a {
+  color: var(--dark-text);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content a.logout-link {
+  color: var(--danger-color);
+}
+
+.dropdown-content a.logout-link:hover {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+/* Class bound to [class.show] in HTML */
+.dropdown-content.show {
+  display: block;
+}
+
 /* Global Reset and Box Sizing */
 :root {
   --primary-color: #4F46E5; /* Elegant Indigo (Tailwind Indigo-600) */
