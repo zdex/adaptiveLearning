@@ -1,61 +1,112 @@
 /* --- Dropdown Styling --- */
 
-.dropdown-menu-container {
+/* 1. Container for the dropdown menu item */
+.dropdown {
   position: relative;
   display: inline-block;
+  margin-left: 0.5rem; /* Matches margin of other navbar links */
 }
 
-.dropdown-toggle {
-  /* Inherits existing .navbar a styles, but adds specific hover/active state */
+/* 2. The button/link that triggers the dropdown */
+.dropbtn {
+  /* Use styling that matches the existing <a> links */
+  background-color: transparent;
+  color: var(--dark-text); /* Ensure color consistency */
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
-  user-select: none;
+  gap: 0.25rem; /* Spacing between text and arrow icon */
 }
 
-.dropdown-toggle.active,
-.dropdown-toggle:hover {
+/* Dropdown button hover style */
+.dropdown:hover .dropbtn,
+.dropbtn:hover {
   background-color: var(--light-hover);
-  border-radius: 4px;
+  color: var(--primary-color);
 }
 
+/* 3. The actual content/menu */
 .dropdown-content {
-  display: none;
+  display: none; /* Hidden by default */
   position: absolute;
-  top: 100%; /* Position right below the toggle button */
-  right: 0;
   background-color: white;
   min-width: 180px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1001; /* Above the header */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Ensure it's above the header */
+  top: 100%; /* Position right below the button */
+  left: 0;
   border-radius: 8px;
-  overflow: hidden;
-  margin-top: 0.5rem;
+  overflow: hidden; /* For rounded corners on contained links */
+  padding: 0.5rem 0; /* Vertical padding */
+  border: 1px solid #ddd;
 }
 
+/* Links inside the dropdown */
 .dropdown-content a {
   color: var(--dark-text);
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   text-decoration: none;
   display: block;
-  transition: background-color 0.15s ease;
+  font-weight: 400; /* Lighter font weight for menu items */
+  transition: background-color 0.2s;
+  cursor: pointer;
+  margin: 0; /* Remove margins inherited from general navbar a styles */
 }
 
+/* Dropdown link hover style */
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: var(--light-hover);
+  color: var(--primary-color);
 }
 
-.dropdown-content a.logout-link {
-  color: var(--danger-color);
+/* Separator line */
+.dropdown-content hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 0.5rem 0;
 }
 
-.dropdown-content a.logout-link:hover {
-  background-color: var(--danger-color);
-  color: white;
-}
-
-/* Class bound to [class.show] in HTML */
-.dropdown-content.show {
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
   display: block;
+}
+
+/* Responsive adjustments for mobile: change dropdown to stack vertically */
+@media (max-width: 768px) {
+  /* When the navbar content is in a column */
+  .navbar .dropdown {
+    width: 100%; /* Take full width */
+    margin-left: 0;
+    margin-bottom: 0.5rem; /* Add spacing between menu items */
+  }
+
+  .navbar .dropdown .dropbtn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Keep dropdown content positioned normally but full width */
+  .dropdown-content {
+    position: relative; /* Change from absolute to relative to flow naturally */
+    min-width: 100%;
+    box-shadow: none; /* Remove shadow when stacked */
+    border: none;
+    padding: 0;
+  }
+
+  .dropdown-content a {
+    padding-left: 2rem; /* Indent links slightly */
+  }
+
+  /* On mobile, keep the dropdown content hidden by default for cleaner stacking */
+  /* If you want a click/tap to open the menu on mobile, you'd need a click handler in TS */
+  /* For now, we rely on the parent component's responsive logic to stack/hide the menu items */
 }
 
 /* Global Reset and Box Sizing */
