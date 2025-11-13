@@ -1,4 +1,4 @@
-package com.adap.learn.model;
+package com.adap.learn.entity;
 import jakarta.persistence.*;
 import lombok.*;
 

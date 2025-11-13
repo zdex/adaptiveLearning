@@ -1,15 +1,20 @@
 package com.adap.learn.service;
 
-import com.adap.learn.dto.AuthRequest;
-import com.adap.learn.dto.AuthResponse;
-import com.adap.learn.dto.RegisterRequest;
-import com.adap.learn.model.User; // Use User model
+import com.adap.learn.dto.*;
+import com.adap.learn.entity.ParentEntity; // Use User model
 import com.adap.learn.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class AuthService {
@@ -35,20 +40,23 @@ public class AuthService {
     /**
      * Register a new user (parent/account owner)
      */
-    public AuthResponse register(RegisterRequest request) {
-        User user = User.builder() // Changed from Student to User
+    public AuthResponse register(RegisterRequestDTO request) {
+        ParentEntity user = ParentEntity.builder() // Changed from Student to User
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role("USER")
+                .role("PARENT")
                 .active(true)
                 .build();
 
         userRepository.save(user);
 
         String token = jwtService.generateToken(user.getEmail());
-        return new AuthResponse("User registered successfully", token);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+
+        ParentDto parentDto = parentDtoMapper(user, userDetails);
+        return new AuthResponse("User registered successfully", token, parentDto);
     }
 
     /**
@@ -61,16 +69,50 @@ public class AuthService {
                 )
         );
 
-        UserDetails user = userDetailsService.loadUserByUsername(request.getEmail());
-        String token = jwtService.generateToken(user.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
 
-        return new AuthResponse("Login successful", token);
+        ParentEntity user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+
+        ParentDto parentDto = parentDtoMapper(user, userDetails);
+        String token = jwtService.generateToken(user.getFirstName() + user.getLastName());
+
+        return new AuthResponse("Login successful", token, parentDto);
+    }
+
+    private ParentDto parentDtoMapper(ParentEntity user, UserDetails userDetails) {
+        Collection<? extends GrantedAuthority> userAuthorities = this.getAuthorities(user);
+        List<StudentDTO> studentDtos = new ArrayList<>();
+        if(null != user.getStudents() && !user.getStudents().isEmpty()) {
+            user.getStudents().forEach(student -> {
+                StudentDTO studentDto = StudentDTO.builder()
+                        .studentId(student.getStudentId()).grade(student.getGrade()).age(student.getAge()).emailId(student.getEmailId()).dateOfBirth(student.getDateOfBirth())
+                        .firstName(student.getFirstName()).lastName(student.getLastName()).build();
+                studentDtos.add(studentDto);
+            });
+        }
+        return ParentDto.builder()
+                .emailId(userDetails.getUsername())
+                .roles(null).firstName(user.getFirstName()).lastName(user.getLastName()).credentialsExpired(userDetails.isCredentialsNonExpired()).accountExpired(userDetails.isAccountNonExpired()).dateOfBirth(user.getDateOfBirth())
+                .parentId(user.getUserId()).disabled(userDetails.isEnabled()).accountLocked(userDetails.isAccountNonLocked()).students(studentDtos).userAuthorities(userAuthorities).build();
+    }
+
+    /**
+     * Returns user roles (authorities). For now, assume every user has "ROLE_USER".
+     * If your User entity has roles, map them here.
+     */
+    private Collection<? extends GrantedAuthority> getAuthorities(ParentEntity user) {
+        if (user.getRole() != null) {
+            // Example: user.role = "ADMIN" or "USER"
+            return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString().toUpperCase()));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     /**
      * Get current logged-in user (parent/account owner) info from token
      */
-    public User getAuthenticatedUser(String authHeader) { // *** FIX: Changed return type to User ***
+    public ParentEntity getAuthenticatedUser(String authHeader) { // *** FIX: Changed return type to User ***
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new RuntimeException("Invalid Authorization header");
         }

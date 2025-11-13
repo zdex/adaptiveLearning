@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import {StudentDTO, StudentService} from '../../services/StudentService';
+import {StudentService} from '../../services/StudentService';
+import {studentDTO} from  '../../models/user.model';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -14,8 +15,8 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn$!: Observable<boolean>;
-  students: StudentDTO[] = [];
-  selectedStudent: StudentDTO | null = null;
+  students: studentDTO[] = [];
+  selectedStudent: studentDTO | null = null;
   isDropdownOpen: boolean = false;
   private authSubscription!: Subscription;
 
@@ -62,7 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectStudent(student: StudentDTO): void {
+  selectStudent(student: studentDTO): void {
     this.selectedStudent = student;
     this.studentService.setSelectedStudent(student);
     this.isDropdownOpen = false; // Close dropdown after selection

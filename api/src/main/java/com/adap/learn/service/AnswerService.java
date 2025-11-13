@@ -3,13 +3,12 @@ package com.adap.learn.service;
 
 import com.adap.learn.dto.questionnaire.SubmitAnswersRequest;
 import com.adap.learn.dto.questionnaire.SubmitAnswersResponse;
-import com.adap.learn.model.AnswerEntity;
+import com.adap.learn.entity.AnswerEntity;
 import com.adap.learn.repository.AnswerRepository;
 
 import com.adap.learn.utils.DifficultyLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

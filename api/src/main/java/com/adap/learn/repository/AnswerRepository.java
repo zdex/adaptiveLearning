@@ -1,6 +1,6 @@
 package com.adap.learn.repository;
 
-import com.adap.learn.model.AnswerEntity;
+import com.adap.learn.entity.AnswerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.adap.learn.controller;
 
-import com.adap.learn.dto.StudentDto;
-import com.adap.learn.model.User;
+import com.adap.learn.dto.StudentDTO;
+import com.adap.learn.entity.ParentEntity;
 import com.adap.learn.service.AuthService;
 import com.adap.learn.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,15 +28,15 @@ public class StudentController {
 
     @Operation(summary = "Create multiple student profiles for the authenticated parent")
     @PostMapping
-    public ResponseEntity<List<StudentDto>> createStudents(
+    public ResponseEntity<List<StudentDTO>> createStudents(
             @RequestHeader("Authorization") String authHeader,
-            @RequestBody List<StudentDto> studentDtos) {
+            @RequestBody List<StudentDTO> studentDtos) {
 
         // 1. Get the authenticated Parent User from the token
-        User parent = authService.getAuthenticatedUser(authHeader);
+        ParentEntity parent = authService.getAuthenticatedUser(authHeader);
 
         // 2. Save the students and link them to the parent
-        List<StudentDto> savedStudents = studentService.saveStudents(studentDtos, parent);
+        List<StudentDTO> savedStudents = studentService.saveStudents(studentDtos, parent);
 
         return ResponseEntity.ok(savedStudents);
     }

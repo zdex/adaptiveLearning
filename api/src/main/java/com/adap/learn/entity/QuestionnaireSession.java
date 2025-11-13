@@ -1,4 +1,4 @@
-package com.adap.learn.model;
+package com.adap.learn.entity;
 
 public class QuestionnaireSession {
     

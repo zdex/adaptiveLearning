@@ -1,4 +1,4 @@
-package com.adap.learn.model;
+package com.adap.learn.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements UserDetails {
+public class ParentEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +35,16 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    private String role = "USER"; // default role
+    @Column
+    private Date dateOfBirth;
+
+    private String role = "PARENT"; // default role
     private boolean active = true;
 
+
     // Optional: Keep track of all students owned by this parent/user
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Student> students;
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentEntity> students;
 
 
     // --- UserDetails Implementation ---

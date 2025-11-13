@@ -1,4 +1,4 @@
-package com.adap.learn.model;
+package com.adap.learn.dto;
 
 public enum Role {
     PARENT,

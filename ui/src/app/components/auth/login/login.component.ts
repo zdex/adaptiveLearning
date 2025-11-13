@@ -37,7 +37,7 @@ export class LoginComponent {
           this.authService.setToken(res.token);
         }
 
-        setTimeout(() => this.router.navigate(['/questionnaire/generate']), 1500);
+        setTimeout(() => this.router.navigate(['/questionnaire/generate']), 150);
       },
       error: (err) => {
         console.error('Login failed:', err);

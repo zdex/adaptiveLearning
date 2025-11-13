@@ -1,7 +1,9 @@
-package com.adap.learn.model;
+package com.adap.learn.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "student")
@@ -10,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Student {
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +20,8 @@ public class Student {
 
     // *** FIX: Added the Many-to-One relationship to the User entity ***
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "parent_id", nullable = false)
+    private ParentEntity parent;
 
     @Column(nullable = false)
     private String firstName;
@@ -31,11 +33,18 @@ public class Student {
     private Integer age;
 
     @Column
-    private String gradeLevel;
+    private String grade;
+
+    @Column
+    private String emailId;
+
+    @Column
+    private Date dateOfBirth;
 
     public String getFullName() {
         return firstName + " " + lastName;
     }
 
-    // NOTE: Removed email, password, role, and active fields as they belong to the User entity.
+
 }
+

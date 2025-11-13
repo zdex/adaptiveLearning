@@ -5,7 +5,7 @@
       <a routerLink="/dashboard">
         <!-- SVG for a book or learning symbol -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        Adaptive Learn
+        Adaptive Learning
       </a>
     </div>
 
@@ -15,7 +15,7 @@
         <div class="student-dropdown-container" (click)="toggleDropdown()">
           <button class="dropdown-toggle" [class.open]="isDropdownOpen">
             <!-- Display selected student name or a default message -->
-            <span class="truncate-text">{{ selectedStudent ? selectedStudent.firstName : 'Select Student' }}</span>
+            <span class="truncate-text">{{ selectedStudent ? selectedStudent.firstName : 'Parent' }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
 
@@ -26,20 +26,16 @@
                (click)="selectStudent(student); $event.stopPropagation()">
               {{ student.firstName + ' ' +student.lastName }}
             </a>
-            <!-- Link to manage students (create new, edit, etc.) -->
-            <div class="dropdown-divider"></div>
-            <a routerLink="/students/manage" class="dropdown-item dropdown-manage-link" (click)="$event.stopPropagation()">
-              Manage Students
-            </a>
           </div>
         </div>
+
+        <a routerLink="/parent-profile" class="nav-link">Parent Profile</a>
       </ng-container>
 
 
       <!-- General Links - Visible when logged in -->
       <ng-container *ngIf="isLoggedIn$ | async">
         <a routerLink="/questionnaire/generate" routerLinkActive="active-link">Generate</a>
-        <a routerLink="/questionnaire/adaptive" routerLinkActive="active-link">Adaptive</a>
       </ng-container>
 
       <!-- Auth Links - Visible only if NOT logged in -->

@@ -2,8 +2,8 @@ package com.adap.learn.controller;
 
 import com.adap.learn.dto.AuthRequest;
 import com.adap.learn.dto.AuthResponse;
-import com.adap.learn.dto.RegisterRequest;
-import com.adap.learn.model.User;
+import com.adap.learn.dto.RegisterRequestDTO;
+import com.adap.learn.entity.ParentEntity;
 import com.adap.learn.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,7 +26,7 @@ public class AuthController {
     @Operation(summary = "Register a new user (Parent/Account Owner)")
     @ApiResponse(responseCode = "200", description = "User registered successfully")
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequestDTO request) {
         return ResponseEntity.ok(authService.register(request));
     }
 
@@ -35,13 +35,14 @@ public class AuthController {
     @ApiResponse(responseCode = "401", description = "Invalid credentials")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+        AuthResponse authResponse = authService.login(request);
+        return ResponseEntity.ok(authResponse);
     }
 
     @Operation(summary = "Get details of the currently authenticated user (Parent/Account Owner)")
     @ApiResponse(responseCode = "200", description = "Access granted")
     @GetMapping("/me")
-    public ResponseEntity<User> getAuthenticatedUser(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<ParentEntity> getAuthenticatedUser(@RequestHeader("Authorization") String token) {
         // Now calling the updated service method
         return ResponseEntity.ok(authService.getAuthenticatedUser(token));
     }

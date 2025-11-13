@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import {parentDTO} from '../models/user.model';
 
 // Define expected response structure for login
 interface AuthResponse {
@@ -56,5 +57,10 @@ export class AuthService {
   register(user: any): Observable<any> {
     // This should call your Spring Boot register endpoint
     return this.http.post<any>(`${this.apiUrl}/register`, user);
+  }
+
+  getUser(userId: any): Observable<parentDTO> {
+    // This should call your Spring Boot register endpoint
+    return this.http.post<parentDTO>(`${this.apiUrl}/getUserDetails`, userId);
   }
 }

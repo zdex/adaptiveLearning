@@ -1,0 +1,26 @@
+<div class="profile-container" *ngIf="!loading; else loadingBlock">
+  <h2>👨‍👩‍👧 Parent Profile</h2>
+
+  <div class="profile-card">
+    <h3>{{ parent?.firstName }} {{ parent?.lastName }}</h3>
+    <p><strong>Email:</strong> {{ parent?.email }}</p>
+  </div>
+
+  <div class="students-section" *ngIf="students.length > 0; else noStudents">
+    <h3>Your Linked Students</h3>
+    <ul>
+      <li *ngFor="let s of students">
+        <strong>{{ s.firstName }} {{ s.lastName }}</strong>
+        <span *ngIf="s.grade"> - Grade {{ s.grade }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noStudents>
+    <p>No students linked to your account yet.</p>
+  </ng-template>
+</div>
+
+<ng-template #loadingBlock>
+  <p>Loading profile...</p>
+</ng-template>

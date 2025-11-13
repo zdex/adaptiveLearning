@@ -1,16 +1,11 @@
 package com.adap.learn.service;
 
-import com.adap.learn.model.User;
+import com.adap.learn.entity.ParentEntity;
 import com.adap.learn.repository.UserRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -26,31 +21,19 @@ public class CustomUserDetailsService implements UserDetailsService {
      * It loads a user from the database using their username (or email).
      */
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        ParentEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail()) // authentication uses email
+                .username(email) // authentication uses email
                 .password(user.getPassword())
-                .authorities(getAuthorities(user))
+                //.authorities(getAuthorities(user))
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
-                .disabled(!user.isActive())
+                //.disabled(!user.isActive())
                 .build();
     }
 
-
-    /**
-     * Returns user roles (authorities). For now, assume every user has "ROLE_USER".
-     * If your User entity has roles, map them here.
-     */
-    private Collection<? extends GrantedAuthority> getAuthorities(User user) {
-        if (user.getRole() != null) {
-            // Example: user.role = "ADMIN" or "USER"
-            return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString().toUpperCase()));
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
 }

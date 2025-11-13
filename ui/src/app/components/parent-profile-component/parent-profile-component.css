@@ -1,0 +1,34 @@
+.profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.profile-card {
+  background: #e8f0fe;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.students-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.students-section li {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  font-size: 15px;
+}
+
+h2, h3 {
+  color: #333;
+  margin-bottom: 10px;
+}

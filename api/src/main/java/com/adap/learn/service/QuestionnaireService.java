@@ -1,7 +1,7 @@
 package com.adap.learn.service;
 
 import com.adap.learn.dto.questionnaire.*;
-import com.adap.learn.model.*;
+import com.adap.learn.entity.*;
 import com.adap.learn.repository.*;
 import com.adap.learn.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +45,7 @@ public class QuestionnaireService {
             fallback.setCorrectIndex(0);
             questions = List.of(fallback);
         }
-        var questionnaire = Questionnaire.builder()
+        var questionnaire = QuestionnaireEntity.builder()
                 .subject(req.subject())
                 .grade(req.grade())
                 .difficulty(parsed.difficulty())
@@ -55,14 +55,14 @@ public class QuestionnaireService {
         questionnaire = questionnaireRepo.save(questionnaire);
 
         for (var q : parsed.questions()) {
-            var ent = Question.builder()
+            var ent = QuestionEntity.builder()
                     .text(q.text())
                     .type(q.type())
                     .questionnaire(questionnaire).build();
             ent = questionRepo.save(ent);
             int idx = 0;
             for (var optText : q.options()) {
-                var opt = QuestionOption.builder().text(optText).question(ent).build();
+                var opt = QuestionOptionEntity.builder().text(optText).question(ent).build();
                 opt = optionRepo.save(opt);
                 if (idx == q.answerIndex()) ent.setCorrectOptionId(opt.getId());
                 idx++;

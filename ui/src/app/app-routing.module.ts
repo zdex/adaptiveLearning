@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { VerifyOtpComponent } from './components/auth/verify-otp/verify-otp.component';
 import { GenerateComponent } from './components/questionnaire/generate/generate.component';
 import { StudentManagerComponent } from './components/student-manager/student-manager-component';
+import {ParentProfileComponent} from './components/parent-profile-component/parent-profile-component';
 
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'verify-otp', component: VerifyOtpComponent },
   { path: 'questionnaire/generate', component: GenerateComponent },
   { path: 'students', component: StudentManagerComponent },
+  { path: 'parent-profile', component: ParentProfileComponent },
   { path: '**', redirectTo: 'login' },
 
 ];

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-// IMPORTANT: Import both StudentService and StudentDto
-import { StudentService, StudentDTO } from '../../services/StudentService';
+import { StudentService } from '../../services/StudentService';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {studentDTO} from  '../../models/user.model';
 
 @Component({
   selector: 'app-student-manager',
@@ -16,10 +16,10 @@ import { Router } from '@angular/router';
 export class StudentManagerComponent {
 
   // List of students to be submitted
-  students: StudentDTO[] = [];
+  students: studentDTO[] = [];
 
   // Model for the new student input form
-  newStudent: StudentDTO = {
+  newStudent: studentDTO = {
     firstName: '',
     lastName: '',
     age: 0,
@@ -60,7 +60,7 @@ export class StudentManagerComponent {
   /**
    * Checks if a single student entry is valid.
    */
-  isStudentValid(student: StudentDTO): boolean {
+  isStudentValid(student: studentDTO): boolean {
     return !!student.firstName &&
       !!student.lastName &&
       (student.grade !== null && student.grade !== undefined) && // Check for grade explicitly
@@ -94,7 +94,7 @@ export class StudentManagerComponent {
     // @ts-ignore
     this.studentService.saveStudents(validStudents).subscribe({
       // FIX APPLIED HERE: Explicitly type 'savedStudents' as StudentDto[]
-      next: (savedStudents: StudentDTO[]) => {
+      next: (savedStudents: studentDTO[]) => {
         this.message = `${savedStudents.length} student profile(s) successfully created!`;
         this.loading = false;
         // Navigate to the next step
@@ -111,7 +111,7 @@ export class StudentManagerComponent {
   }
 
   // Helper for tracking in the ngFor loop
-  trackByFn(index: number, student: StudentDTO): any {
+  trackByFn(index: number, student: studentDTO): any {
     return index;
   }
 }

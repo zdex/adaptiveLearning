@@ -110,9 +110,10 @@ body {
 }
 
 .navbar a[routerLink="/login"]:hover,
-.navbar a[routerLink="/register"]:hover {
+.navbar a[routerLink="/register"]:hover,
+.navbar a[routerLink="/questionnaire/generate"]:hover{
   background-color: var(--primary-color);
-  color: white;
+  color: blue;
   box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
 }
 
@@ -135,7 +136,8 @@ body {
 
 .navbar a.logout-link:hover {
   background-color: var(--light-hover);
-  color: var(--danger-color);
+  color: red;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
 }
 
 /* --- Main Content Styling --- */

@@ -20,6 +20,7 @@ import { HeaderComponent } from './components/header-component/header-component'
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { QuestionnaireService } from './services/questionnaire.service';
+import {ParentProfileComponent} from './components/parent-profile-component/parent-profile-component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { QuestionnaireService } from './services/questionnaire.service';
   declarations: [
     AppComponent, // Re-added the root component here
     VerifyOtpComponent,
-    HeaderComponent
+    HeaderComponent,
+    ParentProfileComponent
   ],
   // IMPORTS: All modules and standalone components
   imports: [

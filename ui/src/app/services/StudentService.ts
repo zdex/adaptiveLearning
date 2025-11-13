@@ -1,19 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-// Define a Student interface for type safety
-export interface StudentDTO {
-  id?: string;
-  firstName: string;
-  lastName: string;
-  email?: string;
-  gradeLevel?: string;
-  parentId?: string;
-  age?: number;
-  grade?: string;
-  dateOfBirth?: string;
-}
+import {studentDTO} from  '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,20 +13,20 @@ export class StudentService {
   constructor(private http: HttpClient) {}
 
   // ✅ Fetch all students
-  getAllStudents(): Observable<StudentDTO[]> {
-    return this.http.get<StudentDTO[]>(`${this.apiUrl}`);
+  getAllStudents(): Observable<studentDTO[]> {
+    return this.http.get<studentDTO[]>(`${this.apiUrl}`);
   }
 
   // ✅ Fetch single student by ID
-  getStudentById(studentId: string): Observable<StudentDTO> {
-    return this.http.get<StudentDTO>(`${this.apiUrl}/${studentId}`);
+  getStudentById(studentId: string): Observable<studentDTO> {
+    return this.http.get<studentDTO>(`${this.apiUrl}/${studentId}`);
   }
 
   /**
    * Submits a list of student profiles to the backend, attaching the JWT for authentication.
    * The Observable return type is explicitly typed as StudentDto[].
    */
-  saveStudents(students: StudentDTO[]): Observable<StudentDTO[]> {
+  saveStudents(students: studentDTO[]): Observable<studentDTO[]> {
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('No authentication token found. Please log in.');
@@ -49,7 +37,7 @@ export class StudentService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.post<StudentDTO[]>(this.apiUrl, students, {headers});
+    return this.http.post<studentDTO[]>(this.apiUrl, students, {headers});
   }
   // ✅ Delete a student
   deleteStudent(studentId: string): Observable<void> {
@@ -57,11 +45,11 @@ export class StudentService {
   }
 
   // ✅ NEW: Fetch students belonging to a parent
-  getStudentsForParent(parentId: string): Observable<StudentDTO[]> {
-    return this.http.get<StudentDTO[]>(`${this.apiUrl}/parent/${parentId}`);
+  getStudentsForParent(parentId: string): Observable<studentDTO[]> {
+    return this.http.get<studentDTO[]>(`${this.apiUrl}/parent/${parentId}`);
   }
 
-  setSelectedStudent(student: StudentDTO) {
+  setSelectedStudent(student: studentDTO) {
 
 
   }
