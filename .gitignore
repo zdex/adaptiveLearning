@@ -1,3 +1,4 @@
+**/**.map
 # Angular specific
 /dist/
 /out-tsc/
@@ -32,3 +33,5 @@ yarn-error.log*
 
 # Ignore Gradle build output directory
 build
+
+api/*.css.map
